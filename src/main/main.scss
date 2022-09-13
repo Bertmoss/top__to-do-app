@@ -1,0 +1,26 @@
+@use "../general/general__scss/colors" as *;
+
+.main__display-btn {
+  width: 70px;
+  height: 70px;
+
+  position: fixed;
+  bottom:  20px;
+  right: 20px;
+
+  border-radius: 100%;
+  border: 1px solid $red;
+}
+
+.main__display-btn:active {
+  width: 65px;
+  height: 65px; 
+}
+
+.c-main__display-btn {
+  font-size: 34px;
+  color: $white;
+
+  background-color: $red; 
+}
+

@@ -1,0 +1,151 @@
+body {
+  margin: 0px;
+}
+
+.header {
+  background-color: #181D3D;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.body__header {
+  height: 80px;
+  width: 100vw;
+}
+
+.header__title {
+  margin: 0px;
+  color: #FFFFFF;
+}
+
+.main__display-btn {
+  width: 70px;
+  height: 70px;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  border-radius: 100%;
+  border: 1px solid #F35168;
+}
+
+.main__display-btn:active {
+  width: 65px;
+  height: 65px;
+}
+
+.c-main__display-btn {
+  font-size: 34px;
+  color: #FFFFFF;
+  background-color: #F35168;
+}
+
+.modal {
+  border: black 2px solid;
+  display: flex;
+  background-color: white;
+}
+
+.main__modal {
+  position: absolute;
+  top: 20%;
+  margin: 0px auto;
+  left: 0px;
+  right: 0px;
+  width: 300px;
+  min-height: 300px;
+}
+
+.main__modal--hidden {
+  display: none;
+}
+
+.modal__side {
+  width: 45%;
+  height: 100%;
+  border-right: 1px black solid;
+  /* Display maybe in separate class */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.side__button {
+  width: 70%;
+  height: 50px;
+}
+
+.s-side__button {
+  appearance: none;
+}
+
+.display__nav {
+  background-color: #181D3D;
+  padding-bottom: 20px;
+  border-radius: 0px 0px 0px 110px;
+}
+
+/* list */
+.nav__list {
+  margin: 0px auto;
+  height: 50px;
+  padding: 0px;
+  max-width: 250px;
+  background-color: #2D325A;
+  border-radius: 110px;
+}
+
+.c-nav__list {
+  font-size: 22px;
+  color: #FFFFFF;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* list items */
+.nav__list-item {
+  width: 100%;
+  height: 100%;
+}
+
+.c-nav__list-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.c-nav__list-item:hover {
+  background-color: #181D3D;
+}
+
+.hidden {
+  display: none;
+}
+
+.display__container-note--hidden,
+.display__container-project--hidden,
+.display__container-task--hidden {
+  display: none;
+}
+
+.display__container {
+  min-height: 100px;
+  background-color: #181D3D;
+}
+
+.display__content {
+  border-radius: 0px 80px 0px 0px;
+  background-color: #FFFFFF;
+  min-height: 250px;
+}
+
+/* header */
+/* main */
+/* 
+@use "./main/modal/__form/modal__form--to-do.scss"; */
+/* DISPLAY */
+
+/*# sourceMappingURL=output.css.map */

@@ -1,0 +1,18 @@
+.modal {
+  border: black 2px solid;
+  display: flex;
+    background-color: white;
+}
+.main__modal {
+  position: absolute;
+  top: 20%;
+  margin: 0px auto;
+  left: 0px;
+  right: 0px;
+  width: 300px;
+  min-height: 300px; 
+
+}
+.main__modal--hidden {
+  display: none;
+}
