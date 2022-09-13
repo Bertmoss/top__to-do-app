@@ -3,6 +3,9 @@ projectDisplay.classList.add("display__container-project--hidden")
 
 
 function subscribeProject(obj) {
+  /* have to clear the project Display element first */
+ /*  
+  } */
   let projectDiv = document.createElement("div"); 
   let heading = document.createElement("h3");
   heading.textContent = obj.title;
@@ -12,6 +15,11 @@ function subscribeProject(obj) {
   projectDiv.appendChild(taskList);
   projectDisplay.appendChild(projectDiv);
 }
+
+function subscribeClearProjectDisplay() {
+  while (projectDisplay.firstChild) {
+    projectDisplay.removeChild(projectDisplay.lastChild);
+  }}
 
 
 function subTaskListItem(obj) {
@@ -45,5 +53,4 @@ function subTaskListItem(obj) {
   })
 }
 
-
-export {subscribeProject, projectDisplay, subTaskListItem}
+export {subscribeProject, projectDisplay, subTaskListItem, subscribeClearProjectDisplay}

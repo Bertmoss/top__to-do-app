@@ -1,13 +1,17 @@
-import { pubSubFactory } from "../../general/general__js/pub-sub";
-import { subscribeNote } from "../../main/display/__container/display__container--note";
-import { subscribeProject, subTaskListItem } from "../../main/display/__container/display__container--project";
-import { subscribeTask } from "../../main/display/__container/display__container--task";
-import {subSelectProjectInput} from "./__form/modal__form--task";
+import { pubSubFactory } from "../general/general__js/pub-sub";
+import { subscribeNote } from "./display/__container/display__container--note";
+import { subscribeProject, subTaskListItem, subscribeClearProjectDisplay } from "./display/__container/display__container--project";
+import { subscribeTask } from "./display/__container/display__container--task";
+import {subSelectProjectInput} from "./modal/__form/modal__form--task";
 
 
 
 /* PUBSUB MODULE FORMS and DISPLAY*/
 let pubSubForms = pubSubFactory();
+
+function publish(key, data) {
+  pubSubForms.publish(key, data)
+}
 
 /* Note Constructor */
 
@@ -56,5 +60,8 @@ pubSubForms.subscribe("project", subSelectProjectInput);
 pubSubForms.subscribe("note", subscribeNote);
 pubSubForms.subscribe("task", subscribeTask);
 pubSubForms.subscribe("task", subTaskListItem);
+pubSubForms.subscribe("clearProject", subscribeClearProjectDisplay);
 
-export { NoteConstructor, ProjectConstructor, TaskConstructor,}
+
+
+export { NoteConstructor, ProjectConstructor, TaskConstructor, publish}

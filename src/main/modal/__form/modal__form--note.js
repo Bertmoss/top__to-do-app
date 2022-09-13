@@ -1,5 +1,5 @@
 import {createBasicInput, appendLabelInput, createLabel} from "../../../general/general__js/_input"
-import { NoteConstructor } from "../modal--pub-sub";
+import { NoteConstructor } from "../../main-pub-sub";
 
 const noteForm = document.createElement("form");
 

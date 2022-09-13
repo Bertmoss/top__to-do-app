@@ -1,6 +1,6 @@
 /* TO DO FORM */
 import {createBasicInput, appendLabelInput, createLabel} from "../../../general/general__js/_input"
-import {TaskConstructor} from "../modal--pub-sub";
+import {TaskConstructor} from "../../main-pub-sub";
 
 
 let taskForm = document.createElement("form");
