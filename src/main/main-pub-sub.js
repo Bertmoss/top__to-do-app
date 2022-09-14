@@ -2,7 +2,7 @@ import { pubSubFactory } from "../general/general__js/pub-sub";
 import { subscribeNote } from "./display/__container/display__container--note";
 import { subscribeProject, subTaskListItem, subscribeClearProjectDisplay } from "./display/__container/display__container--project";
 import { subscribeTask } from "./display/__container/display__container--task";
-import {subSelectProjectInput} from "./modal/__form/modal__form--task";
+import {subSelectProjectInput, subClearSelectOptions} from "./modal/__form/modal__form--task";
 
 
 
@@ -61,6 +61,7 @@ pubSubForms.subscribe("note", subscribeNote);
 pubSubForms.subscribe("task", subscribeTask);
 pubSubForms.subscribe("task", subTaskListItem);
 pubSubForms.subscribe("clearProject", subscribeClearProjectDisplay);
+pubSubForms.subscribe("clearProject", subClearSelectOptions)
 
 
 

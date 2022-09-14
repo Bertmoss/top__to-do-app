@@ -12,7 +12,7 @@ appendLabelInput(projectForm, label, project);
 
 /* "submit" button */
 const submit = document.createElement("button");
-submit.setAttribute("type", "reset"); /* maybe clear instead*/
+submit.setAttribute("type", "reset"); 
 submit.textContent = "Create Project";
 projectForm.appendChild(submit);
 
@@ -27,21 +27,13 @@ function publishProjects() {
     obj.publish(obj);
   })
 }
-function test () {
+function  displayProjects() {
   publish("clearProject", true)
   createProject();
   publishProjects()
-  console.log(projectsArr)
 }
+publishProjects();
 
-
-function publishProject() { 
-  let obj = new ProjectConstructor(project.value);
-  obj.publish(obj)
-}
-
-
-
-submit.addEventListener("click", test)
+submit.addEventListener("click", displayProjects)
 
 export {projectForm}

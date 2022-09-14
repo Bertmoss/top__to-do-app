@@ -35,7 +35,14 @@ const selectProject = document.createElement("select");
 selectProject.setAttribute("id", "select-project");
 selectProject.setAttribute("name", "project");
 
-function subSelectProjectInput(obj) {
+/* clears the select options at the same time as the project display is cleared */
+function subClearSelectOptions() {
+  while (selectProject.firstChild) {
+    selectProject.removeChild(selectProject.lastChild);
+  }}
+
+/* updates the select options when new projects are added */
+function subSelectProjectInput(obj) { 
   const option = document.createElement("option");
   option.setAttribute("value", obj.title);
   option.textContent= obj.title;
@@ -90,4 +97,4 @@ submit.addEventListener("click", () => {
   obj.publish();
 })
 
-export {taskForm, subSelectProjectInput};
+export {taskForm, subSelectProjectInput, subClearSelectOptions};
