@@ -7,8 +7,8 @@ mainDiv.classList.add("main");
 /* display modal button */
 const displayModal = document.createElement("button");
 displayModal.setAttribute("type", "button");
-displayModal.textContent = "+";
-displayModal.setAttribute("style", `background-image:url("../general/images/svg-plus.svg")`)
+displayModal.textContent = "+";/* 
+displayModal.setAttribute("style", `background-image:url("../general/images/svg-plus.svg")`) */
 displayModal.classList.add("main__display-btn","c-main__display-btn" );
 displayModal.addEventListener("click", () => {
   modal.classList.remove("main__modal--hidden")

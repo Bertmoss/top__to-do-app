@@ -1,6 +1,6 @@
 
 import {createBasicInput, appendLabelInput, createLabel} from "../../../general/general__js/_input"
-import { ProjectConstructor, publish } from "../../main-pub-sub";
+import { ProjectConstructor,} from "../../main-pub-sub";
 
 
 const projectForm = document.createElement("form");
@@ -16,23 +16,12 @@ submit.setAttribute("type", "reset");
 submit.textContent = "Create Project";
 projectForm.appendChild(submit);
 
-const projectsArr = [new ProjectConstructor("general"),];
-
-function createProject() {
-  projectsArr.push(new ProjectConstructor(project.value));
+function displayProjects() {
+  let obj = new ProjectConstructor(project.value);
+  obj.displayAll(obj);
 }
-
-function publishProjects() {
-  projectsArr.forEach((obj) => {
-    obj.publish(obj);
-  })
-}
-function  displayProjects() {
-  publish("clearProject", true)
-  createProject();
-  publishProjects()
-}
-publishProjects();
+let obj = new ProjectConstructor("general");
+obj.displayAll(obj);
 
 submit.addEventListener("click", displayProjects)
 

@@ -5,13 +5,38 @@ import { subscribeTask } from "./display/__container/display__container--task";
 import {subSelectProjectInput, subClearSelectOptions} from "./modal/__form/modal__form--task";
 
 
+/* PROJECT CONSTRUCTOR */
+let pubSubProjects = pubSubFactory();
+pubSubProjects["projectArr"] = [];
+
+console.log(pubSubProjects.projectArr);
+
+/* Project Constructor */
+function ProjectConstructor(title) {
+  this.title = title;
+  this.index = pubSubProjects.projectArr.length
+}
+
+ProjectConstructor.prototype.publish = function(obj) {
+  pubSubProjects.publish("project", obj);
+};
+
+ProjectConstructor.prototype.push = function(obj) {
+  pubSubProjects.projectArr.push(obj);
+}
+
+ProjectConstructor.prototype.displayAll = function(obj) {
+  pubSubProjects.publish("clear", true);
+  pubSubProjects.projectArr.push(obj)
+  console.log(pubSubProjects.projectArr);
+  pubSubProjects.projectArr.forEach((object) => {
+    object.publish(object);        
+  });
+}
+
 
 /* PUBSUB MODULE FORMS and DISPLAY*/
 let pubSubForms = pubSubFactory();
-
-function publish(key, data) {
-  pubSubForms.publish(key, data)
-}
 
 /* Note Constructor */
 
@@ -21,16 +46,6 @@ function NoteConstructor(title, details) {
 }
 NoteConstructor.prototype.publish = function () {
   pubSubForms.publish("note", { title: this.title, details: this.details });
-};
-
-/* Project Constructor */
-function ProjectConstructor(title) {
-  this.title = title;
-}
-
-ProjectConstructor.prototype.publish = function (obj) {
-  /* let obj = new ProjectConstructor(this.title) */;
-  pubSubForms.publish("project", obj);
 };
 
 /* Task Constructor */
@@ -55,14 +70,14 @@ TaskConstructor.prototype.publish = function () {
 };
 
 /* Subscribers */
-pubSubForms.subscribe("project", subscribeProject);
-pubSubForms.subscribe("project", subSelectProjectInput);
+pubSubProjects.subscribe("project", subscribeProject);
+pubSubProjects.subscribe("project", subSelectProjectInput);
 pubSubForms.subscribe("note", subscribeNote);
 pubSubForms.subscribe("task", subscribeTask);
 pubSubForms.subscribe("task", subTaskListItem);
-pubSubForms.subscribe("clearProject", subscribeClearProjectDisplay);
-pubSubForms.subscribe("clearProject", subClearSelectOptions)
+pubSubProjects.subscribe("clear", subscribeClearProjectDisplay);
+pubSubProjects.subscribe("clear", subClearSelectOptions)
 
 
 
-export { NoteConstructor, ProjectConstructor, TaskConstructor, publish}
+export { NoteConstructor, ProjectConstructor, TaskConstructor}
