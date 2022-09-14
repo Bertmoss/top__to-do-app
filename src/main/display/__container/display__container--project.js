@@ -1,9 +1,18 @@
 const projectDisplay = document.createElement("div");
 projectDisplay.classList.add("display__container-project--hidden")
 
+/* should this be publish? send the data and then clear projectDisplay */
+
 
 function subscribeProject(obj) {
   let projectDiv = document.createElement("div"); 
+  projectDiv.setAttribute("data-index", obj.index)
+  let dltBtn = document.createElement("button");
+  dltBtn.textContent = "x"
+  dltBtn.setAttribute("type", "button");
+  dltBtn.addEventListener
+
+  
   let heading = document.createElement("h3");
   heading.textContent = obj.title + obj.index;
   projectDiv.appendChild(heading);
@@ -12,6 +21,7 @@ function subscribeProject(obj) {
   projectDiv.appendChild(taskList);
   projectDisplay.appendChild(projectDiv);
 }
+
 
 
 

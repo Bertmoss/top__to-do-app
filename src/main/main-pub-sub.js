@@ -5,31 +5,48 @@ import { subscribeTask } from "./display/__container/display__container--task";
 import {subSelectProjectInput, subClearSelectOptions} from "./modal/__form/modal__form--task";
 
 
-/* PROJECT CONSTRUCTOR */
-let pubSubProjects = pubSubFactory();
-pubSubProjects["projectArr"] = [];
+class ObjectClass {
+   objArr = [];
 
-console.log(pubSubProjects.projectArr);
+   get objArr() {
+    return this.objArr;
+   }
+
+   set objArr(arr) {
+    if (!Array.isArray(arr)) {
+      return alert("Not an array");
+    }
+    return this.objArr = arr;
+   }
+
+   push(obj) {
+    this.objArr.push(obj);
+   }
+
+   remove(index) {
+    this.objArr.splice(index, 1);
+   }
+
+}
+
+let projects = new ObjectClass();
+let pubSubProjects = pubSubFactory();
+
 
 /* Project Constructor */
 function ProjectConstructor(title) {
   this.title = title;
-  this.index = pubSubProjects.projectArr.length
+  this.index = projects.objArr.length;
 }
 
 ProjectConstructor.prototype.publish = function(obj) {
   pubSubProjects.publish("project", obj);
 };
 
-ProjectConstructor.prototype.push = function(obj) {
-  pubSubProjects.projectArr.push(obj);
-}
-
 ProjectConstructor.prototype.displayAll = function(obj) {
   pubSubProjects.publish("clear", true);
-  pubSubProjects.projectArr.push(obj)
-  console.log(pubSubProjects.projectArr);
-  pubSubProjects.projectArr.forEach((object) => {
+  projects.push(obj);
+  projects.objArr.forEach((object) => {
     object.publish(object);        
   });
 }
