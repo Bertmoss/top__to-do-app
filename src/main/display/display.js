@@ -3,7 +3,8 @@ import * as side from "./__side/display__side";
 /* Display Containers */
 import { taskDisplay } from "./__container/display__container--task";
 import { noteDisplay } from "./__container/display__container--note";
-import { projectDisplay } from "./__container/display__container--project";
+import { projectDisplay} from "./__container/display__container--project";
+
 
 const display = document.createElement("div");
 
@@ -38,6 +39,7 @@ note.addEventListener("click", () => {
   taskDisplay.classList.add("display__container-task--hidden");
 });
 
+
 project.addEventListener("click", () => {
   noteDisplay.classList.add("display__container-note--hidden");
   projectDisplay.classList.remove("display__container-project--hidden");
@@ -46,7 +48,7 @@ project.addEventListener("click", () => {
   let date = document.querySelector(".list-item__date");
   details.classList.add("hidden");
   date.classList.add("hidden")
-  
+   
 });
 
 displayContainer.appendChild(displayContent)

@@ -4,6 +4,7 @@ import {
   subscribeProject,
   subTaskListItem,
   subRmvProjectDisplay,
+  subRmvTasks,
 } from "./display/__container/display__container--project";
 import { subscribeTask, subRmvTaskDisplay } from "./display/__container/display__container--task";
 import {
@@ -43,6 +44,12 @@ class ObjectArrClass {
 function RemoveConstructor(pubSub, classObj) {
   this.pubSub = pubSub;
   this.classObj = classObj;
+}
+RemoveConstructor.prototype.removeAll = function() {
+  this.pubSub.publish("clear", true);
+  this.classObj.objArr.forEach((object) => {
+    object.publish(object);
+  });
 }
 
 RemoveConstructor.prototype.remove = function (dataId) {
@@ -90,9 +97,9 @@ function subDisplayAllRequest(obj) {
   }
   pubSub.publish("clear", true);
   objArr.push(obj.obj);
+  console.log(objArr.objArr)
   objArr.objArr.forEach((object) => {
     object.publish(object);
-    console.log(object)
   });
 
 }
@@ -209,17 +216,28 @@ TaskConstructor.prototype.publish = function () {
 
 /* Subscribers */
 pubSubProjects.subscribe("display", subscribeProject);
+/* 
+pubSubProjects.subscribe("display", subProjectDisplay); */
 pubSubProjects.subscribe("display", subSelectProjectInput);
 pubSubForms.subscribe("note", subscribeNote);
-/* pubSubForms.subscribe("task", subscribeTask);
+ pubSubForms.subscribe("task", subscribeTask);
 pubSubForms.subscribe("task", subTaskListItem);
- */
+
 pubSubTasks.subscribe("display", subscribeTask);
 pubSubTasks.subscribe("display", subTaskListItem);
 pubSubTasks.subscribe("clear", subRmvTaskDisplay);
+pubSubTasks.subscribe("clear", subRmvTasks)
+/* 
+pubSubTasks.subscribe("clear",subRmvProjectDisplay) */
+
+/* 
+pubSubTasks.subscribe("clear", subRmvProjectDisplay) /* ?? */
 
 pubSubProjects.subscribe("clear", subRmvProjectDisplay);
 pubSubProjects.subscribe("clear", subClearSelectOptions);
+
+
+
 
 
 export { NoteConstructor, ProjectConstructor, TaskConstructor, projectRemover, taskRemover };

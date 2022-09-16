@@ -1,9 +1,8 @@
 import { projectRemover } from "../../main-pub-sub";
+
 const projectDisplay = document.createElement("div");
 projectDisplay.classList.add("display__container-project--hidden");
-
-/* should this be publish? send the data and then clear projectDisplay */
-
+ 
 function subscribeProject(obj) {
   let projectDiv = document.createElement("div");
   projectDiv.setAttribute("data-id", obj.id);
@@ -20,7 +19,7 @@ function subscribeProject(obj) {
   heading.textContent = obj.title;
   projectDiv.appendChild(heading);
   let taskList = document.createElement("ul");
-  taskList.classList.add(obj.title);
+  taskList.classList.add(obj.title, "task-list");
   projectDiv.appendChild(taskList);
   projectDisplay.appendChild(projectDiv);
 }
@@ -30,9 +29,21 @@ function subRmvProjectDisplay() {
     projectDisplay.removeChild(projectDisplay.lastChild);
   }
 }
+/* Removes Tasks Items when */
+function subRmvTasks() {
+  let taskList = document.querySelectorAll(".task-list")
+  taskList.forEach((listItem) => {
+    while (listItem.firstChild) {
+      listItem.removeChild(listItem.lastChild);
+    }
+  } )
+}
 
+  
 function subTaskListItem(obj) {
   let taskList = document.querySelector("." + obj.project);
+  console.log(obj.id)
+  taskList.setAttribute("data-id", obj.id);
   let listItem = document.createElement("li");
   let title = document.createElement("h4");
   title.textContent = obj.title;
@@ -64,4 +75,6 @@ export {
   projectDisplay,
   subTaskListItem,
   subRmvProjectDisplay,
+  subRmvTasks
+  /* generateProjectDisplay */
 };
