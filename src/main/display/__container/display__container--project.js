@@ -10,6 +10,7 @@ function subscribeProject(obj) {
   let dltBtn = document.createElement("button");
   dltBtn.textContent = "x";
   dltBtn.setAttribute("type", "button");
+  
   dltBtn.addEventListener("click", () => {
     projectRemover.remove(obj.id);
   });
@@ -24,7 +25,7 @@ function subscribeProject(obj) {
   projectDisplay.appendChild(projectDiv);
 }
 
-function subscribeClearProjectDisplay() {
+function subRmvProjectDisplay() {
   while (projectDisplay.firstChild) {
     projectDisplay.removeChild(projectDisplay.lastChild);
   }
@@ -62,5 +63,5 @@ export {
   subscribeProject,
   projectDisplay,
   subTaskListItem,
-  subscribeClearProjectDisplay,
+  subRmvProjectDisplay,
 };

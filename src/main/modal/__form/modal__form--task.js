@@ -89,12 +89,18 @@ submit.textContent = "Create Task";
 taskForm.appendChild(submit);
 
 
+function displayTasks() {
+  let radio = document.querySelector("input:checked");
+  let obj = new TaskConstructor(title.value, textArea.value, date.value, radio.value, selectProject.value);
+  obj.displayAll(obj);
+}
 
-
+submit.addEventListener("click", displayTasks)
+/* 
 submit.addEventListener("click", () => {
   let radio = document.querySelector("input:checked");
   let obj = new TaskConstructor(title.value, textArea.value, date.value, radio.value, selectProject.value);
   obj.publish();
 })
-
+ */
 export {taskForm, subSelectProjectInput, subClearSelectOptions};

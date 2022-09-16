@@ -3,9 +3,9 @@ import { subscribeNote } from "./display/__container/display__container--note";
 import {
   subscribeProject,
   subTaskListItem,
-  subscribeClearProjectDisplay,
+  subRmvProjectDisplay,
 } from "./display/__container/display__container--project";
-import { subscribeTask } from "./display/__container/display__container--task";
+import { subscribeTask, subRmvTaskDisplay } from "./display/__container/display__container--task";
 import {
   subSelectProjectInput,
   subClearSelectOptions,
@@ -62,6 +62,7 @@ let projectRemover = new RemoveConstructor(pubSubProjects, projects);
 
 
 
+
 let pubSubObjectConstructors = pubSubFactory();
 
 
@@ -70,6 +71,8 @@ function subPublishRequest(obj) {
   let pubSub;
   if (obj.type == "project") {
     pubSub = pubSubProjects;
+  } else if(obj.type == "task") {
+    pubSub = pubSubTasks;
   }
   pubSub.publish("display", obj.obj);  
 }
@@ -81,6 +84,9 @@ function subDisplayAllRequest(obj) {
   if (obj.type == "project") {
     pubSub = pubSubProjects;
     objArr = projects;
+  } else if (obj.type == "task") {
+    pubSub = pubSubTasks;
+    objArr = tasks;
   }
   pubSub.publish("clear", true);
   objArr.push(obj.obj);
@@ -127,7 +133,7 @@ function ProjectConstructor(title) {
   this.type = "project";
 }
 
-let test = new ObjectConstructor(pubSubProjects, projects)
+let test = new ObjectConstructor()
 ProjectConstructor.prototype = Object.create(ObjectConstructor.prototype);
 
 
@@ -164,12 +170,30 @@ NoteConstructor.prototype.publish = function () {
 
 /* Task Constructor */
 
+let tasks = new ObjectArrClass();
+let pubSubTasks = pubSubFactory();
+let taskRemover = new RemoveConstructor(pubSubTasks, tasks);
+
 function TaskConstructor(title, details, date, priority, project) {
-  (this.title = title),
-    (this.details = details),
-    (this.date = date),
-    (this.priority = priority);
-  this.project = project;
+  this.title = title,
+  this.details = details,
+  this.date = date,
+  this.priority = priority,
+  this.project = project,
+  this.type = "task";
+  this.id = tasks.objIdGen += 1;
+}
+
+TaskConstructor.prototype = Object.create(ObjectConstructor.prototype)
+
+
+/* 
+function TaskConstructor(title, details, date, priority, project) {
+  this.title = title,
+  this.details = details,
+  this.date = date,
+  this.priority = priority,
+  this.project = project,
 }
 
 TaskConstructor.prototype.publish = function () {
@@ -181,15 +205,21 @@ TaskConstructor.prototype.publish = function () {
     this.project
   );
   pubSubForms.publish("task", obj);
-};
+}; */
 
 /* Subscribers */
 pubSubProjects.subscribe("display", subscribeProject);
 pubSubProjects.subscribe("display", subSelectProjectInput);
 pubSubForms.subscribe("note", subscribeNote);
-pubSubForms.subscribe("task", subscribeTask);
+/* pubSubForms.subscribe("task", subscribeTask);
 pubSubForms.subscribe("task", subTaskListItem);
-pubSubProjects.subscribe("clear", subscribeClearProjectDisplay);
+ */
+pubSubTasks.subscribe("display", subscribeTask);
+pubSubTasks.subscribe("display", subTaskListItem);
+pubSubTasks.subscribe("clear", subRmvTaskDisplay);
+
+pubSubProjects.subscribe("clear", subRmvProjectDisplay);
 pubSubProjects.subscribe("clear", subClearSelectOptions);
 
-export { NoteConstructor, ProjectConstructor, TaskConstructor, projectRemover };
+
+export { NoteConstructor, ProjectConstructor, TaskConstructor, projectRemover, taskRemover };
