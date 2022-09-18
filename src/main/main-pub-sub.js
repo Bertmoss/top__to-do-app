@@ -44,12 +44,24 @@ class ObjectArrClass {
 function RemoveConstructor(pubSub, classObj) {
   this.pubSub = pubSub;
   this.classObj = classObj;
-}
+}/* 
 RemoveConstructor.prototype.removeAll = function() {
   this.pubSub.publish("clear", true);
   this.classObj.objArr.forEach((object) => {
     object.publish(object);
   });
+} */
+
+RemoveConstructor.prototype.removeByProject = function(prjRmv) {
+  let indexOfMatch = this.classObj.objArr.findIndex((obj) => {
+    return obj.project === prjRmv.title ? true : false;
+  });
+  this.classObj.remove(indexOfMatch);
+  this.pubSub.publish("clear", true);
+  this.classObj.objArr.forEach((object) => {
+    object.publish(object);
+  });
+
 }
 
 RemoveConstructor.prototype.remove = function (dataId) {

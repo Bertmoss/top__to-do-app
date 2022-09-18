@@ -1,4 +1,4 @@
-import { projectRemover } from "../../main-pub-sub";
+import { projectRemover, taskRemover } from "../../main-pub-sub";
 
 const projectDisplay = document.createElement("div");
 projectDisplay.classList.add("display__container-project--hidden");
@@ -12,6 +12,8 @@ function subscribeProject(obj) {
   
   dltBtn.addEventListener("click", () => {
     projectRemover.remove(obj.id);
+    taskRemover.removeByProject(obj);
+
   });
   projectDiv.appendChild(dltBtn);
 
