@@ -76,6 +76,7 @@ RemoveConstructor.prototype.remove = function (dataId) {
 };
 
 let projects = new ObjectArrClass();
+
 let pubSubProjects = pubSubFactory();
 let projectRemover = new RemoveConstructor(pubSubProjects, projects);
 
@@ -252,4 +253,4 @@ pubSubProjects.subscribe("clear", subClearSelectOptions);
 
 
 
-export { NoteConstructor, ProjectConstructor, TaskConstructor, projectRemover, taskRemover };
+export { NoteConstructor, ProjectConstructor, TaskConstructor, projectRemover, taskRemover, };

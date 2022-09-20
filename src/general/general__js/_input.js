@@ -1,6 +1,6 @@
-function createBasicInput(type, inputName, id) {
+function createBasicInput(className, type, inputName, id) {
   let input = document.createElement("input");
-  input.classList.add("form__input");
+  input.classList.add(className);
   input.setAttribute("type", type);
   input.setAttribute("name", inputName);
   input.setAttribute("id", id);
