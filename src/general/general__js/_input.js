@@ -6,6 +6,15 @@ function createBasicInput(className, type, inputName, id) {
   input.setAttribute("id", id);
   return input;
 }
+
+function createTextArea(className, inputName, id) {
+  let textArea = document.createElement("textarea");
+  textArea.classList.add(className);
+  textArea.setAttribute("name", inputName);
+  textArea.setAttribute("id", id);
+  return textArea;
+} 
+
 function createLabel(input, text) {
   let label = document.createElement("label");
   label.classList.add("form__label")
@@ -19,4 +28,23 @@ function appendLabelInput(form, label, input) {
   form.appendChild(input);
 }
 
-export {createBasicInput, createLabel, appendLabelInput}
+function createRadioInput(priorityLevel, className) {
+  let radio = createBasicInput(
+    className,
+    "radio",
+    "priority",
+    `priority-${priorityLevel}`
+  );
+  radio.setAttribute("value", priorityLevel);
+  return radio;
+}
+
+function appendRadioInputs(parent, array) {
+  array.forEach((element) => {
+    parent.appendChild(element);
+    let label = createLabel(element, element.getAttribute("value"));
+    parent.appendChild(label);
+  });
+}
+
+export {createBasicInput, createLabel, appendLabelInput, createRadioInput, appendRadioInputs, createTextArea}

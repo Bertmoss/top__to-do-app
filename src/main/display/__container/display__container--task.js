@@ -1,5 +1,6 @@
 import { taskRemover } from "../../main-pub-sub";
 import { projectRemover } from "../../main-pub-sub";
+import { createRadioInput, appendRadioInputs, createBasicInput, createTextArea } from "../../../general/general__js/_input";
 const taskDisplay = document.createElement("div");
 taskDisplay.classList.add("display__container-task--hidden");
 
@@ -40,9 +41,7 @@ function assignClass(key, element) {
     case ("priority"):
       element.classList.add("table__td--priority", "table__td");
       break;
-    
   }
-
 }
 
 
@@ -73,21 +72,28 @@ function subscribeTask(obj) {
   editBtn.addEventListener("click", () => {
 
     let tableData = document.querySelectorAll(`[data-id="${obj.id}"] .table__td`)
-    let table = document.querySelector(`[data-id="${obj.id}"] table`)
+    let table = document.querySelector(`[data-id="${obj.id}"] table`) //Do I really need this?
     tableData.forEach(function(td) {
-      let editInput = document.createElement("input");
+      let editInput;
       
-      if (td.classList.contains("table__td--title")) { 
-        editInput.setAttribute("type", "text"); 
+      if (td.classList.contains("table__td--title")) {
+        editInput = createBasicInput("table__edit-input", "text", "title", "edit-title"); 
         editInput.setAttribute("placeholder", obj.title);
       } else if (td.classList.contains("table__td--details")) {
-        editInput = document.createElement("textarea");
+        editInput = createTextArea("table__edit-input", "details", "edit-details");
         editInput.textContent = obj.details;
-       } else if (td.classList.contains("table__td--date")) {
-        editInput.setAttribute("type", "date");
+      } else if (td.classList.contains("table__td--date")) {
+        editInput = createBasicInput("table__edit-input", "date", "date", "edit-date");
         editInput.setAttribute("placeholder", obj.date);
-       } else if (td.classList.contains("table__td--priority")){
-        
+      } else if (td.classList.contains("table__td--priority")){
+        editInput = document.createElement("fieldset");
+        let legend = document.createElement("legend");
+        legend.textContent = "Priority";
+        editInput.appendChild(legend);
+        let low = createRadioInput("low", "edit-btn__input");
+        let medium = createRadioInput("medium", "edit-btn__input")
+        let high = createRadioInput("high", "edit-btn__input")
+        appendRadioInputs(editInput, [low, medium, high]);
        }
 
       td.parentNode.replaceChild(editInput, td);
@@ -98,54 +104,37 @@ function subscribeTask(obj) {
  */
     
     
-    let submitChange = document.createElement("button");
-    submitChange.textContent = "Submit";
-    submitChange.addEventListener("click", () => {
+    let submitChangeBtn = document.createElement("button");
+    submitChangeBtn.textContent = "Submit";
+    submitChangeBtn.addEventListener("click", () => {
+      let editedInputs = document.querySelectorAll(".table__edit-input");
+      editedInputs.forEach((input) => {
+        if (input.getAttribute("name") == "title") {
+          obj.title = input.value
+        } else if (input.getAttribute("name") == "details") {
+          obj.details = input.value;
+        } else if (input.getAttribute("name") == "date") {
+          obj.date = input.value;
+        }
+
+        input.textContent = obj.title;
+        taskDiv.replaceChild(titleValue, newTitleValue)
+      })
+      
+      
+      
       obj.title = newTitleValue.value;
       titleValue.textContent = obj.title;
       taskDiv.replaceChild(titleValue, newTitleValue);
       console.log(obj);
       submitChange.remove();
     });
-    taskDiv.appendChild(submitChange);
+    taskDiv.appendChild(submitChangeBtn);
   });
   taskDiv.appendChild(editBtn);
 
   createTable(obj, taskDiv);
   
-
-  
-  /* 
-/* Title 
-  let title = document.createElement("p");
-  title.textContent = "Title:";
-  let titleValue = document.createElement("p");
-  titleValue.textContent = obj.title;
-  taskDiv.appendChild(title);
-  taskDiv.appendChild(titleValue);
-
-/* Details (text-area) 
-  let details = document.createElement("p");
-  details.textContent = "Details:"
-
-  let detailsValue = document.createElement("p");
-  detailsValue.textContent = obj.details;
-
-  taskDiv.appendChild(details);
-  taskDiv.appendChild(detailsValue);
-
-  /* Date 
-  let date = document.createElement("p");
-  date.textContent = "Date:"
-
-  let dateValue = document.createElement("p");
-  date.textContent = obj.date;
-  taskDiv.appendChild(date);
-
-  let priority = document.createElement("p");
-  priority.textContent = obj.priority;
-  taskDiv.appendChild(priority);
-  ; */
   taskDisplay.appendChild(taskDiv)
 }
 
