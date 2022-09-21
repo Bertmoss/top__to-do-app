@@ -6,7 +6,10 @@ import {
   subRmvProjectDisplay,
   subRmvTasks,
 } from "./display/__container/display__container--project";
-import { subscribeTask, subRmvTaskDisplay } from "./display/__container/display__container--task";
+import {
+  subscribeTask,
+  subRmvTaskContainer,
+} from "./display/__container/display__container--task";
 import {
   subSelectProjectInput,
   subClearSelectOptions,
@@ -36,15 +39,28 @@ class ObjectArrClass {
   remove(index) {
     this.objArr.splice(index, 1);
   }
+  /* sortByPriority() {
+    this.objArr.sort(function (a, b) {
+      return b.countPriority() - a.countPriority();
+    });
+  } */
 }
+class TaskObjectArrClass extends ObjectArrClass {
+  sortByPriority() {
+    this.objArr.sort(function (a, b) {
+      return b.countPriority() - a.countPriority();
+    });
+  }
+} 
 
 /* REMOVE CONSTRUCTOR */
 /* used to remove objects from the display by matching the data index to the index property in each object */
+/* REFACTOR REMOVE CONSTRUCTOR IT EXPOSES PUBSUB and CLASSOBJ */
 
 function RemoveConstructor(pubSub, classObj) {
   this.pubSub = pubSub;
   this.classObj = classObj;
-}/* 
+} /* 
 RemoveConstructor.prototype.removeAll = function() {
   this.pubSub.publish("clear", true);
   this.classObj.objArr.forEach((object) => {
@@ -52,7 +68,7 @@ RemoveConstructor.prototype.removeAll = function() {
   });
 } */
 
-RemoveConstructor.prototype.removeByProject = function(prjRmv) {
+RemoveConstructor.prototype.removeByProject = function (prjRmv) {
   let indexOfMatch = this.classObj.objArr.findIndex((obj) => {
     return obj.project === prjRmv.title ? true : false;
   });
@@ -61,8 +77,7 @@ RemoveConstructor.prototype.removeByProject = function(prjRmv) {
   this.classObj.objArr.forEach((object) => {
     object.publish(object);
   });
-
-}
+};
 
 RemoveConstructor.prototype.remove = function (dataId) {
   let indexOfMatch = this.classObj.objArr.findIndex((obj) => {
@@ -75,36 +90,38 @@ RemoveConstructor.prototype.remove = function (dataId) {
   });
 };
 
-RemoveConstructor.prototype.clearDisplay = function() {
+RemoveConstructor.prototype.clearDisplay = function () {
   this.pubSub.publish("clear", true);
   this.classObj.objArr.forEach((object) => {
     object.publish(object);
   });
+};
 
-}
+RemoveConstructor.prototype.sortByPriority = function () {
+  tasks.sortByPriority();
+  this.pubSub.publish("clear", true);
+  this.classObj.objArr.forEach((object) => {
+    object.publish(object);
+  });
+};
 
 let projects = new ObjectArrClass();
 
 let pubSubProjects = pubSubFactory();
 let projectRemover = new RemoveConstructor(pubSubProjects, projects);
 
-
-
-
 let pubSubObjectConstructors = pubSubFactory();
-
 
 /* WEIRD OBJ make this into pubSub ? */
 function subPublishRequest(obj) {
   let pubSub;
   if (obj.type == "project") {
     pubSub = pubSubProjects;
-  } else if(obj.type == "task") {
+  } else if (obj.type == "task") {
     pubSub = pubSubTasks;
   }
-  pubSub.publish("display", obj.obj);  
+  pubSub.publish("display", obj.obj);
 }
-
 
 function subDisplayAllRequest(obj) {
   let pubSub;
@@ -118,33 +135,32 @@ function subDisplayAllRequest(obj) {
   }
   pubSub.publish("clear", true);
   objArr.push(obj.obj);
-  console.log(objArr.objArr)
+  console.log(objArr.objArr);
   objArr.objArr.forEach((object) => {
     object.publish(object);
   });
-
 }
 
-pubSubObjectConstructors.subscribe("publish", subPublishRequest );
+pubSubObjectConstructors.subscribe("publish", subPublishRequest);
 
 pubSubObjectConstructors.subscribe("displayAll", subDisplayAllRequest);
 
 /* Object Constructor*/
-function ObjectConstructor( /* pubSub, objArr */) {
-/*   this.pubSub = pubSub;
+function ObjectConstructor(/* pubSub, objArr */) {
+  /*   this.pubSub = pubSub;
   this.objArr = objArr; */
 }
 /* 
 ObjectConstructor.prototype.getId = function() {this.objArr.objIdGen += 1};
  */
-ObjectConstructor.prototype.publish = function(obj) {
+ObjectConstructor.prototype.publish = function (obj) {
   /* this.pubSub.publish("display", obj); */
-  pubSubObjectConstructors.publish("publish", {type:this.type, obj})
-}
+  pubSubObjectConstructors.publish("publish", { type: this.type, obj });
+};
 
-ObjectConstructor.prototype.displayAll = function(obj) {
-  pubSubObjectConstructors.publish("displayAll",{type:this.type, obj});
- /*  this.pubSub.publish("clear", true);
+ObjectConstructor.prototype.displayAll = function (obj) {
+  pubSubObjectConstructors.publish("displayAll", { type: this.type, obj });
+  /*  this.pubSub.publish("clear", true);
   this.objArr.push(obj);
   this.objArr.objArr.forEach((object) => {
     object.publish(object);
@@ -153,17 +169,16 @@ ObjectConstructor.prototype.displayAll = function(obj) {
 };
 
 function ProjectConstructor(title) {
-  this.title = title;/* 
+  this.title = title; /* 
   this.pubSub = pubSubProjects;
-  this.objArr = projects; *//* 
+  this.objArr = projects; */ /* 
   this.id = this.objArr.objIdGen += 1; */
   this.id = projects.objIdGen += 1;
   this.type = "project";
 }
 
-let test = new ObjectConstructor()
+let test = new ObjectConstructor();
 ProjectConstructor.prototype = Object.create(ObjectConstructor.prototype);
-
 
 /* Project Constructor */
 /* function ProjectConstructor(title) {
@@ -198,22 +213,37 @@ NoteConstructor.prototype.publish = function () {
 
 /* Task Constructor */
 
-let tasks = new ObjectArrClass();
+let tasks = new TaskObjectArrClass();
 let pubSubTasks = pubSubFactory();
 let taskRemover = new RemoveConstructor(pubSubTasks, tasks);
 
 function TaskConstructor(title, details, date, priority, project) {
-  this.title = title,
-  this.details = details,
-  this.date = date,
-  this.priority = priority,
-  this.project = project,
-  this.type = "task";
+  (this.title = title),
+    (this.details = details),
+    (this.date = date),
+    (this.priority = priority),
+    (this.project = project),
+    (this.type = "task");
   this.id = tasks.objIdGen += 1;
 }
 
-TaskConstructor.prototype = Object.create(ObjectConstructor.prototype)
+TaskConstructor.prototype = Object.create(ObjectConstructor.prototype);
 
+TaskConstructor.prototype.countPriority = function () {
+  switch (this.priority) {
+    case "low":
+      return 1;
+      break;
+    case "medium":
+      return 2;
+      break;
+    case "high":
+      return 3;
+      break;
+    default:
+      return 0;
+  }
+};
 
 /* 
 function TaskConstructor(title, details, date, priority, project) {
@@ -246,8 +276,8 @@ pubSubForms.subscribe("task", subTaskListItem);
 
 pubSubTasks.subscribe("display", subscribeTask);
 pubSubTasks.subscribe("display", subTaskListItem);
-pubSubTasks.subscribe("clear", subRmvTaskDisplay);
-pubSubTasks.subscribe("clear", subRmvTasks)
+pubSubTasks.subscribe("clear", subRmvTaskContainer);
+pubSubTasks.subscribe("clear", subRmvTasks);
 /* 
 pubSubTasks.subscribe("clear",subRmvProjectDisplay) */
 
@@ -257,8 +287,10 @@ pubSubTasks.subscribe("clear", subRmvProjectDisplay) /* ?? */
 pubSubProjects.subscribe("clear", subRmvProjectDisplay);
 pubSubProjects.subscribe("clear", subClearSelectOptions);
 
-
-
-
-
-export { NoteConstructor, ProjectConstructor, TaskConstructor, projectRemover, taskRemover, };
+export {
+  NoteConstructor,
+  ProjectConstructor,
+  TaskConstructor,
+  projectRemover,
+  taskRemover,
+};

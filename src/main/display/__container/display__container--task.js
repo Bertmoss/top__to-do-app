@@ -1,13 +1,41 @@
 import { taskRemover } from "../../main-pub-sub";
 import { projectRemover } from "../../main-pub-sub";
-import { createRadioInput, appendRadioInputs, createBasicInput, createTextArea } from "../../../general/general__js/_input";
+import {
+  createRadioInput,
+  appendRadioInputs,
+  createBasicInput,
+  createTextArea,
+} from "../../../general/general__js/_input";
+
+
 const taskDisplay = document.createElement("div");
 taskDisplay.classList.add("display__container-task--hidden");
+
+/* SORT BUTTON */
+let sortDiv = document.createElement("div");
+sortDiv.setAttribute(
+  "style",
+  "width: 50px, height:50px, border: 1px solid black"
+);
+let sortBtnPriority = document.createElement("button");
+
+sortBtnPriority.textContent = "Priority";
+sortBtnPriority.addEventListener("click", () => {taskRemover.sortByPriority()}) 
+sortDiv.appendChild(sortBtnPriority);
+taskDisplay.appendChild(sortDiv);
+
+
+
+const taskContainer = document.createElement("div");
+taskDisplay.appendChild(taskContainer);
+
+
 
 function createTable(obj, parent) {
   let table = document.createElement("table");
   for (const [key, value] of Object.entries(obj)) {
-    if ( key == "type" || key === "id" || key == "project") { /* not sure why I have type task in the first place */
+    if (key == "type" || key === "id" || key == "project") {
+      /* not sure why I have type task in the first place */
       continue;
     }
 
@@ -18,7 +46,7 @@ function createTable(obj, parent) {
 }
 function createRow(key, value) {
   let tableRow = document.createElement("tr");
-  let tableHeading = document.createElement("th")
+  let tableHeading = document.createElement("th");
   tableHeading.textContent = key;
   let tableData = document.createElement("td");
   tableData.textContent = value;
@@ -28,17 +56,17 @@ function createRow(key, value) {
   return tableRow;
 }
 function assignClass(key, element) {
-  switch(key) {
-    case ("title"):
+  switch (key) {
+    case "title":
       element.classList.add("table__td--title", "table__td");
       break;
-    case ("details"):
+    case "details":
       element.classList.add("table__td--details", "table__td");
       break;
-    case ("date"):
+    case "date":
       element.classList.add("table__td--date", "table__td");
       break;
-    case ("priority"):
+    case "priority":
       element.classList.add("table__td--priority", "table__td");
       break;
   }
@@ -61,37 +89,52 @@ function subscribeTask(obj) {
   editBtn.textContent = "Edit";
   editBtn.setAttribute("type", "button");
 
- /*Have to create labels and hide them for accessibility ??*/
+  /*Have to create labels and hide them for accessibility ??*/
 
   editBtn.addEventListener("click", () => {
-
-    let tableData = document.querySelectorAll(`[data-id="${obj.id}"] .table__td`)
-    let table = document.querySelector(`[data-id="${obj.id}"] table`) //Do I really need this?
-    tableData.forEach(function(td) {
+    let tableData = document.querySelectorAll(
+      `[data-id="${obj.id}"] .table__td`
+    );
+    //let table = document.querySelector(`[data-id="${obj.id}"] table`) //Do I really need this?
+    tableData.forEach(function (td) {
       let editInput;
-      
+
       if (td.classList.contains("table__td--title")) {
-        editInput = createBasicInput("table__edit-input", "text", "title", "edit-title"); 
+        editInput = createBasicInput(
+          "table__edit-input",
+          "text",
+          "title",
+          "edit-title"
+        );
         editInput.setAttribute("placeholder", obj.title);
       } else if (td.classList.contains("table__td--details")) {
-        editInput = createTextArea("table__edit-input", "details", "edit-details");
+        editInput = createTextArea(
+          "table__edit-input",
+          "details",
+          "edit-details"
+        );
         editInput.textContent = obj.details;
       } else if (td.classList.contains("table__td--date")) {
-        editInput = createBasicInput("table__edit-input", "date", "date", "edit-date");
+        editInput = createBasicInput(
+          "table__edit-input",
+          "date",
+          "date",
+          "edit-date"
+        );
         editInput.setAttribute("placeholder", obj.date);
-      } else if (td.classList.contains("table__td--priority")){
+      } else if (td.classList.contains("table__td--priority")) {
         editInput = document.createElement("fieldset");
         let legend = document.createElement("legend");
         legend.textContent = "Priority";
         editInput.appendChild(legend);
         let low = createRadioInput("low", "edit-btn__input--radio");
-        let medium = createRadioInput("medium", "edit-btn__input--radio")
-        let high = createRadioInput("high", "edit-btn__input--radio")
+        let medium = createRadioInput("medium", "edit-btn__input--radio");
+        let high = createRadioInput("high", "edit-btn__input--radio");
         appendRadioInputs(editInput, [low, medium, high]);
-       }
+      }
 
       td.parentNode.replaceChild(editInput, td);
-    })
+    });
     /* SUBMIT CHANGES BTN */
     let submitChangeBtn = document.createElement("button");
     submitChangeBtn.textContent = "Submit";
@@ -99,29 +142,35 @@ function subscribeTask(obj) {
       let editedInputs = document.querySelectorAll(".table__edit-input");
       editedInputs.forEach((input) => {
         if (input.getAttribute("name") == "title") {
-          (input.title == "") ? obj.title : (obj.title = input.value)
+          input.title == "" ? obj.title : (obj.title = input.value);
         } else if (input.getAttribute("name") == "details") {
           obj.details = input.value;
         } else if (input.getAttribute("name") == "date") {
-          (input.value == "") ? obj.date : (obj.date = input.value); 
+          input.value == "" ? obj.date : (obj.date = input.value);
         }
-      })
-      let editedPriorityInput = document.querySelector(".edit-btn__input--radio:checked");
-      (editedPriorityInput == null) ? obj.priority :  (obj.priority = editedPriorityInput.value);
+      });
+      let editedPriorityInput = document.querySelector(
+        ".edit-btn__input--radio:checked"
+      );
+      editedPriorityInput == null
+        ? obj.priority
+        : (obj.priority = editedPriorityInput.value);
+      submitChangeBtn.remove();
       taskRemover.clearDisplay();
+      console.log(taskRemover);
     });
     taskDiv.appendChild(submitChangeBtn);
   });
 
   taskDiv.appendChild(editBtn);
   createTable(obj, taskDiv);
-  taskDisplay.appendChild(taskDiv)
+  taskContainer.appendChild(taskDiv);
 }
 
-function subRmvTaskDisplay() {
-  while (taskDisplay.firstChild) {
-    taskDisplay.removeChild(taskDisplay.lastChild);
+function subRmvTaskContainer() {
+  while (taskContainer.firstChild) {
+    taskContainer.removeChild(taskContainer.lastChild);
   }
 }
 
-export { subscribeTask, taskDisplay, subRmvTaskDisplay };
+export { subscribeTask, taskDisplay, subRmvTaskContainer };
