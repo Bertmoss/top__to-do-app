@@ -46,16 +46,23 @@ class ObjectArrClass {
   } */
 }
 class TaskObjectArrClass extends ObjectArrClass {
-  sortByPriority() {
-    this.objArr.sort(function (a, b) {
-      return b.countPriority() - a.countPriority();
-    });
+  sortByPriority(value) {
+    if (value == "most") {
+      this.objArr.sort(function (a, b) {
+        return b.countPriority() - a.countPriority();
+      });
+    } else if (value == "least") {
+      this.objArr.sort(function (a, b) {
+        return a.countPriority() - b.countPriority();
+      });
+    }
   }
 } 
 
 /* REMOVE CONSTRUCTOR */
 /* used to remove objects from the display by matching the data index to the index property in each object */
-/* REFACTOR REMOVE CONSTRUCTOR IT EXPOSES PUBSUB and CLASSOBJ */
+/* REFACTOR REMOVE CONSTRUCTOR IT EXPOSES PUBSUB and CLASSOBJ  instead of hereditary use a composite model. Create different functions that take pubSub/ObjectArr as an argument
+and prototype them!*/
 
 function RemoveConstructor(pubSub, classObj) {
   this.pubSub = pubSub;
@@ -97,8 +104,8 @@ RemoveConstructor.prototype.clearDisplay = function () {
   });
 };
 
-RemoveConstructor.prototype.sortByPriority = function () {
-  tasks.sortByPriority();
+RemoveConstructor.prototype.displaySorted = function(value) {
+  tasks.sortByPriority(value);
   this.pubSub.publish("clear", true);
   this.classObj.objArr.forEach((object) => {
     object.publish(object);

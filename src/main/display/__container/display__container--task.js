@@ -7,7 +7,6 @@ import {
   createTextArea,
 } from "../../../general/general__js/_input";
 
-
 const taskDisplay = document.createElement("div");
 taskDisplay.classList.add("display__container-task--hidden");
 
@@ -17,19 +16,36 @@ sortDiv.setAttribute(
   "style",
   "width: 50px, height:50px, border: 1px solid black"
 );
-let sortBtnPriority = document.createElement("button");
+let sort = document.createElement("select");
+let sortPlaceholder = document.createElement("option");
+sortPlaceholder.setAttribute("disabled","");
+sortPlaceholder.setAttribute("selected","")
+sortPlaceholder.setAttribute("value", " ");
+sortPlaceholder.textContent = "Sort";
+sort.appendChild(sortPlaceholder);
 
-sortBtnPriority.textContent = "Priority";
-sortBtnPriority.addEventListener("click", () => {taskRemover.sortByPriority()}) 
-sortDiv.appendChild(sortBtnPriority);
+let sortPriorityDescending = document.createElement("option");
+
+sortPriorityDescending.textContent = "Most Important";
+sortPriorityDescending.setAttribute("value", "most");
+
+let sortPriorityAscending = document.createElement("option");
+
+sortPriorityAscending.textContent = "Least Important";
+sortPriorityAscending.setAttribute("value", "least")
+
+sort.addEventListener("click", () => {
+  taskRemover.displaySorted(sort.value);
+   
+});
+
+sort.appendChild(sortPriorityDescending);
+sort.appendChild(sortPriorityAscending);
+sortDiv.appendChild(sort);
 taskDisplay.appendChild(sortDiv);
-
-
 
 const taskContainer = document.createElement("div");
 taskDisplay.appendChild(taskContainer);
-
-
 
 function createTable(obj, parent) {
   let table = document.createElement("table");
