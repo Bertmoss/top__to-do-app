@@ -44,9 +44,6 @@ function assignClass(key, element) {
   }
 }
 
-
-
-
 function subscribeTask(obj) {
   let taskDiv = document.createElement("div");
   taskDiv.setAttribute("data-id", obj.id);
@@ -64,10 +61,7 @@ function subscribeTask(obj) {
   editBtn.textContent = "Edit";
   editBtn.setAttribute("type", "button");
 
-  /* This works in principle! Now need to find a way to condense it! */
-  /* add classlist for each value, then for each . Have to create a function that replaces the old title in the obj with the new one 
-
- Have to create labels and hide them for accessibility */
+ /*Have to create labels and hide them for accessibility ??*/
 
   editBtn.addEventListener("click", () => {
 
@@ -90,51 +84,37 @@ function subscribeTask(obj) {
         let legend = document.createElement("legend");
         legend.textContent = "Priority";
         editInput.appendChild(legend);
-        let low = createRadioInput("low", "edit-btn__input");
-        let medium = createRadioInput("medium", "edit-btn__input")
-        let high = createRadioInput("high", "edit-btn__input")
+        let low = createRadioInput("low", "edit-btn__input--radio");
+        let medium = createRadioInput("medium", "edit-btn__input--radio")
+        let high = createRadioInput("high", "edit-btn__input--radio")
         appendRadioInputs(editInput, [low, medium, high]);
        }
 
       td.parentNode.replaceChild(editInput, td);
     })
-    /* let newTitleValue = document.createElement("input");
-    newTitleValue.setAttribute("placeholder", obj.title);
-    taskDiv.replaceChild(newTitleValue, titleValue);
- */
-    
-    
+    /* SUBMIT CHANGES BTN */
     let submitChangeBtn = document.createElement("button");
     submitChangeBtn.textContent = "Submit";
     submitChangeBtn.addEventListener("click", () => {
       let editedInputs = document.querySelectorAll(".table__edit-input");
       editedInputs.forEach((input) => {
         if (input.getAttribute("name") == "title") {
-          obj.title = input.value
+          (input.title == "") ? obj.title : (obj.title = input.value)
         } else if (input.getAttribute("name") == "details") {
           obj.details = input.value;
         } else if (input.getAttribute("name") == "date") {
-          obj.date = input.value;
+          (input.value == "") ? obj.date : (obj.date = input.value); 
         }
-
-        input.textContent = obj.title;
-        taskDiv.replaceChild(titleValue, newTitleValue)
       })
-      
-      
-      
-      obj.title = newTitleValue.value;
-      titleValue.textContent = obj.title;
-      taskDiv.replaceChild(titleValue, newTitleValue);
-      console.log(obj);
-      submitChange.remove();
+      let editedPriorityInput = document.querySelector(".edit-btn__input--radio:checked");
+      (editedPriorityInput == null) ? obj.priority :  (obj.priority = editedPriorityInput.value);
+      taskRemover.clearDisplay();
     });
     taskDiv.appendChild(submitChangeBtn);
   });
-  taskDiv.appendChild(editBtn);
 
+  taskDiv.appendChild(editBtn);
   createTable(obj, taskDiv);
-  
   taskDisplay.appendChild(taskDiv)
 }
 
@@ -142,9 +122,6 @@ function subRmvTaskDisplay() {
   while (taskDisplay.firstChild) {
     taskDisplay.removeChild(taskDisplay.lastChild);
   }
-}
-function createForm(obj) {
-  
 }
 
 export { subscribeTask, taskDisplay, subRmvTaskDisplay };

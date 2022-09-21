@@ -27,7 +27,6 @@ const project = side.createListItem("Projects");
 const note = side.createListItem("Notes");
 
 home.addEventListener("click", () => {
-  console.log("hello");
   noteDisplay.classList.add("display__container-note--hidden");
   projectDisplay.classList.add("display__container-project--hidden");
   taskDisplay.classList.remove("display__container-task--hidden");

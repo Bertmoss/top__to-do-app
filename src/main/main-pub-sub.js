@@ -75,6 +75,14 @@ RemoveConstructor.prototype.remove = function (dataId) {
   });
 };
 
+RemoveConstructor.prototype.clearDisplay = function() {
+  this.pubSub.publish("clear", true);
+  this.classObj.objArr.forEach((object) => {
+    object.publish(object);
+  });
+
+}
+
 let projects = new ObjectArrClass();
 
 let pubSubProjects = pubSubFactory();
@@ -233,7 +241,7 @@ pubSubProjects.subscribe("display", subscribeProject);
 pubSubProjects.subscribe("display", subProjectDisplay); */
 pubSubProjects.subscribe("display", subSelectProjectInput);
 pubSubForms.subscribe("note", subscribeNote);
- pubSubForms.subscribe("task", subscribeTask);
+pubSubForms.subscribe("task", subscribeTask);
 pubSubForms.subscribe("task", subTaskListItem);
 
 pubSubTasks.subscribe("display", subscribeTask);
