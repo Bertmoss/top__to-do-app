@@ -1,4 +1,7 @@
 import { projectRemover, taskRemover } from "../../main-pub-sub";
+import { createBasicInput } from "../../../general/general__js/_input";
+import { createTable } from "../../../general/general__js/_table";
+
 
 const projectDisplay = document.createElement("div");
 projectDisplay.classList.add("display__container-project--hidden");
@@ -13,9 +16,12 @@ function subscribeProject(obj) {
   dltBtn.addEventListener("click", () => {
     projectRemover.remove(obj.id);
     taskRemover.removeByProject(obj);
-
   });
   projectDiv.appendChild(dltBtn);
+
+  
+
+
 
   let heading = document.createElement("h3");
   heading.textContent = obj.title;
@@ -43,10 +49,29 @@ function subRmvTasks() {
 
   
 function subTaskListItem(obj) {
-  let taskList = document.querySelector("." + obj.project);
-  console.log(obj.id)
+  let taskList = document.querySelector("." + obj.project);/* Finished checkbox */
   taskList.setAttribute("data-id", obj.id);
+  
+  let completeInput = createBasicInput("project-div__done-input", "checkbox", "complete-input", "complete-input");
+  
+  
   let listItem = document.createElement("li");
+  completeInput.addEventListener("click", ()=> {
+    taskRemover.complete(obj.id);
+    let taskTable = document.querySelectorAll("th, td");
+    taskTable.forEach((element) => {
+      element.classList.toggle("complete");
+    })
+  })
+  listItem.appendChild(completeInput);
+
+
+
+  createTable(obj, listItem);
+  taskList.appendChild(listItem);
+  
+
+  /* 
   let title = document.createElement("h4");
   title.textContent = obj.title;
   listItem.appendChild(title);
@@ -69,7 +94,7 @@ function subTaskListItem(obj) {
   listItem.addEventListener("click", () => {
     details.classList.toggle("hidden");
     date.classList.toggle("hidden");
-  });
+  }); */
 }
 
 export {
