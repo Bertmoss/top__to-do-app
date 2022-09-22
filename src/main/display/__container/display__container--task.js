@@ -11,6 +11,7 @@ const taskDisplay = document.createElement("div");
 taskDisplay.classList.add("display__container-task--hidden");
 
 /* SORT BUTTON */
+/* NEED TO ADD A SORT BY DATE OPTION */
 let sortDiv = document.createElement("div");
 sortDiv.setAttribute(
   "style",
@@ -44,13 +45,14 @@ sort.appendChild(sortPriorityAscending);
 sortDiv.appendChild(sort);
 taskDisplay.appendChild(sortDiv);
 
+/* TASK CONTAINER */
 const taskContainer = document.createElement("div");
 taskDisplay.appendChild(taskContainer);
 
 function createTable(obj, parent) {
   let table = document.createElement("table");
   for (const [key, value] of Object.entries(obj)) {
-    if (key == "type" || key === "id" || key == "project") {
+    if (key == "type" || key === "id" || key == "project" || key == "status") {
       /* not sure why I have type task in the first place */
       continue;
     }
@@ -91,6 +93,21 @@ function assignClass(key, element) {
 function subscribeTask(obj) {
   let taskDiv = document.createElement("div");
   taskDiv.setAttribute("data-id", obj.id);
+
+  /* Finished checkbox */
+  let completeInput = createBasicInput("task-div__done-input", "checkbox", "complete-input", "complete-input");
+  
+  completeInput.addEventListener("click", ()=> {
+    taskRemover.complete(obj.id);
+    let taskTable = document.querySelectorAll("th, td");
+    taskTable.forEach((element) => {
+      element.classList.toggle("complete");
+    })
+    editBtn.classList.toggle("hidden");
+  })
+
+  taskDiv.appendChild(completeInput);
+
   /* DELETE BUTTON */
   let dltBtn = document.createElement("button");
   dltBtn.textContent = "x";

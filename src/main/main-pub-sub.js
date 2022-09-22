@@ -97,6 +97,16 @@ RemoveConstructor.prototype.remove = function (dataId) {
   });
 };
 
+RemoveConstructor.prototype.complete = function (dataId) {
+  let match = this.classObj.objArr.find((obj) => {
+    return obj.id === dataId ? true : false;
+  });
+
+  (match.status == "active") ? (match.status = "complete"): (match.status = "active");
+  console.log(match);
+
+}
+
 RemoveConstructor.prototype.clearDisplay = function () {
   this.pubSub.publish("clear", true);
   this.classObj.objArr.forEach((object) => {
@@ -225,12 +235,13 @@ let pubSubTasks = pubSubFactory();
 let taskRemover = new RemoveConstructor(pubSubTasks, tasks);
 
 function TaskConstructor(title, details, date, priority, project) {
-  (this.title = title),
-    (this.details = details),
-    (this.date = date),
-    (this.priority = priority),
-    (this.project = project),
-    (this.type = "task");
+  this.title = title;
+  this.details = details;
+  this.date = date;
+  this.priority = priority;
+  this.project = project;
+  this.type = "task";
+  this.status = "active";
   this.id = tasks.objIdGen += 1;
 }
 

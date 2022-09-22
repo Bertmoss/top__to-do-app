@@ -142,6 +142,14 @@ body {
   min-height: 250px;
 }
 
+.hidden {
+  display: none;
+}
+
+.complete {
+  text-decoration: line-through;
+}
+
 /* header */
 /* main */
 /* 
