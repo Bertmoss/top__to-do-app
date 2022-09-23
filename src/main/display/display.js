@@ -1,5 +1,5 @@
 import * as side from "./__side/display__side";
-
+import { taskRemover } from "../main-pub-sub";
 /* Display Containers */
 import { taskDisplay } from "./__container/display__container--task";
 import { noteDisplay } from "./__container/display__container--note";
@@ -27,9 +27,11 @@ const project = side.createListItem("Projects");
 const note = side.createListItem("Notes");
 
 home.addEventListener("click", () => {
+  taskRemover.clearDisplay();
   noteDisplay.classList.add("display__container-note--hidden");
   projectDisplay.classList.add("display__container-project--hidden");
   taskDisplay.classList.remove("display__container-task--hidden");
+
 });
 
 note.addEventListener("click", () => {
@@ -40,13 +42,10 @@ note.addEventListener("click", () => {
 
 
 project.addEventListener("click", () => {
+  taskRemover.clearDisplay();
   noteDisplay.classList.add("display__container-note--hidden");
   projectDisplay.classList.remove("display__container-project--hidden");
   taskDisplay.classList.add("display__container-task--hidden");
-  let details = document.querySelector(".list-item__details");
-  let date = document.querySelector(".list-item__date");
-  details.classList.add("hidden");
-  date.classList.add("hidden")
    
 });
 

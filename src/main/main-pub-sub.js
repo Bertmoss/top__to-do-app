@@ -110,7 +110,11 @@ RemoveConstructor.prototype.complete = function (dataId) {
 RemoveConstructor.prototype.clearDisplay = function () {
   this.pubSub.publish("clear", true);
   this.classObj.objArr.forEach((object) => {
-    object.publish(object);
+    if (object.status == "complete") {
+    } else {
+      object.publish(object);
+    }
+    
   });
 };
 
@@ -154,7 +158,11 @@ function subDisplayAllRequest(obj) {
   objArr.push(obj.obj);
   console.log(objArr.objArr);
   objArr.objArr.forEach((object) => {
-    object.publish(object);
+    if (object.status == "complete") {
+    } else {
+      object.publish(object);
+    }
+    
   });
 }
 
