@@ -56,7 +56,7 @@ function subscribeTask(obj) {
   let taskDiv = document.createElement("div");
   taskDiv.setAttribute("data-id", obj.id);
 
-  /* Finished checkbox */
+  /* Complete checkbox */
   let completeInput = createBasicInput("task-div__done-input", "checkbox", "complete-input", "complete-input");
   
   completeInput.addEventListener("click", ()=> {

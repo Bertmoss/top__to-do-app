@@ -49,16 +49,18 @@ function subRmvTasks() {
 
   
 function subTaskListItem(obj) {
-  let taskList = document.querySelector("." + obj.project);/* Finished checkbox */
+  let taskList = document.querySelector("." + obj.project);
   taskList.setAttribute("data-id", obj.id);
-  
+
+  /* Finished checkbox */
   let completeInput = createBasicInput("project-div__done-input", "checkbox", "complete-input", "complete-input");
   
   
   let listItem = document.createElement("li");
+  listItem.setAttribute("data-li-id", obj.id)
   completeInput.addEventListener("click", ()=> {
     taskRemover.complete(obj.id);
-    let taskTable = document.querySelectorAll("th, td");
+    let taskTable = document.querySelectorAll(`li[data-li-id = "${obj.id}"] th,li[data-li-id = "${obj.id}"] td`);
     taskTable.forEach((element) => {
       element.classList.toggle("complete");
     })
@@ -70,31 +72,6 @@ function subTaskListItem(obj) {
   createTable(obj, listItem);
   taskList.appendChild(listItem);
   
-
-  /* 
-  let title = document.createElement("h4");
-  title.textContent = obj.title;
-  listItem.appendChild(title);
-
-  let details = document.createElement("p");
-  details.textContent = obj.details;
-  details.classList.add("hidden", "list-item__details");
-  listItem.appendChild(details);
-
-  let date = document.createElement("p");
-  date.textContent = obj.date;
-  date.classList.add("hidden", "list-item__date");
-  listItem.appendChild(date);
-
-  let priority = document.createElement("p");
-  priority.textContent = obj.priority;
-  listItem.appendChild(priority);
-  taskList.appendChild(listItem);
-
-  listItem.addEventListener("click", () => {
-    details.classList.toggle("hidden");
-    date.classList.toggle("hidden");
-  }); */
 }
 
 export {
