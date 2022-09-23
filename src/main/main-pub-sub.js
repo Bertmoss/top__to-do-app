@@ -202,7 +202,6 @@ function ProjectConstructor(title) {
   this.type = "project";
 }
 
-let test = new ObjectConstructor();
 ProjectConstructor.prototype = Object.create(ObjectConstructor.prototype);
 
 /* Project Constructor */

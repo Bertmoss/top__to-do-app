@@ -46,6 +46,11 @@ project.addEventListener("click", () => {
   noteDisplay.classList.add("display__container-note--hidden");
   projectDisplay.classList.remove("display__container-project--hidden");
   taskDisplay.classList.add("display__container-task--hidden");
+  let hiddenRows = document.querySelectorAll(".task-list tr:not(:first-child)");
+  hiddenRows.forEach((row) => {
+    row.classList.add("hidden");
+  })
+  
    
 });
 

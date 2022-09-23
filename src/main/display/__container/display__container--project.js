@@ -1,6 +1,7 @@
 import { projectRemover, taskRemover } from "../../main-pub-sub";
 import { createBasicInput } from "../../../general/general__js/_input";
 import { createTable } from "../../../general/general__js/_table";
+import { add } from "date-fns";
 
 
 const projectDisplay = document.createElement("div");
@@ -19,10 +20,6 @@ function subscribeProject(obj) {
     });
     projectDiv.appendChild(dltBtn);
   }
-  
-
-
-
   let heading = document.createElement("h3");
   heading.textContent = obj.title;
   projectDiv.appendChild(heading);
@@ -37,6 +34,9 @@ function subRmvProjectDisplay() {
     projectDisplay.removeChild(projectDisplay.lastChild);
   }
 }
+
+
+
 /* Removes Tasks Items when */
 function subRmvTasks() {
   let taskList = document.querySelectorAll(".task-list")
@@ -66,12 +66,15 @@ function subTaskListItem(obj) {
     })
   })
   listItem.appendChild(completeInput);
-
-
-
   createTable(obj, listItem);
+  listItem.addEventListener("click", () => {
+    let hiddenRows = document.querySelectorAll(`li[data-li-id = "${obj.id}"] tr:not(:first-child)`);
+    hiddenRows.forEach((row) => {
+      row.classList.toggle("hidden");
+    })
+   
+  })
   taskList.appendChild(listItem);
-  
 }
 
 export {

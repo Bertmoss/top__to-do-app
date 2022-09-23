@@ -135,6 +135,10 @@ body {
   display: none;
 }
 
+.hidden {
+  display: none;
+}
+
 .display__container {
   min-height: 100px;
   background-color: #181D3D;
