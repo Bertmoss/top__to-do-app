@@ -9,16 +9,16 @@ projectDisplay.classList.add("display__container-project--hidden");
 function subscribeProject(obj) {
   let projectDiv = document.createElement("div");
   projectDiv.setAttribute("data-id", obj.id);
-  let dltBtn = document.createElement("button");
-  dltBtn.textContent = "x";
-  dltBtn.setAttribute("type", "button");
-  
-  dltBtn.addEventListener("click", () => {
-    projectRemover.remove(obj.id);
-    taskRemover.removeByProject(obj);
-  });
-  projectDiv.appendChild(dltBtn);
-
+  if (obj.id !== 1) { //exemption for the general project
+    let dltBtn = document.createElement("button");
+    dltBtn.textContent = "x";
+    dltBtn.setAttribute("type", "button"); 
+    dltBtn.addEventListener("click", () => {
+      projectRemover.remove(obj.id);
+      taskRemover.removeByProject(obj);
+    });
+    projectDiv.appendChild(dltBtn);
+  }
   
 
 
