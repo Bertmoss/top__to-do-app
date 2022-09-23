@@ -114,9 +114,17 @@ RemoveConstructor.prototype.clearDisplay = function () {
     } else {
       object.publish(object);
     }
-    
   });
 };
+RemoveConstructor.prototype.displayComplete = function() {
+  this.pubSub.publish("clear", true);
+  this.classObj.objArr.forEach((object) => {
+    if (object.status == "complete") {
+      object.publish(object);
+    }}
+  )
+}
+
 
 RemoveConstructor.prototype.displaySorted = function(value) {
   tasks.sortByPriority(value);

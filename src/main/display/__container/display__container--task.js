@@ -14,10 +14,6 @@ taskDisplay.classList.add("display__container-task--hidden");
 /* SORT BUTTON */
 /* NEED TO ADD A SORT BY DATE OPTION */
 let sortDiv = document.createElement("div");
-sortDiv.setAttribute(
-  "style",
-  "width: 50px, height:50px, border: 1px solid black"
-);
 let sort = document.createElement("select");
 let sortPlaceholder = document.createElement("option");
 sortPlaceholder.setAttribute("disabled","");
@@ -46,16 +42,60 @@ sort.appendChild(sortPriorityAscending);
 sortDiv.appendChild(sort);
 taskDisplay.appendChild(sortDiv);
 
+
+/* Complete Display button */
+const completeDiv = document.createElement("div");
+const completeDisplayBtn = document.createElement("button");
+completeDisplayBtn.setAttribute("type", "button");
+completeDisplayBtn.textContent = "COMPLETE" // change to check svg later;
+completeDisplayBtn.addEventListener("click", () => {
+  taskRemover.displayComplete();
+  let checkedInput = document.querySelectorAll(".task-div__done-input");
+  checkedInput.forEach((input) => {
+    input.setAttribute("checked", "");
+    input.addEventListener("click", () => {
+      let taskTable = document.querySelectorAll(`div[data-id="${obj.id}"] th, div[data-id="${obj.id}"] td`);
+      taskTable.forEach((element) => {
+        element.classList.toggle("complete");
+      })
+    })
+  })
+  let tableRows = document.querySelectorAll("tr");
+  tableRows.forEach((tr) => {
+    tr.classList.add("complete");
+  })
+})
+completeDiv.appendChild(completeDisplayBtn);
+taskDisplay.appendChild(completeDiv);
+
+
+
+
+
 /* TASK CONTAINER */
 const taskContainer = document.createElement("div");
 taskDisplay.appendChild(taskContainer);
 
+/* Might have to make a separate subscribe for complete tasks */
+
+function prioritySwitch(element, obj) {
+  switch(obj.priority) {
+    case "high":
+      element.classList.add("priority-high");
+      break;
+    case "medium":
+      element.classList.add("priority-medium");
+      break;
+    case "low":
+      element.classList.add("priority-low");
+  }
+}
 
 
 function subscribeTask(obj) {
   let taskDiv = document.createElement("div");
   taskDiv.setAttribute("data-id", obj.id);
-
+  prioritySwitch(taskDiv, obj)
   /* Complete checkbox */
   let completeInput = createBasicInput("task-div__done-input", "checkbox", "complete-input", "complete-input");
   

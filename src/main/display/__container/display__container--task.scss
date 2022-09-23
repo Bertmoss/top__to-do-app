@@ -5,3 +5,12 @@
 .complete {
   text-decoration: line-through;
 }
+.priority-high {
+  border: 1px solid red;
+}
+.priority-medium {
+  border: 1px solid orange;
+}
+.priority-low {
+  border: 1px solid green;
+}
