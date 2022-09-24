@@ -2,7 +2,6 @@ function createTable(obj, parent) {
   let table = document.createElement("table");
   for (const [key, value] of Object.entries(obj)) {
     if (key == "type" || key === "id" || key == "project" || key == "status") {
-      /* not sure why I have type task in the first place */
       continue;
     }
     let row = createRow(key, value);

@@ -50,12 +50,17 @@ completeDisplayBtn.setAttribute("type", "button");
 completeDisplayBtn.textContent = "COMPLETE" // change to check svg later;
 completeDisplayBtn.addEventListener("click", () => {
   taskRemover.displayComplete();
+  
+  /* 
+  taskRemover.displayComplete();
   let checkedInput = document.querySelectorAll(".task-div__done-input");
   checkedInput.forEach((input) => {
     input.setAttribute("checked", "");
     input.addEventListener("click", () => {
       let taskTable = document.querySelectorAll(`div[data-id="${obj.id}"] th, div[data-id="${obj.id}"] td`);
       taskTable.forEach((element) => {
+        console.log(element)
+        console.log("yoo");
         element.classList.toggle("complete");
       })
     })
@@ -63,7 +68,7 @@ completeDisplayBtn.addEventListener("click", () => {
   let tableRows = document.querySelectorAll("tr");
   tableRows.forEach((tr) => {
     tr.classList.add("complete");
-  })
+  }) */
 })
 completeDiv.appendChild(completeDisplayBtn);
 taskDisplay.appendChild(completeDiv);
@@ -89,6 +94,28 @@ function prioritySwitch(element, obj) {
     case "low":
       element.classList.add("priority-low");
   }
+} 
+function subCompleteTask(obj) {
+  let taskDiv = document.createElement("div");
+  taskDiv.setAttribute("data-id", obj.id);
+  let completeInput = createBasicInput("task-div__done-input", "checkbox", "complete-input", "complete-input");
+  completeInput.setAttribute("checked", "");
+  completeInput.addEventListener("click", ()=> {
+    taskRemover.complete(obj.id);
+    let taskTable = document.querySelectorAll(`div[data-id="${obj.id}"] th, div[data-id="${obj.id}"] td`);
+    taskTable.forEach((element) => {
+      element.classList.toggle("complete");
+    })
+  })
+
+  taskDiv.appendChild(completeInput);
+  createTable(obj, taskDiv);
+  
+  taskContainer.appendChild(taskDiv);
+  let allRows = document.querySelectorAll("th, td");
+  allRows.forEach((row) => {
+    row.classList.add("complete");
+  })
 }
 
 
@@ -102,6 +129,7 @@ function subscribeTask(obj) {
   completeInput.addEventListener("click", ()=> {
     taskRemover.complete(obj.id);
     let taskTable = document.querySelectorAll(`div[data-id="${obj.id}"] th, div[data-id="${obj.id}"] td`);
+    
     taskTable.forEach((element) => {
       element.classList.toggle("complete");
     })
@@ -208,4 +236,4 @@ function subRmvTaskContainer() {
   }
 }
 
-export { subscribeTask, taskDisplay, subRmvTaskContainer };
+export { subscribeTask, taskDisplay, subRmvTaskContainer, subCompleteTask };

@@ -9,6 +9,7 @@ import {
 import {
   subscribeTask,
   subRmvTaskContainer,
+  subCompleteTask,
 } from "./display/__container/display__container--task";
 import {
   subSelectProjectInput,
@@ -120,7 +121,7 @@ RemoveConstructor.prototype.displayComplete = function() {
   this.pubSub.publish("clear", true);
   this.classObj.objArr.forEach((object) => {
     if (object.status == "complete") {
-      object.publish(object);
+      object.publishComplete(object);
     }}
   )
 }
@@ -200,6 +201,9 @@ ObjectConstructor.prototype.displayAll = function (obj) {
     console.log(object)
   }); */
 };
+ObjectConstructor.prototype.publishComplete = function(obj) {
+  pubSubTasks.publish("displayComplete", obj);
+}
 
 function ProjectConstructor(title) {
   this.title = title; /* 
@@ -311,6 +315,7 @@ pubSubTasks.subscribe("display", subscribeTask);
 pubSubTasks.subscribe("display", subTaskListItem);
 pubSubTasks.subscribe("clear", subRmvTaskContainer);
 pubSubTasks.subscribe("clear", subRmvTasks);
+pubSubTasks.subscribe("displayComplete", subCompleteTask); //added this trying to make the complete
 /* 
 pubSubTasks.subscribe("clear",subRmvProjectDisplay) */
 
