@@ -86,6 +86,7 @@ submit.setAttribute("type", "button");
 taskForm.appendChild(submit);
 
 function displayTasks() {
+  submit.setAttribute("type", "button");
   let radio = document.querySelector("input:checked");
   if (!title.value) {
     return createAlert("Please create a title for your task!");
