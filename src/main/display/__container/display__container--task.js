@@ -199,8 +199,13 @@ function subscribeTask(obj) {
       td.parentNode.replaceChild(editInput, td);
     });
     /* SUBMIT CHANGES BTN */
-    let submitChangeBtn = document.createElement("button");
-    submitChangeBtn.textContent = "Submit";
+    let submitChangeBtn = document.querySelector(".submit-edit-btn");
+    if (!submitChangeBtn) {
+      submitChangeBtn = document.createElement("button");
+      submitChangeBtn.textContent = "Submit";
+      submitChangeBtn.classList.add("submit-edit-btn");
+    }
+    
     submitChangeBtn.addEventListener("click", () => {
       let editedInputs = document.querySelectorAll(".table__edit-input");
       editedInputs.forEach((input) => {
@@ -220,7 +225,6 @@ function subscribeTask(obj) {
         : (obj.priority = editedPriorityInput.value);
       submitChangeBtn.remove();
       taskRemover.clearDisplay();
-      console.log(taskRemover);
     });
     taskDiv.appendChild(submitChangeBtn);
   });
