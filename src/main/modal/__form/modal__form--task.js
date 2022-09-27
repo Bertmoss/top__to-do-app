@@ -8,6 +8,7 @@ import {
   appendRadioInputs
 } from "../../../general/general__js/_input";
 import { TaskConstructor } from "../../main-pub-sub";
+import {createAlert} from "../../../general/general__js/_alert"
 
 let taskForm = document.createElement("form");
 taskForm.classList.add("form");
@@ -73,17 +74,26 @@ let priorityHigh = createRadioInput("high", "form__input");
 
 
 
+
 appendRadioInputs(fieldset, [priorityLow, priorityMedium, priorityHigh]);
 
 taskForm.appendChild(fieldset);
 
 let submit = document.createElement("button");
-submit.setAttribute("type", "reset");
+
 submit.textContent = "Create Task";
+submit.setAttribute("type", "button");
 taskForm.appendChild(submit);
 
 function displayTasks() {
   let radio = document.querySelector("input:checked");
+  if (!title.value) {
+    return createAlert("Please create a title for your task!");
+  }
+  if (!radio) {
+   return createAlert("Please select a priority for your task!");
+  }
+  submit.setAttribute("type", "reset");
   let obj = new TaskConstructor(
     title.value,
     textArea.value,
