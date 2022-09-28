@@ -4,6 +4,7 @@ import {
   createLabel,
 } from "../../../general/general__js/_input";
 import { ProjectConstructor } from "../../main-pub-sub";
+import { createAlert } from "../../../general/general__js/_alert";
 
 const projectForm = document.createElement("form");
 
@@ -24,8 +25,12 @@ submit.textContent = "Create Project";
 projectForm.appendChild(submit);
 
 function displayProjects() {
-  let obj = new ProjectConstructor(project.value);
-  obj.displayAll(obj);
+  if (!project.value) {
+    createAlert("Please provide a name for your project!")
+  } else {
+    let obj = new ProjectConstructor(project.value);
+    obj.displayAll(obj);
+  }
 }
 let obj = new ProjectConstructor("general");
 obj.displayAll(obj);
