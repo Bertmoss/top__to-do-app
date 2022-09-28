@@ -1,3 +1,4 @@
+import { compareAsc } from "date-fns";
 import { pubSubFactory } from "../general/general__js/pub-sub";
 import { subscribeNote } from "./display/__container/display__container--note";
 import {
@@ -40,11 +41,7 @@ class ObjectArrClass {
   remove(index) {
     this.objArr.splice(index, 1);
   }
-  /* sortByPriority() {
-    this.objArr.sort(function (a, b) {
-      return b.countPriority() - a.countPriority();
-    });
-  } */
+  
 }
 class TaskObjectArrClass extends ObjectArrClass {
   sortByPriority(value) {
@@ -56,6 +53,16 @@ class TaskObjectArrClass extends ObjectArrClass {
       this.objArr.sort(function (a, b) {
         return a.countPriority() - b.countPriority();
       });
+    } else if (value == "earliest") {
+      this.objArr.sort(function (a,b) {
+        return compareAsc(a.date, b.date)
+      });
+    }  else if (value == "latest") {
+      this.objArr.sort(function (a,b) {
+        return compareAsc(b.date, a.date)
+      });
+      
+
     }
   }
 } 

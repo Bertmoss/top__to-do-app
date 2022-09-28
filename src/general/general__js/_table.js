@@ -3,9 +3,15 @@ function createTable(obj, parent) {
   for (const [key, value] of Object.entries(obj)) {
     if (key == "type" || key === "id" || key == "project" || key == "status") {
       continue;
+    } else if (key == "date") {
+      let date = value.toISOString().split("T")[0];
+      date = date.split("-").reverse().join("-");  
+      let row = createRow(key, date)
+      table.appendChild(row);  
+    } else {
+      let row = createRow(key, value);
+      table.appendChild(row);
     }
-    let row = createRow(key, value);
-    table.appendChild(row);
   }
   return parent.appendChild(table);
 }

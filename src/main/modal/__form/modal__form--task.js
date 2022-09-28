@@ -8,7 +8,11 @@ import {
   appendRadioInputs
 } from "../../../general/general__js/_input";
 import { TaskConstructor } from "../../main-pub-sub";
-import {createAlert} from "../../../general/general__js/_alert"
+import {createAlert} from "../../../general/general__js/_alert";
+import {format} from "date-fns"
+/* 
+format(new Date(2014, 1, 11), "yyyy-MM-dd"); */
+
 
 let taskForm = document.createElement("form");
 taskForm.classList.add("form");
@@ -94,11 +98,16 @@ function displayTasks() {
   if (!radio) {
    return createAlert("Please select a priority for your task!");
   }
+  let year, month, day;
+  let dateArr = date.value.split("-");
+  [year, month, day] = dateArr;
   submit.setAttribute("type", "reset");
   let obj = new TaskConstructor(
     title.value,
     textArea.value,
-    date.value,
+    /* date.value, */
+    new Date(date.value),/* 
+    new Date(year, month, day), */
     radio.value,
     selectProject.value
   );

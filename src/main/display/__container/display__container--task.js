@@ -32,6 +32,15 @@ let sortPriorityAscending = document.createElement("option");
 sortPriorityAscending.textContent = "Least Important";
 sortPriorityAscending.setAttribute("value", "least")
 
+let sortDateDescending = document.createElement("option");
+sortDateDescending.textContent = "Earliest"
+sortDateDescending.setAttribute("value", "earliest");
+
+let sortDateAscending = document.createElement("option");
+sortDateAscending.textContent = "Latest"
+sortDateAscending.setAttribute("value", "latest");
+
+
 sort.addEventListener("click", () => {
   taskRemover.displaySorted(sort.value);
    
@@ -39,6 +48,8 @@ sort.addEventListener("click", () => {
 
 sort.appendChild(sortPriorityDescending);
 sort.appendChild(sortPriorityAscending);
+sort.appendChild(sortDateDescending);
+sort.appendChild(sortDateAscending)
 sortDiv.appendChild(sort);
 taskDisplay.appendChild(sortDiv);
 
@@ -217,7 +228,7 @@ function subscribeTask(obj) {
         } else if (input.getAttribute("name") == "details") {
           obj.details = input.value;
         } else if (input.getAttribute("name") == "date") {
-          input.value == "" ? obj.date : (obj.date = input.value);
+          input.value == "" ? obj.date : (obj.date = new Date(input.value));
         }
       });
       let editedPriorityInput = document.querySelector(
