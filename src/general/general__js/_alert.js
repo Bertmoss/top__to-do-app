@@ -14,5 +14,6 @@ function createAlert(text) {
   
   let body = document.querySelector("body");
   body.appendChild(alertDiv);
+  return alertDiv;
 }
 export {createAlert}

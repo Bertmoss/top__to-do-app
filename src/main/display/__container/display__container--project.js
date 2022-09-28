@@ -2,6 +2,7 @@ import { projectRemover, taskRemover } from "../../main-pub-sub";
 import { createBasicInput } from "../../../general/general__js/_input";
 import { createTable } from "../../../general/general__js/_table";
 import { add } from "date-fns";
+import { createAlert } from "../../../general/general__js/_alert";
 
 
 const projectDisplay = document.createElement("div");
@@ -17,10 +18,25 @@ function subscribeProject(obj) {
     dltBtn.setAttribute("type", "button"); 
     dltBtn.addEventListener("click", () => {
       if (obj.taskIdArr.length > 0) {
-        alert("yo it works")
+        let alert = createAlert("There seem to be some unfinished tasks in this project. Are you sure you would like to delete it?");
+        let yesBtn = document.createElement("button");
+        yesBtn.textContent = "Yes";
+        yesBtn.addEventListener("click", () => {
+          projectRemover.remove(obj.id);
+          taskRemover.removeByProject(obj);
+          alert.remove();
+        })
+        alert.appendChild(yesBtn);
+        let noBtn = document.createElement("button");
+        noBtn.textContent = "No";
+        noBtn.addEventListener("click", () => {
+          alert.remove();
+        })
+        alert.appendChild(noBtn);
+      } else {
+        projectRemover.remove(obj.id);
+        taskRemover.removeByProject(obj);
       }
-      projectRemover.remove(obj.id);
-      taskRemover.removeByProject(obj);
     });
     projectDiv.appendChild(dltBtn);
   }
