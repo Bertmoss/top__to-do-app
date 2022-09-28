@@ -10,11 +10,15 @@ projectDisplay.classList.add("display__container-project--hidden");
 function subscribeProject(obj) {
   let projectDiv = document.createElement("div");
   projectDiv.setAttribute("data-id", obj.id);
+  /* delete button */
   if (obj.id !== 1) { //exemption for the general project
     let dltBtn = document.createElement("button");
     dltBtn.textContent = "x";
     dltBtn.setAttribute("type", "button"); 
     dltBtn.addEventListener("click", () => {
+      if (obj.taskIdArr.length > 0) {
+        alert("yo it works")
+      }
       projectRemover.remove(obj.id);
       taskRemover.removeByProject(obj);
     });
@@ -60,6 +64,7 @@ function subTaskListItem(obj) {
   listItem.setAttribute("data-li-id", obj.id)
   completeInput.addEventListener("click", ()=> {
     taskRemover.complete(obj.id);
+    (obj.status == "complete") ? taskRemover.removeTaskFromProjectIdArr(obj): obj.pushId() ;  
     let taskTable = document.querySelectorAll(`li[data-li-id = "${obj.id}"] th,li[data-li-id = "${obj.id}"] td`);
     taskTable.forEach((element) => {
       element.classList.toggle("complete");

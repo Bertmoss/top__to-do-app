@@ -76,6 +76,7 @@ RemoveConstructor.prototype.removeAll = function() {
   });
 } */
 
+
 RemoveConstructor.prototype.removeByProject = function (prjRmv) {
   let indexOfMatch = this.classObj.objArr.findIndex((obj) => {
     return obj.project === prjRmv.title ? true : false;
@@ -87,10 +88,18 @@ RemoveConstructor.prototype.removeByProject = function (prjRmv) {
   });
 };
 
+RemoveConstructor.prototype.removeTaskFromProjectIdArr = function (obj) { 
+  let projectObject = projects.objArr.find(project => project.title == obj.project);
+  let indexNum = projectObject.taskIdArr.findIndex(id => id == obj.id );
+  projectObject.taskIdArr.splice(indexNum, 1);
+  console.log(projectObject);
+}
+
 RemoveConstructor.prototype.remove = function (dataId) {
   let indexOfMatch = this.classObj.objArr.findIndex((obj) => {
     return obj.id === dataId ? true : false;
   });
+
   this.classObj.remove(indexOfMatch);
   this.pubSub.publish("clear", true);
   this.classObj.objArr.forEach((object) => {
@@ -212,6 +221,7 @@ function ProjectConstructor(title) {
   this.id = this.objArr.objIdGen += 1; */
   this.id = projects.objIdGen += 1;
   this.type = "project";
+  this.taskIdArr = [];
 }
 
 ProjectConstructor.prototype = Object.create(ObjectConstructor.prototype);
@@ -265,6 +275,17 @@ function TaskConstructor(title, details, date, priority, project) {
 }
 
 TaskConstructor.prototype = Object.create(ObjectConstructor.prototype);
+
+TaskConstructor.prototype.pushId = function() {
+  let projectObject = projects.objArr.find(project => project.title == this.project)
+  projectObject.taskIdArr.push(this.id);
+  console.log(projectObject)
+}
+
+
+  /* 
+  projectObject.taskIdArr.push(this.id); */ //THE ISSUE IS HERE
+
 
 TaskConstructor.prototype.countPriority = function () {
   switch (this.priority) {

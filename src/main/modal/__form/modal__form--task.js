@@ -102,6 +102,7 @@ function displayTasks() {
     radio.value,
     selectProject.value
   );
+  obj.pushId();
   obj.displayAll(obj);
 }
 
