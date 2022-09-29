@@ -53,11 +53,11 @@ class TaskObjectArrClass extends ObjectArrClass {
       this.objArr.sort(function (a, b) {
         return a.countPriority() - b.countPriority();
       });
-    } else if (value == "earliest") {
+    } else if (value == "date-ascending") {
       this.objArr.sort(function (a,b) {
         return compareAsc(a.date, b.date)
       });
-    }  else if (value == "latest") {
+    }  else if (value == "date-descending") {
       this.objArr.sort(function (a,b) {
         return compareAsc(b.date, a.date)
       });

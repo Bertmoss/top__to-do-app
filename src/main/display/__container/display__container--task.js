@@ -32,13 +32,13 @@ let sortPriorityAscending = document.createElement("option");
 sortPriorityAscending.textContent = "Least Important";
 sortPriorityAscending.setAttribute("value", "least")
 
-let sortDateDescending = document.createElement("option");
-sortDateDescending.textContent = "Earliest"
-sortDateDescending.setAttribute("value", "earliest");
-
 let sortDateAscending = document.createElement("option");
-sortDateAscending.textContent = "Latest"
-sortDateAscending.setAttribute("value", "latest");
+sortDateAscending.textContent = "Date (Ascending)"
+sortDateAscending.setAttribute("value", "date-ascending");
+
+let sortDateDescending = document.createElement("option");
+sortDateDescending.textContent = "Date (Descending)"
+sortDateDescending.setAttribute("value", "date-descending");
 
 
 sort.addEventListener("click", () => {
@@ -48,8 +48,8 @@ sort.addEventListener("click", () => {
 
 sort.appendChild(sortPriorityDescending);
 sort.appendChild(sortPriorityAscending);
-sort.appendChild(sortDateDescending);
 sort.appendChild(sortDateAscending)
+sort.appendChild(sortDateDescending);
 sortDiv.appendChild(sort);
 taskDisplay.appendChild(sortDiv);
 
