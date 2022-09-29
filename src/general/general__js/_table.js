@@ -4,10 +4,15 @@ function createTable(obj, parent) {
     if (key == "type" || key === "id" || key == "project" || key == "status") {
       continue;
     } else if (key == "date") {
+      if (value == "") {
+        let row = createRow(key, value)
+        table.appendChild(row);  
+      } else {
       let date = value.toISOString().split("T")[0];
       date = date.split("-").reverse().join("-");  
       let row = createRow(key, date)
-      table.appendChild(row);  
+      table.appendChild(row);
+      }  
     } else {
       let row = createRow(key, value);
       table.appendChild(row);

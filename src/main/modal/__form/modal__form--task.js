@@ -89,6 +89,11 @@ submit.textContent = "Create Task";
 submit.setAttribute("type", "button");
 taskForm.appendChild(submit);
 
+ 
+function checkDate() {
+  return (!date.value ) ? "" : new Date(date.value)
+}
+
 function displayTasks() {
   submit.setAttribute("type", "button");
   let radio = document.querySelector("input:checked");
@@ -98,16 +103,13 @@ function displayTasks() {
   if (!radio) {
    return createAlert("Please select a priority for your task!");
   }
-  let year, month, day;
-  let dateArr = date.value.split("-");
-  [year, month, day] = dateArr;
+
+  
   submit.setAttribute("type", "reset");
   let obj = new TaskConstructor(
     title.value,
     textArea.value,
-    /* date.value, */
-    new Date(date.value),/* 
-    new Date(year, month, day), */
+    checkDate(),
     radio.value,
     selectProject.value
   );

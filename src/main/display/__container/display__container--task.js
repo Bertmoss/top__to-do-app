@@ -94,7 +94,7 @@ taskDisplay.appendChild(taskContainer);
 
 /* Might have to make a separate subscribe for complete tasks */
 
-function prioritySwitch(element, obj) {
+function priorityColorSwitch(element, obj) {
   switch(obj.priority) {
     case "high":
       element.classList.add("priority-high");
@@ -128,12 +128,13 @@ function subCompleteTask(obj) {
     row.classList.add("complete");
   })
 }
-
+ 
 
 function subscribeTask(obj) {
   let taskDiv = document.createElement("div");
   taskDiv.setAttribute("data-id", obj.id);
-  prioritySwitch(taskDiv, obj)
+  taskDiv.setAttribute("data-date", obj.date);
+  priorityColorSwitch(taskDiv, obj)
   /* Complete checkbox */
   let completeInput = createBasicInput("task-div__done-input", "checkbox", "complete-input", "complete-input");
   
@@ -245,6 +246,23 @@ function subscribeTask(obj) {
 
   taskDiv.appendChild(editBtn);
   createTable(obj, taskDiv);
+  if (sort.value == "date-ascending") {
+    if (taskDiv.getAttribute("data-date")== "" ) {
+      let noDateDiv = document.querySelector(".task-container__div--no-date");
+      if (!noDateDiv) { 
+        noDateDiv = document.createElement("div");
+        noDateDiv.setAttribute("style", "background-color: pink");
+        noDateDiv.classList.add("task-container__div--no-date")
+        let noDateHeading = document.createElement("h1");
+        noDateHeading.textContent = "Undated";
+        noDateDiv.appendChild(noDateHeading);
+      } //continue adding conditions here for today and for this week and for upcoming
+      noDateDiv.appendChild(taskDiv);
+      return taskContainer.appendChild(noDateDiv);
+    } else {
+      return taskContainer.appendChild(taskDiv);
+    }
+  }
   taskContainer.appendChild(taskDiv);
 }
 

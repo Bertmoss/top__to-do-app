@@ -44,7 +44,7 @@ class ObjectArrClass {
   
 }
 class TaskObjectArrClass extends ObjectArrClass {
-  sortByPriority(value) {
+  customSort(value) {
     if (value == "most") {
       this.objArr.sort(function (a, b) {
         return b.countPriority() - a.countPriority();
@@ -144,7 +144,7 @@ RemoveConstructor.prototype.displayComplete = function() {
 
 
 RemoveConstructor.prototype.displaySorted = function(value) {
-  tasks.sortByPriority(value);
+  tasks.customSort(value);
   this.pubSub.publish("clear", true);
   this.classObj.objArr.forEach((object) => {
     object.publish(object);
