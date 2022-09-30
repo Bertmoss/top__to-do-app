@@ -9,7 +9,7 @@ import {
 } from "../../../general/general__js/_input";
 import { TaskConstructor } from "../../main-pub-sub";
 import {createAlert} from "../../../general/general__js/_alert";
-import {format} from "date-fns"
+import {format, parseISO} from "date-fns"
 /* 
 format(new Date(2014, 1, 11), "yyyy-MM-dd"); */
 
@@ -91,7 +91,13 @@ taskForm.appendChild(submit);
 
  
 function checkDate() {
-  return (!date.value ) ? "" : new Date(date.value)
+  let dateProcessed = new Date(date.value);
+  if (date.value) {
+    dateProcessed = dateProcessed.toISOString().split("T")[0];
+    /* dateProcessed = dateProcessed.split("-").reverse().join("-"); */
+    /* dateProcessed = parseISO(dateProcessed) */
+  }
+  return (!date.value ) ? "" : dateProcessed;
 }
 
 function displayTasks() {

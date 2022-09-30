@@ -1,4 +1,4 @@
-import { compareAsc } from "date-fns";
+import { compareAsc, parseISO } from "date-fns";
 import { pubSubFactory } from "../general/general__js/pub-sub";
 import { subscribeNote } from "./display/__container/display__container--note";
 import {
@@ -55,11 +55,11 @@ class TaskObjectArrClass extends ObjectArrClass {
       });
     } else if (value == "date-ascending") {
       this.objArr.sort(function (a,b) {
-        return compareAsc(a.date, b.date)
+        return compareAsc(parseISO(a.date), parseISO(b.date))
       });
     }  else if (value == "date-descending") {
       this.objArr.sort(function (a,b) {
-        return compareAsc(b.date, a.date)
+        return compareAsc(parseISO(b.date), parseISO(a.date))
       });
       
 

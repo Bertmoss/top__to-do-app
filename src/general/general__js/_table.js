@@ -1,22 +1,16 @@
 function createTable(obj, parent) {
   let table = document.createElement("table");
   for (const [key, value] of Object.entries(obj)) {
+    let row;
     if (key == "type" || key === "id" || key == "project" || key == "status") {
       continue;
     } else if (key == "date") {
-      if (value == "") {
-        let row = createRow(key, value)
-        table.appendChild(row);  
-      } else {
-      let date = value.toISOString().split("T")[0];
-      date = date.split("-").reverse().join("-");  
-      let row = createRow(key, date)
-      table.appendChild(row);
-      }  
+      let date = value.split("-").reverse().join("-");
+      row = createRow(key, date);
     } else {
-      let row = createRow(key, value);
-      table.appendChild(row);
+      row = createRow(key, value);
     }
+    table.appendChild(row);
   }
   return parent.appendChild(table);
 }

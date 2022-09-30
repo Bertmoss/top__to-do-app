@@ -7,6 +7,7 @@ import {
   createBasicInput,
   createTextArea,
 } from "../../../general/general__js/_input";
+import { endOfWeek, isAfter, isBefore, parseISO } from "date-fns";
 
 const taskDisplay = document.createElement("div");
 taskDisplay.classList.add("display__container-task--hidden");
@@ -133,6 +134,8 @@ function subCompleteTask(obj) {
 function subscribeTask(obj) {
   let taskDiv = document.createElement("div");
   taskDiv.setAttribute("data-id", obj.id);
+  
+  
   taskDiv.setAttribute("data-date", obj.date);
   priorityColorSwitch(taskDiv, obj)
   /* Complete checkbox */
@@ -246,8 +249,16 @@ function subscribeTask(obj) {
 
   taskDiv.appendChild(editBtn);
   createTable(obj, taskDiv);
+
+  //Date Ascending Display
   if (sort.value == "date-ascending") {
-    if (taskDiv.getAttribute("data-date")== "" ) {
+    let currentDate = new Date();
+    currentDate = currentDate.toISOString().split("T")[0];/* 
+    currentDate = currentDate.split("-").reverse().join("-"); */
+    let lastWeekDay = endOfWeek(new Date(), {weekStartsOn: 1});
+    
+
+    if (taskDiv.getAttribute("data-date")== "" ) {  //if date was not provided
       let noDateDiv = document.querySelector(".task-container__div--no-date");
       if (!noDateDiv) { 
         noDateDiv = document.createElement("div");
@@ -256,15 +267,68 @@ function subscribeTask(obj) {
         let noDateHeading = document.createElement("h1");
         noDateHeading.textContent = "Undated";
         noDateDiv.appendChild(noDateHeading);
-      } //continue adding conditions here for today and for this week and for upcoming
+      }       
       noDateDiv.appendChild(taskDiv);
       return taskContainer.appendChild(noDateDiv);
-    } else {
-      return taskContainer.appendChild(taskDiv);
-    }
+    }  else if (isBefore(parseISO(taskDiv.getAttribute("data-date")),  parseISO(currentDate)))  {
+      let overdueDiv= document.querySelector(".task-container__div--overdue")
+      if (!overdueDiv) {
+      overdueDiv = document.createElement("div");
+      overdueDiv.setAttribute("style", "background-color: orange");
+      overdueDiv.classList.add("task-container__div--overdue")
+      let overdueHeading = document.createElement("h1");
+      overdueHeading.textContent = "Overdue";
+      overdueDiv.appendChild(overdueHeading);
+      }
+      overdueDiv.appendChild(taskDiv)
+      return taskContainer.appendChild(overdueDiv);
+
+    } else if (taskDiv.getAttribute("data-date") == currentDate){ //if date is today
+      let todayDiv = document.querySelector(".task-container__div--today")
+      if (!todayDiv) {
+        todayDiv = document.createElement("div");
+        todayDiv.setAttribute("style", "background-color: green");
+        todayDiv.classList.add("task-container__div--today")
+        let todayHeading = document.createElement("h1");
+        todayHeading.textContent = "Today";
+        todayDiv.appendChild(todayHeading);
+      }
+      todayDiv.appendChild(taskDiv)
+      return taskContainer.appendChild(todayDiv);
+    } else if ((isBefore(parseISO(taskDiv.getAttribute("data-date")),  lastWeekDay))) {
+      let weekDiv = document.querySelector(".task-container__div--week")
+      if (!weekDiv) {
+        weekDiv = document.createElement("div");
+        weekDiv.setAttribute("style", "background-color: purple");
+        weekDiv.classList.add("task-container__div--week")
+        let weekHeading = document.createElement("h1");
+        weekHeading.textContent = "This Week";
+        weekDiv.appendChild(weekHeading);
+      }
+      weekDiv.appendChild(taskDiv)
+      return taskContainer.appendChild(weekDiv);
+    } else if ((isAfter(parseISO(taskDiv.getAttribute("data-date")),  lastWeekDay))) {
+
+      let upcomingDiv = document.querySelector(".task-container__div--upcoming")
+      if (!upcomingDiv) {
+        upcomingDiv = document.createElement("div");
+        upcomingDiv.setAttribute("style", "background-color: blue");
+        upcomingDiv.classList.add("task-container__div--upcoming")
+        let upcomingHeading = document.createElement("h1");
+        upcomingHeading.textContent = "Upcoming";
+        upcomingDiv.appendChild(upcomingHeading);
+      }
+      upcomingDiv.appendChild(taskDiv)
+      return taskContainer.appendChild(upcomingDiv);
+
   }
+
+
+
+
+
   taskContainer.appendChild(taskDiv);
-}
+}}
 
 function subRmvTaskContainer() {
   while (taskContainer.firstChild) {
