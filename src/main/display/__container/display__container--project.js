@@ -88,6 +88,7 @@ function subTaskListItem(obj) {
   })
   listItem.appendChild(completeInput);
   createTable(obj, listItem);
+
   listItem.addEventListener("click", () => {
     let hiddenRows = document.querySelectorAll(`li[data-li-id = "${obj.id}"] tr:not(:first-child)`);
     hiddenRows.forEach((row) => {
@@ -95,7 +96,12 @@ function subTaskListItem(obj) {
     })
    
   })
+  
   taskList.appendChild(listItem);
+  let hiddenRows = document.querySelectorAll(".task-list tr:not(:first-child)");
+  hiddenRows.forEach((row) => {
+    row.classList.add("hidden");
+  })
 }
 
 export {
