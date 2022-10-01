@@ -47,6 +47,7 @@ function subscribeProject(obj) {
   taskList.classList.add(obj.title, "task-list");
   projectDiv.appendChild(taskList);
   projectDisplay.appendChild(projectDiv);
+  taskRemover.clearDisplay();
 }
 
 function subRmvProjectDisplay() {
