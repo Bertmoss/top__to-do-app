@@ -308,7 +308,6 @@ function subscribeTask(obj) {
       weekDiv.appendChild(taskDiv)
       return taskContainer.appendChild(weekDiv);
     } else if ((isAfter(parseISO(taskDiv.getAttribute("data-date")),  lastWeekDay))) {
-
       let upcomingDiv = document.querySelector(".task-container__div--upcoming")
       if (!upcomingDiv) {
         upcomingDiv = document.createElement("div");
@@ -320,15 +319,14 @@ function subscribeTask(obj) {
       }
       upcomingDiv.appendChild(taskDiv)
       return taskContainer.appendChild(upcomingDiv);
-
-  }
+    }}
 
 
 
 
 
   taskContainer.appendChild(taskDiv);
-}}
+}
 
 function subRmvTaskContainer() {
   while (taskContainer.firstChild) {
