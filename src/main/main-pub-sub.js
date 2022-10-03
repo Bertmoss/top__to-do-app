@@ -102,6 +102,7 @@ RemoveConstructor.prototype.removeTaskFromProjectIdArr = function (obj) {
   console.log(projectObject);
 }
 
+
 RemoveConstructor.prototype.remove = function (dataId) {
   let indexOfMatch = this.classObj.objArr.findIndex((obj) => {
     return obj.id === dataId ? true : false;
@@ -133,6 +134,21 @@ RemoveConstructor.prototype.clearDisplay = function () {
     }
   });
 };
+
+RemoveConstructor.prototype.searchTasks = function(searchValue) {
+  this.pubSub.publish("clear", true);
+  tasks.objArr.forEach((object) => {
+    let found = Object.values(object).find(value => value == searchValue);
+    if (found) {
+      object.publish(object) // it needs to hide all the other displays and switch to container search display? 
+    } else {
+      console.log("noo")
+    }
+  })
+
+}
+
+
 RemoveConstructor.prototype.displayComplete = function() {
   this.pubSub.publish("clear", true);
   this.classObj.objArr.forEach((object) => {

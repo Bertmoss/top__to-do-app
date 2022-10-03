@@ -1,23 +1,30 @@
 @use "../general/general__scss/colors" as *;
 
-.main__display-btn {
+.main__display-form-btn, .main__display-search-btn {
   width: 70px;
   height: 70px;
 
   position: fixed;
   bottom:  20px;
-  right: 20px;
+  
 
   border-radius: 100%;
   border: 1px solid $red;
 }
 
-.main__display-btn:active {
+.main__display-form-btn {
+  right: 20px;
+}
+.main__display-search-btn {
+  left: 20px;
+}
+
+.main__display-form-btn:active, .main__display-search-btn:active {
   width: 65px;
   height: 65px; 
 }
 
-.c-main__display-btn {
+.c-main__display-form-btn, .c-main__display-search-btn {
   font-size: 34px;
   color: $white;
 

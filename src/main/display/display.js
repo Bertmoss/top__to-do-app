@@ -31,8 +31,9 @@ home.addEventListener("click", () => {
   noteDisplay.classList.add("display__container-note--hidden");
   projectDisplay.classList.add("display__container-project--hidden");
   taskDisplay.classList.remove("display__container-task--hidden");
-
 });
+
+
 
 note.addEventListener("click", () => {
   noteDisplay.classList.remove("display__container-note--hidden");

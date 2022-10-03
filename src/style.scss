@@ -16,4 +16,7 @@
 
 
 @use "./main/display/display.scss" ;
-@use "./main/display/__container/display__container--task.scss"
+@use "./main/display/__container/display__container--task.scss";
+
+/* search modal */
+@use "./main/modal/__search/modal__search.scss";
