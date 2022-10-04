@@ -85,14 +85,27 @@ RemoveConstructor.prototype.removeAll = function() {
 
 
 RemoveConstructor.prototype.removeByProject = function (prjRmv) {
+  prjRmv.taskIdArr.forEach((element) => {
+    let removeIndex = this.classObj.objArr.findIndex(task => task.id == element);
+    this.classObj.objArr.splice(removeIndex, 1);
+})
+  
+/*   this.classObj.objArr.forEach((task, index) => {
+   if (prjRmv.taskIdArr.find(element => /* element == task.id console.log(element))) {
+      this.classObj.objArr.splice(index, 1);
+    } 
+  })
+ */
+  /* )
   let indexOfMatch = this.classObj.objArr.findIndex((obj) => {
     return obj.project === prjRmv.title ? true : false;
   });
   this.classObj.remove(indexOfMatch);
-  this.pubSub.publish("clear", true);
+ */  
+  /* this.pubSub.publish("clear", true);
   this.classObj.objArr.forEach((object) => {
     object.publish(object);
-  });
+  }); */
 };
 
 RemoveConstructor.prototype.removeTaskFromProjectIdArr = function (obj) { 
@@ -140,7 +153,7 @@ RemoveConstructor.prototype.searchTasks = function(searchValue) {
   tasks.objArr.forEach((object) => {
     let published;
     for (const [key, value] of Object.entries(object)) {
-      if (key == "project", key == "id", key == "status", key== "type" ) {
+      if (/* key == "project", */ key == "id", key == "status", key== "type" ) {
         continue;
       } else {
         let found = value.toString().toUpperCase().includes(searchValue.toUpperCase());
@@ -151,7 +164,27 @@ RemoveConstructor.prototype.searchTasks = function(searchValue) {
       }
     }
   })
-}
+}/* 
+RemoveConstructor.prototype.searchProjects = function(searchValue) {
+ this.pubSub.publish("clear", true);
+ let displayed;
+  projects.objArr.forEach((object) => {
+    let published;
+    for (const [key, value] of Object.entries(object)) {
+      if (key== "type" ) {
+        continue;
+      } else {
+        let found = value.toString().toUpperCase().includes(searchValue.toUpperCase());
+        if (found && !published) {
+          object.publish(object);
+          published = true;  
+          displayed = true;
+        } 
+      }
+    }
+  })
+  return displayed;
+} */
 
 
 RemoveConstructor.prototype.displayComplete = function() {

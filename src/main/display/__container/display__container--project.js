@@ -22,8 +22,13 @@ function subscribeProject(obj) {
         let yesBtn = document.createElement("button");
         yesBtn.textContent = "Yes";
         yesBtn.addEventListener("click", () => {
-          projectRemover.remove(obj.id);
+          
           taskRemover.removeByProject(obj);
+          console.log(`this one yo ${obj}`)
+          console.log(obj)
+          projectRemover.remove(obj.id);
+
+         
           alert.remove();
         })
         alert.appendChild(yesBtn);
@@ -70,11 +75,16 @@ function subRmvTasks() {
 
   
 function subTaskListItem(obj) {
+  console.log(obj);
   let taskList = document.querySelector("." + obj.project);
-  taskList.setAttribute("data-id", obj.id);
 
-  /* Finished checkbox */
-  let completeInput = createBasicInput("project-div__done-input", "checkbox", "complete-input", "complete-input");
+  if (taskList) {
+  taskList.setAttribute("data-id", obj.id); 
+  } else {
+    return;
+  }
+
+  let completeInput = createBasicInput("project-div__done-input", "checkbox", "complete-input", "complete-input"); //finished checkbox
   
   
   let listItem = document.createElement("li");
