@@ -1,7 +1,7 @@
 
 
 let noteDisplay = document.createElement("div");
-noteDisplay.classList.add("display__container-note--hidden");
+noteDisplay.classList.add("display__container-note--hidden","display__container-note");
 
 function subscribeNote(obj) {
   let titleNote = document.createElement("h4");

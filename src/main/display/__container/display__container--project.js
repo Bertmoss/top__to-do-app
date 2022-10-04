@@ -6,7 +6,7 @@ import { createAlert } from "../../../general/general__js/_alert";
 
 
 const projectDisplay = document.createElement("div");
-projectDisplay.classList.add("display__container-project--hidden");
+projectDisplay.classList.add("display__container-project--hidden", "display__container-project");
  
 function subscribeProject(obj) {
   let projectDiv = document.createElement("div");

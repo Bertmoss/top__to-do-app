@@ -4,6 +4,7 @@ import { taskRemover } from "../main-pub-sub";
 import { taskDisplay } from "./__container/display__container--task";
 import { noteDisplay } from "./__container/display__container--note";
 import { projectDisplay} from "./__container/display__container--project";
+import { searchInput } from "../modal/__search/modal__search";
 
 
 const display = document.createElement("div");
@@ -50,10 +51,15 @@ project.addEventListener("click", () => {
   let hiddenRows = document.querySelectorAll(".task-list tr:not(:first-child)");
   hiddenRows.forEach((row) => {
     row.classList.add("hidden");
-  })
-  
-   
+  }) 
 });
+
+searchInput.addEventListener("input", () => {
+  noteDisplay.classList.add("display__container-note--hidden");
+  projectDisplay.classList.add("display__container-project--hidden");
+  taskDisplay.classList.remove("display__container-task--hidden");
+
+})
 
 displayContainer.appendChild(displayContent)
 display.appendChild(sideNav);

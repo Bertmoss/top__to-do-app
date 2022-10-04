@@ -25,13 +25,13 @@ let searchInput = createBasicInput("search-form__search-input", "text", "search"
 let searchLabel = createLabel(searchInput, "Search");
 appendLabelInput(searchForm, searchLabel, searchInput);
 
-searchInput.addEventListener("input", ()=> {
-  taskRemover.searchTasks(searchInput.value)/* 
+searchInput.addEventListener("input", ()=> {/* 
   projectRemover.searchProjects(searchInput.value) */
+  taskRemover.searchTasks(searchInput.value);
 })
 
 
 searchModal.appendChild(searchForm);
 
-export {searchModal};
+export {searchModal, searchInput};
 

@@ -10,7 +10,7 @@ import {
 import { endOfWeek, isAfter, isBefore, parseISO } from "date-fns";
 
 const taskDisplay = document.createElement("div");
-taskDisplay.classList.add("display__container-task--hidden");
+taskDisplay.classList.add("display__container-task--hidden", "display__container-task" );
 
 /* SORT BUTTON */
 /* NEED TO ADD A SORT BY DATE OPTION */

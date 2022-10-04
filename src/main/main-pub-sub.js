@@ -164,7 +164,7 @@ RemoveConstructor.prototype.searchTasks = function(searchValue) {
       }
     }
   })
-}/* 
+}
 RemoveConstructor.prototype.searchProjects = function(searchValue) {
  this.pubSub.publish("clear", true);
  let displayed;
@@ -184,7 +184,7 @@ RemoveConstructor.prototype.searchProjects = function(searchValue) {
     }
   })
   return displayed;
-} */
+} 
 
 
 RemoveConstructor.prototype.displayComplete = function() {
