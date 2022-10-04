@@ -25,14 +25,11 @@ let searchInput = createBasicInput("search-form__search-input", "text", "search"
 let searchLabel = createLabel(searchInput, "Search");
 appendLabelInput(searchForm, searchLabel, searchInput);
 
-let searchBtn = document.createElement("button");
-searchBtn.setAttribute("type", "button");
-searchBtn.textContent = "Search";
-searchBtn.addEventListener("click", ()=> {
+searchInput.addEventListener("input", ()=> {
   taskRemover.searchTasks(searchInput.value)
 })
 
-searchForm.appendChild(searchBtn);
+
 searchModal.appendChild(searchForm);
 
 export {searchModal};

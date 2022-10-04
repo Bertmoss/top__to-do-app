@@ -138,14 +138,19 @@ RemoveConstructor.prototype.clearDisplay = function () {
 RemoveConstructor.prototype.searchTasks = function(searchValue) {
   this.pubSub.publish("clear", true);
   tasks.objArr.forEach((object) => {
-    let found = Object.values(object).find(value => value == searchValue);
-    if (found) {
-      object.publish(object) // it needs to hide all the other displays and switch to container search display? 
-    } else {
-      console.log("noo")
+    let published;
+    for (const [key, value] of Object.entries(object)) {
+      if (key == "project", key == "id", key == "status", key== "type" ) {
+        continue;
+      } else {
+        let found = value.toString().toUpperCase().includes(searchValue.toUpperCase());
+        if (found && !published) {
+          object.publish(object);
+          published = true; // it needs to hide all the other displays and switch to container search display? 
+        } 
+      }
     }
   })
-
 }
 
 
