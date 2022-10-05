@@ -89,7 +89,7 @@ function subTaskListItem(obj) {
   let listItem = document.createElement("li");
   listItem.setAttribute("data-li-id", obj.id)
   completeInput.addEventListener("click", ()=> {
-    taskRemover.complete(obj.id);
+    obj.complete()
     (obj.status == "complete") ? obj.removeTaskFromProjectIdArr() : obj.pushId() ;  
     let taskTable = document.querySelectorAll(`li[data-li-id = "${obj.id}"] th,li[data-li-id = "${obj.id}"] td`);
     taskTable.forEach((element) => {

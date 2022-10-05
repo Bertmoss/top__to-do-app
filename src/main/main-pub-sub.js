@@ -89,18 +89,7 @@ RemoveConstructor.prototype.remove = function (dataId) {
   });
 };
 
-RemoveConstructor.prototype.complete = function (dataId) {
-  let match = this.classObj.objArr.find((obj) => {
-    return obj.id === dataId ? true : false;
-  });
-  console.log(this.classObj)
 
-  console.log(this.pubSub)
-
-  (match.status == "active") ? (match.status = "complete"): (match.status = "active");
-  console.log(match);
-
-}
 
 RemoveConstructor.prototype.clearDisplay = function () {
   this.pubSub.publish("clear", true);
@@ -239,14 +228,6 @@ ObjectConstructor.prototype.publishComplete = function(obj) {
   pubSubTasks.publish("displayComplete", obj);
 }
 
-//Probably should only be in task constructor
-ObjectConstructor.prototype.removeTaskFromProjectIdArr = function () { 
-  let projectObject = projects.objArr.find(project => project.title == this.project);
-  let indexNum = projectObject.taskIdArr.findIndex(id => id == this.id );
-  projectObject.taskIdArr.splice(indexNum, 1);
-}
-
-
 
 function ProjectConstructor(title) {
   this.title = title; /* 
@@ -317,10 +298,25 @@ function TaskConstructor(title, details, date, priority, project) {
 
 TaskConstructor.prototype = Object.create(ObjectConstructor.prototype);
 
+
+//Probably should only be in task constructor
+TaskConstructor.prototype.removeTaskFromProjectIdArr = function () { 
+  let projectObject = projects.objArr.find(project => project.title == this.project);
+  let indexNum = projectObject.taskIdArr.findIndex(id => id == this.id );
+  projectObject.taskIdArr.splice(indexNum, 1);
+}
+
 TaskConstructor.prototype.pushId = function() {
   let projectObject = projects.objArr.find(project => project.title == this.project)
   projectObject.taskIdArr.push(this.id);
   console.log(projectObject)
+}
+
+TaskConstructor.prototype.complete = function () {
+  let match = tasks.objArr.find((obj) => {
+    return obj.id === this.id ? true : false;
+  });
+ return (match.status == "active") ? (match.status = "complete"): (match.status = "active");
 }
 
 

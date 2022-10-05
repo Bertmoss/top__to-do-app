@@ -113,7 +113,7 @@ function subCompleteTask(obj) {
   let completeInput = createBasicInput("task-div__done-input", "checkbox", "complete-input", "complete-input");
   completeInput.setAttribute("checked", "");
   completeInput.addEventListener("click", ()=> {
-    taskRemover.complete(obj.id);
+    obj.complete()
     let taskTable = document.querySelectorAll(`div[data-id="${obj.id}"] th, div[data-id="${obj.id}"] td`);
     taskTable.forEach((element) => {
       element.classList.toggle("complete");
@@ -142,7 +142,7 @@ function subscribeTask(obj) {
   let completeInput = createBasicInput("task-div__done-input", "checkbox", "complete-input", "complete-input");
   
   completeInput.addEventListener("click", ()=> {
-    taskRemover.complete(obj.id);
+    obj.complete();
     (obj.status == "complete") ? obj.removeTaskFromProjectIdArr(): obj.pushId() ;
     let taskTable = document.querySelectorAll(`div[data-id="${obj.id}"] th, div[data-id="${obj.id}"] td`);
     
