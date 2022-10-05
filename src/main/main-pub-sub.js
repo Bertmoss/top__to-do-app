@@ -61,11 +61,58 @@ class TaskObjectArrClass extends ObjectArrClass {
       this.objArr.sort(function (a,b) {
         return compareAsc(parseISO(b.date), parseISO(a.date))
       });
-      
-
     }
   }
 } 
+
+
+
+
+
+
+let displayMod = (() => { 
+  function _clear() {
+    pubSubTasks.publish("clear", true);
+  }
+
+ function _displayTasks() {
+    tasks.objArr.forEach((object) => {
+      if (object.status == "complete") {
+      } else {
+        object.publish(object);
+      }
+    });
+  }
+ function update() {
+    _clear();
+    _displayTasks()
+  };
+  
+  function updateSearch(searchValue) {
+    _clear();
+    tasks.objArr.forEach((object) => {
+      let published;
+      for (const [key, value] of Object.entries(object)) {
+        if ( key == "id", key == "status", key== "type" ) {
+          continue;
+        } else {
+          let found = value.toString().toUpperCase().includes(searchValue.toUpperCase());
+          if (found && !published) {
+            object.publish(object);
+            published = true;
+          } 
+        }
+      }
+    })
+  }
+
+
+ return {
+  update,
+  updateSearch
+ }
+})() 
+
 
 /* REMOVE CONSTRUCTOR */
 /* used to remove objects from the display by matching the data index to the index property in each object */
@@ -76,12 +123,11 @@ function RemoveConstructor(pubSub, classObj) {
   this.pubSub = pubSub;
   this.classObj = classObj;
 } 
-
+/* both projectRemover and taskRemover use this */
 RemoveConstructor.prototype.remove = function (dataId) {
   let indexOfMatch = this.classObj.objArr.findIndex((obj) => {
     return obj.id === dataId ? true : false;
   });
-
   this.classObj.remove(indexOfMatch);
   this.pubSub.publish("clear", true);
   this.classObj.objArr.forEach((object) => {
@@ -89,17 +135,6 @@ RemoveConstructor.prototype.remove = function (dataId) {
   });
 };
 
-
-
-RemoveConstructor.prototype.clearDisplay = function () {
-  this.pubSub.publish("clear", true);
-  this.classObj.objArr.forEach((object) => {
-    if (object.status == "complete") {
-    } else {
-      object.publish(object);
-    }
-  });
-};
 
 RemoveConstructor.prototype.searchTasks = function(searchValue) {
   this.pubSub.publish("clear", true);
@@ -298,8 +333,6 @@ function TaskConstructor(title, details, date, priority, project) {
 
 TaskConstructor.prototype = Object.create(ObjectConstructor.prototype);
 
-
-//Probably should only be in task constructor
 TaskConstructor.prototype.removeTaskFromProjectIdArr = function () { 
   let projectObject = projects.objArr.find(project => project.title == this.project);
   let indexNum = projectObject.taskIdArr.findIndex(id => id == this.id );
@@ -309,14 +342,14 @@ TaskConstructor.prototype.removeTaskFromProjectIdArr = function () {
 TaskConstructor.prototype.pushId = function() {
   let projectObject = projects.objArr.find(project => project.title == this.project)
   projectObject.taskIdArr.push(this.id);
-  console.log(projectObject)
 }
 
 TaskConstructor.prototype.complete = function () {
-  let match = tasks.objArr.find((obj) => {
-    return obj.id === this.id ? true : false;
-  });
- return (match.status == "active") ? (match.status = "complete"): (match.status = "active");
+  return (this.status == "active") ? (this.status = "complete"): (this.status = "active");
+
+  /* 
+  let match = tasks.objArr.find(obj => obj.id == this.id);
+  return (match.status == "active") ? (match.status = "complete"): (match.status = "active"); */
 }
 
 
@@ -389,4 +422,5 @@ export {
   TaskConstructor,
   projectRemover,
   taskRemover,
+  displayMod,
 };
