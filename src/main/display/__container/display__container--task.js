@@ -143,7 +143,7 @@ function subscribeTask(obj) {
   
   completeInput.addEventListener("click", ()=> {
     taskRemover.complete(obj.id);
-    (obj.status == "complete") ? taskRemover.removeTaskFromProjectIdArr(obj): obj.pushId() ;
+    (obj.status == "complete") ? obj.removeTaskFromProjectIdArr(): obj.pushId() ;
     let taskTable = document.querySelectorAll(`div[data-id="${obj.id}"] th, div[data-id="${obj.id}"] td`);
     
     taskTable.forEach((element) => {
@@ -161,7 +161,7 @@ function subscribeTask(obj) {
   dltBtn.addEventListener("click", () => {
     console.log(obj)
     taskRemover.remove(obj.id);
-    taskRemover.removeTaskFromProjectIdArr(obj);
+    obj.removeTaskFromProjectIdArr();
   });
   taskDiv.appendChild(dltBtn);
 

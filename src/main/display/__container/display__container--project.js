@@ -22,10 +22,8 @@ function subscribeProject(obj) {
         let yesBtn = document.createElement("button");
         yesBtn.textContent = "Yes";
         yesBtn.addEventListener("click", () => {
+          obj.removeByProject();
           
-          taskRemover.removeByProject(obj);
-          console.log(`this one yo ${obj}`)
-          console.log(obj)
           projectRemover.remove(obj.id);
 
          
@@ -40,7 +38,8 @@ function subscribeProject(obj) {
         alert.appendChild(noBtn);
       } else {
         projectRemover.remove(obj.id);
-        taskRemover.removeByProject(obj);
+    
+        obj.removeByProject();
       }
     });
     projectDiv.appendChild(dltBtn);
@@ -91,7 +90,7 @@ function subTaskListItem(obj) {
   listItem.setAttribute("data-li-id", obj.id)
   completeInput.addEventListener("click", ()=> {
     taskRemover.complete(obj.id);
-    (obj.status == "complete") ? taskRemover.removeTaskFromProjectIdArr(obj): obj.pushId() ;  
+    (obj.status == "complete") ? obj.removeTaskFromProjectIdArr() : obj.pushId() ;  
     let taskTable = document.querySelectorAll(`li[data-li-id = "${obj.id}"] th,li[data-li-id = "${obj.id}"] td`);
     taskTable.forEach((element) => {
       element.classList.toggle("complete");

@@ -75,46 +75,7 @@ and prototype them!*/
 function RemoveConstructor(pubSub, classObj) {
   this.pubSub = pubSub;
   this.classObj = classObj;
-} /* 
-RemoveConstructor.prototype.removeAll = function() {
-  this.pubSub.publish("clear", true);
-  this.classObj.objArr.forEach((object) => {
-    object.publish(object);
-  });
-} */
-
-
-RemoveConstructor.prototype.removeByProject = function (prjRmv) {
-  prjRmv.taskIdArr.forEach((element) => {
-    let removeIndex = this.classObj.objArr.findIndex(task => task.id == element);
-    this.classObj.objArr.splice(removeIndex, 1);
-})
-  
-/*   this.classObj.objArr.forEach((task, index) => {
-   if (prjRmv.taskIdArr.find(element => /* element == task.id console.log(element))) {
-      this.classObj.objArr.splice(index, 1);
-    } 
-  })
- */
-  /* )
-  let indexOfMatch = this.classObj.objArr.findIndex((obj) => {
-    return obj.project === prjRmv.title ? true : false;
-  });
-  this.classObj.remove(indexOfMatch);
- */  
-  /* this.pubSub.publish("clear", true);
-  this.classObj.objArr.forEach((object) => {
-    object.publish(object);
-  }); */
-};
-
-RemoveConstructor.prototype.removeTaskFromProjectIdArr = function (obj) { 
-  let projectObject = projects.objArr.find(project => project.title == obj.project);
-  let indexNum = projectObject.taskIdArr.findIndex(id => id == obj.id );
-  projectObject.taskIdArr.splice(indexNum, 1);
-  console.log(projectObject);
-}
-
+} 
 
 RemoveConstructor.prototype.remove = function (dataId) {
   let indexOfMatch = this.classObj.objArr.findIndex((obj) => {
@@ -132,6 +93,9 @@ RemoveConstructor.prototype.complete = function (dataId) {
   let match = this.classObj.objArr.find((obj) => {
     return obj.id === dataId ? true : false;
   });
+  console.log(this.classObj)
+
+  console.log(this.pubSub)
 
   (match.status == "active") ? (match.status = "complete"): (match.status = "active");
   console.log(match);
@@ -275,6 +239,15 @@ ObjectConstructor.prototype.publishComplete = function(obj) {
   pubSubTasks.publish("displayComplete", obj);
 }
 
+//Probably should only be in task constructor
+ObjectConstructor.prototype.removeTaskFromProjectIdArr = function () { 
+  let projectObject = projects.objArr.find(project => project.title == this.project);
+  let indexNum = projectObject.taskIdArr.findIndex(id => id == this.id );
+  projectObject.taskIdArr.splice(indexNum, 1);
+}
+
+
+
 function ProjectConstructor(title) {
   this.title = title; /* 
   this.pubSub = pubSubProjects;
@@ -286,6 +259,13 @@ function ProjectConstructor(title) {
 }
 
 ProjectConstructor.prototype = Object.create(ObjectConstructor.prototype);
+
+ProjectConstructor.prototype.removeByProject = function() {
+  this.taskIdArr.forEach((element) => {
+    let removeIndex = tasks.objArr.findIndex(task => task.id == element);
+    tasks.objArr.splice(removeIndex, 1);
+  })
+};
 
 /* Project Constructor */
 /* function ProjectConstructor(title) {
