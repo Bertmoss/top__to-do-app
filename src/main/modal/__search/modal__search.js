@@ -3,7 +3,7 @@ import {
   appendLabelInput,
   createLabel,
 } from "../../../general/general__js/_input";
-import {taskRemover, projectRemover} from "../../main-pub-sub";
+import {taskRemover, displayMod} from "../../main-pub-sub";
 
 /* search modal */
 let searchModal = document.createElement("div");
@@ -25,9 +25,8 @@ let searchInput = createBasicInput("search-form__search-input", "text", "search"
 let searchLabel = createLabel(searchInput, "Search");
 appendLabelInput(searchForm, searchLabel, searchInput);
 
-searchInput.addEventListener("input", ()=> {/* 
-  projectRemover.searchProjects(searchInput.value) */
-  taskRemover.searchTasks(searchInput.value);
+searchInput.addEventListener("input", ()=> {
+  displayMod.updateSearch(searchInput.value);
 })
 
 

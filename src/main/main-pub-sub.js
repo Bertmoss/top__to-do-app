@@ -105,6 +105,15 @@ let displayMod = (() => {
       }
     })
   }
+  
+  function _displayCompleteTasks() {
+    tasks.objArr.forEach((object) => {
+      if (object.status == "complete") {
+        object.publishComplete(object);
+      }})
+
+  }
+  
 
 
  return {
@@ -134,45 +143,6 @@ RemoveConstructor.prototype.remove = function (dataId) {
     object.publish(object);
   });
 };
-
-
-RemoveConstructor.prototype.searchTasks = function(searchValue) {
-  this.pubSub.publish("clear", true);
-  tasks.objArr.forEach((object) => {
-    let published;
-    for (const [key, value] of Object.entries(object)) {
-      if (/* key == "project", */ key == "id", key == "status", key== "type" ) {
-        continue;
-      } else {
-        let found = value.toString().toUpperCase().includes(searchValue.toUpperCase());
-        if (found && !published) {
-          object.publish(object);
-          published = true; // it needs to hide all the other displays and switch to container search display? 
-        } 
-      }
-    }
-  })
-}
-RemoveConstructor.prototype.searchProjects = function(searchValue) {
- this.pubSub.publish("clear", true);
- let displayed;
-  projects.objArr.forEach((object) => {
-    let published;
-    for (const [key, value] of Object.entries(object)) {
-      if (key== "type" ) {
-        continue;
-      } else {
-        let found = value.toString().toUpperCase().includes(searchValue.toUpperCase());
-        if (found && !published) {
-          object.publish(object);
-          published = true;  
-          displayed = true;
-        } 
-      }
-    }
-  })
-  return displayed;
-} 
 
 
 RemoveConstructor.prototype.displayComplete = function() {
