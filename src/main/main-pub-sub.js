@@ -111,14 +111,17 @@ let displayMod = (() => {
       if (object.status == "complete") {
         object.publishComplete(object);
       }})
-
   }
-  
+  function updateComplete() {
+    _clear()
+    _displayCompleteTasks()
+  }
 
 
  return {
   update,
-  updateSearch
+  updateSearch,
+  updateComplete
  }
 })() 
 
@@ -143,16 +146,6 @@ RemoveConstructor.prototype.remove = function (dataId) {
     object.publish(object);
   });
 };
-
-
-RemoveConstructor.prototype.displayComplete = function() {
-  this.pubSub.publish("clear", true);
-  this.classObj.objArr.forEach((object) => {
-    if (object.status == "complete") {
-      object.publishComplete(object);
-    }}
-  )
-}
 
 
 RemoveConstructor.prototype.displaySorted = function(value) {

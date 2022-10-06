@@ -62,26 +62,7 @@ const completeDisplayBtn = document.createElement("button");
 completeDisplayBtn.setAttribute("type", "button");
 completeDisplayBtn.textContent = "COMPLETE"; // change to check svg later;
 completeDisplayBtn.addEventListener("click", () => {
-  taskRemover.displayComplete();
-
-  /* 
-  taskRemover.displayComplete();
-  let checkedInput = document.querySelectorAll(".task-div__done-input");
-  checkedInput.forEach((input) => {
-    input.setAttribute("checked", "");
-    input.addEventListener("click", () => {
-      let taskTable = document.querySelectorAll(`div[data-id="${obj.id}"] th, div[data-id="${obj.id}"] td`);
-      taskTable.forEach((element) => {
-        console.log(element)
-        console.log("yoo");
-        element.classList.toggle("complete");
-      })
-    })
-  })
-  let tableRows = document.querySelectorAll("tr");
-  tableRows.forEach((tr) => {
-    tr.classList.add("complete");
-  }) */
+  displayMod.updateComplete()
 });
 completeDiv.appendChild(completeDisplayBtn);
 taskDisplay.appendChild(completeDiv);
