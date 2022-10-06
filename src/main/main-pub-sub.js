@@ -74,7 +74,7 @@ let displayMod = (() => {
   function _clear() {
     pubSubTasks.publish("clear", true);
   }
-
+ 
  function _displayTasks() {
     tasks.objArr.forEach((object) => {
       if (object.status == "complete") {
@@ -83,13 +83,27 @@ let displayMod = (() => {
       }
     });
   }
+
  function update() {
     _clear();
-    _displayTasks()
+    _displayTasks();
   };
-  
-  function updateSearch(searchValue) {
-    _clear();
+
+  function _clearProjects() {
+    pubSubProjects.publish("clear", true);
+  }
+  function _displayProjects() {
+    projects.objArr.forEach((object) => {
+    object.publish(object);
+    });
+  }
+
+  function updateProjects() {
+    _clearProjects();
+    _displayProjects();
+  }
+
+  function _displaySearchedTasks(searchValue) {
     tasks.objArr.forEach((object) => {
       let published;
       for (const [key, value] of Object.entries(object)) {
@@ -105,7 +119,11 @@ let displayMod = (() => {
       }
     })
   }
-  
+  function updateSearch(searchValue) {
+    _clear();
+    _displaySearchedTasks(searchValue)
+  }
+
   function _displayCompleteTasks() {
     tasks.objArr.forEach((object) => {
       if (object.status == "complete") {
@@ -117,11 +135,25 @@ let displayMod = (() => {
     _displayCompleteTasks()
   }
 
+  function _sortTasks(value) {
+    tasks.customSort(value);
+
+  }
+  
+ function updateSorted (value) {
+  _sortTasks(value);
+  _clear()
+  _displayTasks();
+};
+
+
 
  return {
   update,
+  updateProjects,
   updateSearch,
-  updateComplete
+  updateComplete,
+  updateSorted
  }
 })() 
 
@@ -135,26 +167,8 @@ function RemoveConstructor(pubSub, classObj) {
   this.pubSub = pubSub;
   this.classObj = classObj;
 } 
-/* both projectRemover and taskRemover use this */
-RemoveConstructor.prototype.remove = function (dataId) {
-  let indexOfMatch = this.classObj.objArr.findIndex((obj) => {
-    return obj.id === dataId ? true : false;
-  });
-  this.classObj.remove(indexOfMatch);
-  this.pubSub.publish("clear", true);
-  this.classObj.objArr.forEach((object) => {
-    object.publish(object);
-  });
-};
 
 
-RemoveConstructor.prototype.displaySorted = function(value) {
-  tasks.customSort(value);
-  this.pubSub.publish("clear", true);
-  this.classObj.objArr.forEach((object) => {
-    object.publish(object);
-  });
-};
 
 let projects = new ObjectArrClass();
 
@@ -173,7 +187,6 @@ function subPublishRequest(obj) {
   }
   pubSub.publish("display", obj.obj);
 }
-
 function subDisplayAllRequest(obj) {
   let pubSub;
   let objArr;
@@ -225,6 +238,22 @@ ObjectConstructor.prototype.displayAll = function (obj) {
 ObjectConstructor.prototype.publishComplete = function(obj) {
   pubSubTasks.publish("displayComplete", obj);
 }
+ObjectConstructor.prototype.remove = function() {
+  let indexOfMatch;
+  if (this.type == "project") {
+    indexOfMatch = projects.objArr.findIndex((obj) => {
+      return obj.id === this.id ? true : false;
+    });
+    projects.remove(indexOfMatch);
+    displayMod.updateProjects();
+  } else if (this.type == "task") {
+    indexOfMatch = tasks.objArr.findIndex((obj) => {
+      return obj.id === this.id ? true : false;
+    });
+    tasks.remove(indexOfMatch);
+    displayMod.update();
+  }
+};
 
 
 function ProjectConstructor(title) {
@@ -356,6 +385,7 @@ TaskConstructor.prototype.publish = function () {
   pubSubForms.publish("task", obj);
 }; */
 
+console.log(pubSubTasks);
 /* Subscribers */
 pubSubProjects.subscribe("display", subscribeProject);
 /* 

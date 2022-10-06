@@ -1,7 +1,6 @@
-import { taskRemover } from "../../main-pub-sub";
 import { displayMod } from "../../main-pub-sub";
 import { createTable } from "../../../general/general__js/_table";
-import { projectRemover } from "../../main-pub-sub";
+
 import {
   createRadioInput,
   appendRadioInputs,
@@ -46,7 +45,7 @@ sortDateDescending.textContent = "Date (Descending)";
 sortDateDescending.setAttribute("value", "date-descending");
 
 sort.addEventListener("click", () => {
-  taskRemover.displaySorted(sort.value);
+  displayMod.updateSorted(sort.value)
 });
 
 sort.appendChild(sortPriorityDescending);
@@ -149,8 +148,7 @@ function subscribeTask(obj) {
   dltBtn.textContent = "x";
   dltBtn.setAttribute("type", "button");
   dltBtn.addEventListener("click", () => {
-    console.log(obj);
-    taskRemover.remove(obj.id);
+    obj.remove();
     obj.removeTaskFromProjectIdArr();
   });
   taskDiv.appendChild(dltBtn);
@@ -232,7 +230,6 @@ function subscribeTask(obj) {
         ? obj.priority
         : (obj.priority = editedPriorityInput.value);
       submitChangeBtn.remove();
-      /* taskRemover.clearDisplay(); */
       displayMod.update();
     });
     taskDiv.appendChild(submitChangeBtn);

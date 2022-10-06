@@ -1,5 +1,5 @@
 import * as side from "./__side/display__side";
-import { taskRemover, displayMod } from "../main-pub-sub";
+import { displayMod } from "../main-pub-sub";
 /* Display Containers */
 import { taskDisplay } from "./__container/display__container--task";
 import { noteDisplay } from "./__container/display__container--note";
@@ -27,7 +27,6 @@ const project = side.createListItem("Projects");
 const note = side.createListItem("Notes");
 
 home.addEventListener("click", () => {
-  /* taskRemover.clearDisplay(); */
   displayMod.update();
   noteDisplay.classList.add("display__container-note--hidden");
   projectDisplay.classList.add("display__container-project--hidden");
@@ -41,7 +40,6 @@ note.addEventListener("click", () => {
 });
 
 project.addEventListener("click", () => {
-  /* taskRemover.clearDisplay(); */
   displayMod.update();
   noteDisplay.classList.add("display__container-note--hidden");
   projectDisplay.classList.remove("display__container-project--hidden");

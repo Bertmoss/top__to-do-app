@@ -3,7 +3,7 @@ import {
   appendLabelInput,
   createLabel,
 } from "../../../general/general__js/_input";
-import {taskRemover, displayMod} from "../../main-pub-sub";
+import { displayMod } from "../../main-pub-sub";
 
 /* search modal */
 let searchModal = document.createElement("div");

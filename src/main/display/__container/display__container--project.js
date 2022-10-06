@@ -1,4 +1,4 @@
-import { projectRemover, taskRemover, displayMod } from "../../main-pub-sub";
+import { projectRemover, displayMod } from "../../main-pub-sub";
 import { createBasicInput } from "../../../general/general__js/_input";
 import { createTable } from "../../../general/general__js/_table";
 import { add } from "date-fns";
@@ -28,8 +28,8 @@ function subscribeProject(obj) {
         yesBtn.textContent = "Yes";
         yesBtn.addEventListener("click", () => {
           obj.removeByProject();
-
-          projectRemover.remove(obj.id);
+          obj.remove()/* )
+          projectRemover.remove(obj.id); */
 
           alert.remove();
         });
@@ -41,7 +41,8 @@ function subscribeProject(obj) {
         });
         alert.appendChild(noBtn);
       } else {
-        projectRemover.remove(obj.id);
+       /*  projectRemover.remove(obj.id); */
+       obj.remove()
 
         obj.removeByProject();
       }
@@ -55,7 +56,6 @@ function subscribeProject(obj) {
   taskList.classList.add(obj.title, "task-list");
   projectDiv.appendChild(taskList);
   projectDisplay.appendChild(projectDiv);
-  /*  taskRemover.clearDisplay(); */
   displayMod.update();
   console.log(displayMod)
 }
@@ -92,7 +92,7 @@ function subTaskListItem(obj) {
     "complete-input",
     "complete-input"
   ); //finished checkbox
-
+  //maybe add delete button for project here too?
   let listItem = document.createElement("li");
   listItem.setAttribute("data-li-id", obj.id);
   completeInput.addEventListener("click", () => {
