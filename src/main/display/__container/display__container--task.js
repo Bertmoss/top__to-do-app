@@ -16,7 +16,6 @@ taskDisplay.classList.add(
 );
 
 /* SORT BUTTON */
-/* NEED TO ADD A SORT BY DATE OPTION */
 let sortDiv = document.createElement("div");
 let sort = document.createElement("select");
 let sortPlaceholder = document.createElement("option");
@@ -162,7 +161,7 @@ function subscribeTask(obj) {
 
   editBtn.addEventListener("click", () => {
     let tableData = document.querySelectorAll(
-      `[data-id="${obj.id}"] .table__td`
+      `.display__container-task [data-id="${obj.id}"] .table__td`
     );
     //let table = document.querySelector(`[data-id="${obj.id}"] table`) //Do I really need this?
     tableData.forEach(function (td) {
@@ -213,14 +212,20 @@ function subscribeTask(obj) {
     }
 
     submitChangeBtn.addEventListener("click", () => {
-      let editedInputs = document.querySelectorAll(".table__edit-input");
+      let editedInputs = document.querySelectorAll(" .table__edit-input");
       editedInputs.forEach((input) => {
+        console.log(obj)
         if (input.getAttribute("name") == "title") {
-          input.title == "" ? obj.title : (obj.title = input.value);
+          input.value == "" ?  obj.title : (obj.title = input.value);
         } else if (input.getAttribute("name") == "details") {
+          console.log(input.value)
           obj.details = input.value;
         } else if (input.getAttribute("name") == "date") {
-          input.value == "" ? obj.date : (obj.date = new Date(input.value));
+          if (input.value !== "") {
+            let dateProcessed = new Date(input.value);
+            dateProcessed = dateProcessed.toISOString().split("T")[0];
+            obj.date = dateProcessed;
+          }
         }
       });
       let editedPriorityInput = document.querySelector(

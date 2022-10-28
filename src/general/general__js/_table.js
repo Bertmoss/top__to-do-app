@@ -5,6 +5,7 @@ function createTable(obj, parent) {
     if (key == "type" || key === "id" || key == "project" || key == "status") {
       continue;
     } else if (key == "date") {
+      console.log(value);
       let date = value.split("-").reverse().join("-");
       row = createRow(key, date);
     } else {

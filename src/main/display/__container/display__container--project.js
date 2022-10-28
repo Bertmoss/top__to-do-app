@@ -1,4 +1,4 @@
-import { projectRemover, displayMod } from "../../main-pub-sub";
+import { displayMod } from "../../main-pub-sub";
 import { createBasicInput } from "../../../general/general__js/_input";
 import { createTable } from "../../../general/general__js/_table";
 import { add } from "date-fns";
@@ -28,9 +28,7 @@ function subscribeProject(obj) {
         yesBtn.textContent = "Yes";
         yesBtn.addEventListener("click", () => {
           obj.removeByProject();
-          obj.remove()/* )
-          projectRemover.remove(obj.id); */
-
+          obj.remove();
           alert.remove();
         });
         alert.appendChild(yesBtn);
@@ -41,7 +39,6 @@ function subscribeProject(obj) {
         });
         alert.appendChild(noBtn);
       } else {
-       /*  projectRemover.remove(obj.id); */
        obj.remove()
 
         obj.removeByProject();

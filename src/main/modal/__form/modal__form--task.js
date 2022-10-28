@@ -120,15 +120,9 @@ function displayTasks() {
     selectProject.value
   );
   obj.pushId();
-  obj.displayAll(obj);
+  obj.displayAll();
 }
 
 submit.addEventListener("click", displayTasks);
-/* 
-submit.addEventListener("click", () => {
-  let radio = document.querySelector("input:checked");
-  let obj = new TaskConstructor(title.value, textArea.value, date.value, radio.value, selectProject.value);
-  obj.publish();
-})
- */
+
 export { taskForm, subSelectProjectInput, subClearSelectOptions };

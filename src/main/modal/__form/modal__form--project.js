@@ -29,11 +29,11 @@ function displayProjects() {
     createAlert("Please provide a name for your project!")
   } else {
     let obj = new ProjectConstructor(project.value);
-    obj.displayAll(obj);
+    obj.displayAll();
   }
 }
 let obj = new ProjectConstructor("general");
-obj.displayAll(obj);
+obj.displayAll();
 
 submit.addEventListener("click", displayProjects);
 

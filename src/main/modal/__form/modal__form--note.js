@@ -34,7 +34,7 @@ noteForm.appendChild(submit);
 
 function publishNote() {
   let obj = new NoteConstructor(noteTitle.value, note.value);
-  obj.publish();
+  obj.displayAll();
 }
 
 submit.addEventListener("click", publishNote);

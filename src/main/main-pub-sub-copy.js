@@ -1,6 +1,6 @@
 import { compareAsc, parseISO } from "date-fns";
 import { pubSubFactory } from "../general/general__js/pub-sub";
-import { subscribeNote, subRmvNoteDisplay } from "./display/__container/display__container--note";
+import { subscribeNote } from "./display/__container/display__container--note";
 import {
   subscribeProject,
   subTaskListItem,
@@ -16,13 +16,6 @@ import {
   subSelectProjectInput,
   subClearSelectOptions,
 } from "./modal/__form/modal__form--task";
-
-//PUBSUB OBJ
-
-let pubSubNotes = pubSubFactory();
-let pubSubProjects = pubSubFactory();
-let pubSubTasks = pubSubFactory();
-
 
 /* OBJECT CLASS */
 /* holds an array of all the objects. The objIdGen is used to assign unique ids to each obj */
@@ -50,7 +43,6 @@ class ObjectArrClass {
   }
   
 }
-
 class TaskObjectArrClass extends ObjectArrClass {
   customSort(value) {
     if (value == "most") {
@@ -74,15 +66,9 @@ class TaskObjectArrClass extends ObjectArrClass {
 } 
 
 
-let projects = new ObjectArrClass();
-let tasks = new TaskObjectArrClass();
-let notes = new ObjectArrClass();
 
 
 /* DISPLAY MODIFIER */
-//need to add note update made out of clear and displayNotes
-
-
 
 let displayMod = (() => { 
   function _clear() {
@@ -92,7 +78,7 @@ let displayMod = (() => {
     tasks.objArr.forEach((object) => {
       if (object.status == "complete") {
       } else {
-        object.publish();
+        object.publish(object);
       }
     });
   }
@@ -101,27 +87,12 @@ let displayMod = (() => {
     _displayTasks();
   };
 
-  function _clearNotes() {
-    pubSubNotes.publish("clear", true);
-  }
-
-  function _displayNotes() {
-    notes.objArr.forEach((object) => {
-      object.publish();
-    })
-  }
-
-  function updateNotes() {
-    _clearNotes();
-    _displayNotes();
-  }
-
   function _clearProjects() {
     pubSubProjects.publish("clear", true);
   }
   function _displayProjects() {
     projects.objArr.forEach((object) => {
-    object.publish();
+    object.publish(object);
     });
   }
   function updateProjects() {
@@ -153,7 +124,7 @@ let displayMod = (() => {
   function _displayCompleteTasks() {
     tasks.objArr.forEach((object) => {
       if (object.status == "complete") {
-        object.publishComplete();
+        object.publishComplete(object);
       }})
   }
   function updateComplete() {
@@ -175,88 +146,104 @@ let displayMod = (() => {
   updateProjects,
   updateSearch,
   updateComplete,
-  updateSorted,
-  updateNotes
+  updateSorted
  }
 })() 
 
 
-/* Object Constructor (Prototype for project and task constructors*/
-function ObjectConstructor() {
+
+
+
+let projects = new ObjectArrClass();
+
+let pubSubProjects = pubSubFactory();
+
+let pubSubObjectConstructors = pubSubFactory();
+
+/* WEIRD OBJ make this into pubSub ? */
+function subPublishRequest(obj) {
+  let pubSub;
+  if (obj.type == "project") {
+    pubSub = pubSubProjects;
+  } else if (obj.type == "task") {
+    pubSub = pubSubTasks;
+  }
+  pubSub.publish("display", obj.obj);
+}
+function subDisplayAllRequest(obj) {
+  let pubSub;
+  let objArr;
+  if (obj.type == "project") {
+    pubSub = pubSubProjects;
+    objArr = projects;
+  } else if (obj.type == "task") {
+    pubSub = pubSubTasks;
+    objArr = tasks;
+  }
+  pubSub.publish("clear", true);
+  objArr.push(obj.obj);
+  console.log(objArr.objArr);
+  objArr.objArr.forEach((object) => {
+    if (object.status == "complete") {
+    } else {
+      object.publish(object);
+    }
+    
+  });
 }
 
-ObjectConstructor.prototype.publish = function () {
-  switch (this.type) {
-    case "project":
-      pubSubProjects.publish("display", this);
-      break;
-    case "task":
-      pubSubTasks.publish("display", this);
-      break;
-    case "note":
-      pubSubNotes.publish("display", this)
-  }
+pubSubObjectConstructors.subscribe("publish", subPublishRequest);
+
+pubSubObjectConstructors.subscribe("displayAll", subDisplayAllRequest);
+
+/* Object Constructor*/
+function ObjectConstructor(/* pubSub, objArr */) {
+  /*   this.pubSub = pubSub;
+  this.objArr = objArr; */
+}
+/* 
+ObjectConstructor.prototype.getId = function() {this.objArr.objIdGen += 1};
+ */
+ObjectConstructor.prototype.publish = function (obj) {
+  /* this.pubSub.publish("display", obj); */
+  pubSubObjectConstructors.publish("publish", { type: this.type, obj });
 };
 
-ObjectConstructor.prototype.displayAll = function () {
-  switch (this.type) {
-    case "project":
-      pubSubProjects.publish("clear", true);
-      projects.push(this); 
-      projects.objArr.forEach((object) =>{
-        object.publish();
-      })
-      break;
-    case "task":
-      pubSubTasks.publish("clear", true);
-      tasks.push(this);
-    
-      tasks.objArr.forEach((object) => {
-        if (object.status == "complete") {
-        } else {
-          object.publish();
-        } 
-      })
-      break;
-    case "note":
-      pubSubNotes.publish("clear", true);
-      notes.push(this);
-      notes.objArr.forEach((object) => {
-        object.publish()
-      })
-  }
+ObjectConstructor.prototype.displayAll = function (obj) {
+  pubSubObjectConstructors.publish("displayAll", { type: this.type, obj });
+  /*  this.pubSub.publish("clear", true);
+  this.objArr.push(obj);
+  this.objArr.objArr.forEach((object) => {
+    object.publish(object);
+    console.log(object)
+  }); */
 };
-
+ObjectConstructor.prototype.publishComplete = function(obj) {
+  pubSubTasks.publish("displayComplete", obj);
+}
 ObjectConstructor.prototype.remove = function() {
   let indexOfMatch;
-  switch (this.type) {
-    case "project":
-      indexOfMatch = projects.objArr.findIndex((obj) => {
-        return obj.id === this.id ? true : false;
-      });
-      projects.remove(indexOfMatch);
-      displayMod.updateProjects();
-      break;
-    case "task":
-      indexOfMatch = tasks.objArr.findIndex((obj) => {
-        return obj.id === this.id ? true : false;
-      });
-      tasks.remove(indexOfMatch);
-      displayMod.update();
-      break;
-    case "note":
-      indexOfMatch = notes.objArr.findIndex((obj) => {
-        return obj.id === this.id ? true : false;
-      });
-      notes.remove(indexOfMatch);
-      displayMod.updateNotes();
+  if (this.type == "project") {
+    indexOfMatch = projects.objArr.findIndex((obj) => {
+      return obj.id === this.id ? true : false;
+    });
+    projects.remove(indexOfMatch);
+    displayMod.updateProjects();
+  } else if (this.type == "task") {
+    indexOfMatch = tasks.objArr.findIndex((obj) => {
+      return obj.id === this.id ? true : false;
+    });
+    tasks.remove(indexOfMatch);
+    displayMod.update();
   }
-
 };
 
-//Project Constructor
+
 function ProjectConstructor(title) {
-  this.title = title; 
+  this.title = title; /* 
+  this.pubSub = pubSubProjects;
+  this.objArr = projects; */ /* 
+  this.id = this.objArr.objIdGen += 1; */
   this.id = projects.objIdGen += 1;
   this.type = "project";
   this.taskIdArr = [];
@@ -271,8 +258,41 @@ ProjectConstructor.prototype.removeByProject = function() {
   })
 };
 
+/* Project Constructor */
+/* function ProjectConstructor(title) {
+  this.title = title;
+  this.id = projects.objIdGen += 1;
+}
+
+ProjectConstructor.prototype.publish = function (obj) {
+  pubSubProjects.publish("project", obj);
+};
+
+ProjectConstructor.prototype.displayAll = function (obj) {
+  pubSubProjects.publish("clear", true);
+  projects.push(obj);
+  projects.objArr.forEach((object) => {
+    object.publish(object);
+  });
+}; */
+
+/* PUBSUB MODULE FORMS and DISPLAY*/
+let pubSubForms = pubSubFactory();
+
+/* Note Constructor */
+
+function NoteConstructor(title, details) {
+  this.title = title;
+  this.details = details;
+}
+NoteConstructor.prototype.publish = function () {
+  pubSubForms.publish("note", { title: this.title, details: this.details });
+};
 
 /* Task Constructor */
+
+let tasks = new TaskObjectArrClass();
+let pubSubTasks = pubSubFactory();
 
 function TaskConstructor(title, details, date, priority, project) {
   this.title = title;
@@ -300,7 +320,14 @@ TaskConstructor.prototype.pushId = function() {
 
 TaskConstructor.prototype.complete = function () {
   return (this.status == "active") ? (this.status = "complete"): (this.status = "active");
+
+  /* 
+  let match = tasks.objArr.find(obj => obj.id == this.id);
+  return (match.status == "active") ? (match.status = "complete"): (match.status = "active"); */
 }
+
+
+
 
 TaskConstructor.prototype.countPriority = function () {
   switch (this.priority) {
@@ -318,44 +345,28 @@ TaskConstructor.prototype.countPriority = function () {
   }
 };
 
-TaskConstructor.prototype.publishComplete = function() {
-  pubSubTasks.publish("displayComplete", this);
-}
-
-
-
-/* Note Constructor */
-
-function NoteConstructor(title, details) {
-  this.title = title;
-  this.details = details;
-  this.type = "note";
-  this.id = notes.objIdGen += 1;
-}
-
-NoteConstructor.prototype = Object.create(ObjectConstructor.prototype);
-
-/* NoteConstructor.prototype.publish = function () {
-  pubSubNotes.publish("note", { title: this.title, details: this.details });
-  console.log(not)
-}; */
 
 
 console.log(pubSubTasks);
 /* Subscribers */
 pubSubProjects.subscribe("display", subscribeProject);
-
+/* 
+pubSubProjects.subscribe("display", subProjectDisplay); */
 pubSubProjects.subscribe("display", subSelectProjectInput);
-pubSubNotes.subscribe("display", subscribeNote);
-pubSubNotes.subscribe("clear", subRmvNoteDisplay);
-
+pubSubForms.subscribe("note", subscribeNote);
+pubSubForms.subscribe("task", subscribeTask);
+pubSubForms.subscribe("task", subTaskListItem);
 
 pubSubTasks.subscribe("display", subscribeTask);
 pubSubTasks.subscribe("display", subTaskListItem);
 pubSubTasks.subscribe("clear", subRmvTaskContainer);
 pubSubTasks.subscribe("clear", subRmvTasks);
-pubSubTasks.subscribe("displayComplete", subCompleteTask); 
+pubSubTasks.subscribe("displayComplete", subCompleteTask); //added this trying to make the complete
+/* 
+pubSubTasks.subscribe("clear",subRmvProjectDisplay) */
 
+/* 
+pubSubTasks.subscribe("clear", subRmvProjectDisplay) /* ?? */
 
 pubSubProjects.subscribe("clear", subRmvProjectDisplay);
 pubSubProjects.subscribe("clear", subClearSelectOptions);
@@ -364,5 +375,7 @@ export {
   NoteConstructor,
   ProjectConstructor,
   TaskConstructor,
+
+ 
   displayMod,
 };
