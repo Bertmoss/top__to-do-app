@@ -255,7 +255,7 @@ function subscribeTask(obj) {
       let noDateDiv = document.querySelector(".task-container__div--no-date");
       if (!noDateDiv) {
         noDateDiv = document.createElement("div");
-        noDateDiv.setAttribute("style", "background-color: pink");
+        noDateDiv.setAttribute("style", "background-color: pink; order:0");
         noDateDiv.classList.add("task-container__div--no-date");
         let noDateHeading = document.createElement("h1");
         noDateHeading.textContent = "Undated";
@@ -272,7 +272,7 @@ function subscribeTask(obj) {
       let overdueDiv = document.querySelector(".task-container__div--overdue");
       if (!overdueDiv) {
         overdueDiv = document.createElement("div");
-        overdueDiv.setAttribute("style", "background-color: orange");
+        overdueDiv.setAttribute("style", "background-color: orange; order:4");
         overdueDiv.classList.add("task-container__div--overdue");
         let overdueHeading = document.createElement("h1");
         overdueHeading.textContent = "Overdue";
@@ -285,7 +285,7 @@ function subscribeTask(obj) {
       let todayDiv = document.querySelector(".task-container__div--today");
       if (!todayDiv) {
         todayDiv = document.createElement("div");
-        todayDiv.setAttribute("style", "background-color: green");
+        todayDiv.setAttribute("style", "background-color: green; order:3");
         todayDiv.classList.add("task-container__div--today");
         let todayHeading = document.createElement("h1");
         todayHeading.textContent = "Today";
@@ -299,7 +299,7 @@ function subscribeTask(obj) {
       let weekDiv = document.querySelector(".task-container__div--week");
       if (!weekDiv) {
         weekDiv = document.createElement("div");
-        weekDiv.setAttribute("style", "background-color: purple");
+        weekDiv.setAttribute("style", "background-color: purple; order:2");
         weekDiv.classList.add("task-container__div--week");
         let weekHeading = document.createElement("h1");
         weekHeading.textContent = "This Week";
@@ -315,7 +315,7 @@ function subscribeTask(obj) {
       );
       if (!upcomingDiv) {
         upcomingDiv = document.createElement("div");
-        upcomingDiv.setAttribute("style", "background-color: blue");
+        upcomingDiv.setAttribute("style", "background-color: blue; order: 1");
         upcomingDiv.classList.add("task-container__div--upcoming");
         let upcomingHeading = document.createElement("h1");
         upcomingHeading.textContent = "Upcoming";
