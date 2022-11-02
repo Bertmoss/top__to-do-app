@@ -251,7 +251,6 @@ ObjectConstructor.prototype.remove = function() {
       notes.remove(indexOfMatch);
       displayMod.updateNotes();
   }
-
 };
 
 //Project Constructor

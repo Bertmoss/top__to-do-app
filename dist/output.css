@@ -47,6 +47,12 @@ body {
   background-color: #F35168;
 }
 
+.c-main__display-search-btn {
+  background-image: url(/src/general/images/search-icon--white.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 .modal {
   border: black 2px solid;
   display: flex;

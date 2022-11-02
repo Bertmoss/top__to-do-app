@@ -17,7 +17,6 @@ displayFormModal.addEventListener("click", () => {
 /*display search modal button*/
 const displaySearchModal = document.createElement("button");
 displaySearchModal.setAttribute("type", "button");
-displaySearchModal.textContent = "Search";
 displaySearchModal.classList.add("main__display-search-btn", "c-main__display-search-btn");
 displaySearchModal.addEventListener("click", () => {
   searchModal.classList.remove("main__search-modal--hidden");
