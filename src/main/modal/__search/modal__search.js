@@ -13,7 +13,7 @@ searchModal.classList.add("main__search-modal--hidden", "p-main__search-modal", 
 let closeBtn = document.createElement("button");
 closeBtn.setAttribute("type", "button");
 closeBtn.textContent = "x";
-closeBtn.classList.add("search-modal__btn", "p-search-modal__btn")
+closeBtn.classList.add("search-modal__hide-btn", "p-search-modal__hide-btn")
 closeBtn.addEventListener("click", () => {
   searchModal.classList.add("main__search-modal--hidden");
   searchInput.value = "";
