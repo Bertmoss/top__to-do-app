@@ -29,17 +29,8 @@ displaySearchModal.addEventListener("click", () => {
  
   
   modal.classList.add("main__modal--hidden");
-});/* 
-function checkIfHidden() {
-  return searchModal.classList.contains("main__search-modal--hidden") ? true : false;
-}
-document.addEventListener("click", function (event) {
-  if (!event.target.closest(".main__search-modal")) {
-   searchModal.setAttribute("style", "background-color: blue;")
-    
-  }
-  false
-})   */
+});
+
 function hide() {
   searchModal.classList.add("main__search-modal--hidden")
 }
@@ -48,8 +39,6 @@ function hideModal() {
 
 }
 document.addEventListener("click", function (event) {
-  console.log(searchModal.classList.contains("main__search-modal--hidden"))
-  console.log(event.target)
   if (!event.target.closest(".main__search-modal")&& !event.target.matches(".main__display-search-btn")  && (searchModal.classList.contains("main__search-modal--hidden")== false)) {
     searchModal.setAttribute("style", "animation-name : swing-out-left; animation-duration: 0.5s");
     setTimeout(hide, 500) 
