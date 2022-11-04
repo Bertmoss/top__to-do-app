@@ -19,7 +19,10 @@ const displaySearchModal = document.createElement("button");
 displaySearchModal.setAttribute("type", "button");
 displaySearchModal.classList.add("main__display-search-btn", "c-main__display-search-btn");
 displaySearchModal.addEventListener("click", () => {
+
   searchModal.classList.remove("main__search-modal--hidden");
+  searchModal.setAttribute("style", "animation-name : swing-in-left; animation-duration: 0.5s"); //work on the animation so that it expands and add this https://techstacker.com/close-modal-click-outside-vanilla-javascript/
+  
   modal.classList.add("main__modal--hidden");
 });
 

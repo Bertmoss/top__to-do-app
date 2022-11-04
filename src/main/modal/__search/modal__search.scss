@@ -1,3 +1,50 @@
+@use  "../../../general/general__scss/colors" as *; 
+
 .main__search-modal--hidden {
   display: none;
+}
+
+.p-main__search-modal {
+  position: absolute;
+  bottom: 0px;
+  left: 20px;
+  bottom: 20px;
+/*   left: 0px;
+  right: 0px;
+  margin: 0px auto;
+ */  
+
+  box-sizing: border-box;
+  padding: 20px;
+  width: 200px;
+}
+
+.main__search-modal {
+  border-radius: 25px;
+  background-color: $red;
+  color: $white;
+  
+
+}
+
+
+.search-modal__label {
+  position: absolute;
+  font-size: 1px;
+}
+
+.p-search-modal__btn {
+  position: absolute;
+  top: 0px;
+}
+
+.search-modal__btn {
+  appearance: none; 
+  border-radius: 3px;
+  outline: none;
+  box-shadow: none;
+  border: none;
+  color: $dark-blue;
+  background-color: $red;
+
 }

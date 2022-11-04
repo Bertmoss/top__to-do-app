@@ -53,6 +53,38 @@ body {
   background-repeat: no-repeat;
 }
 
+@-webkit-keyframes swing-in-left {
+  0% {
+    -webkit-transform: rotateY(100deg);
+    transform: rotateY(100deg);
+    -webkit-transform-origin: left;
+    transform-origin: left;
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: rotateY(0);
+    transform: rotateY(0);
+    -webkit-transform-origin: left;
+    transform-origin: left;
+    opacity: 1;
+  }
+}
+@keyframes swing-in-left {
+  0% {
+    -webkit-transform: rotateY(100deg);
+    transform: rotateY(100deg);
+    -webkit-transform-origin: left;
+    transform-origin: left;
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: rotateY(0);
+    transform: rotateY(0);
+    -webkit-transform-origin: left;
+    transform-origin: left;
+    opacity: 1;
+  }
+}
 .modal {
   border: black 2px solid;
   display: flex;
@@ -185,7 +217,49 @@ body {
 
 .main__search-modal--hidden {
   display: none;
-} /* header */
+}
+
+.p-main__search-modal {
+  position: absolute;
+  bottom: 0px;
+  left: 20px;
+  bottom: 20px;
+  /*   left: 0px;
+    right: 0px;
+    margin: 0px auto;
+   */
+  box-sizing: border-box;
+  padding: 20px;
+  width: 200px;
+}
+
+.main__search-modal {
+  border-radius: 25px;
+  background-color: #F35168;
+  color: #FFFFFF;
+}
+
+.search-modal__label {
+  position: absolute;
+  font-size: 1px;
+}
+
+.p-search-modal__btn {
+  position: absolute;
+  top: 0px;
+}
+
+.search-modal__btn {
+  appearance: none;
+  border-radius: 3px;
+  outline: none;
+  box-shadow: none;
+  border: none;
+  color: #181D3D;
+  background-color: #F35168;
+}
+
+/* header */
 /* main */
 /* 
 @use "./main/modal/__form/modal__form--to-do.scss"; */
