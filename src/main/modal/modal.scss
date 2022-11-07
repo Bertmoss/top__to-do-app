@@ -1,18 +1,22 @@
+@use "../../general/general__scss/colors" as *;
+
 .modal {
-  border: black 2px solid;
+  border: $dark-blue 2px solid;
+  border-radius: 25px;
   display: flex;
-    background-color: white;
+  background-color: white;
 }
-.main__modal {
+.p-main__modal {
+  box-sizing: border-box;
   position: absolute;
   top: 20%;
   margin: 0px auto;
   left: 0px;
   right: 0px;
   width: 300px;
-  min-height: 300px; 
-
+  height: 300px; 
 }
+
 .main__modal--hidden {
   display: none;
 }

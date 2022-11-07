@@ -54,19 +54,21 @@ body {
 }
 
 .modal {
-  border: black 2px solid;
+  border: #181D3D 2px solid;
+  border-radius: 25px;
   display: flex;
   background-color: white;
 }
 
-.main__modal {
+.p-main__modal {
+  box-sizing: border-box;
   position: absolute;
   top: 20%;
   margin: 0px auto;
   left: 0px;
   right: 0px;
   width: 300px;
-  min-height: 300px;
+  height: 300px;
 }
 
 .main__modal--hidden {
@@ -121,24 +123,35 @@ body {
     opacity: 1;
   }
 }
-.modal__side {
-  width: 45%;
+.p-modal__side {
+  width: 100%;
   height: 100%;
-  border-right: 1px black solid;
-  /* Display maybe in separate class */
+  border-radius: 20px 0px 0px 20px;
+}
+
+.modal__side {
+  background-color: #2D325A;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
 }
 
-.side__button {
-  width: 70%;
+.modal__side-btn {
+  border: none;
+  appearance: none;
+  border-radius: 20px;
+  background-color: #FFFFFF;
+  color: #2D325A;
+  width: 75px;
   height: 50px;
+  font-size: 12px;
 }
 
-.s-side__button {
-  appearance: none;
+.modal__side-btn:active {
+  width: 68px;
+  height: 48px;
+  font-size: 10px;
 }
 
 .display__nav {
