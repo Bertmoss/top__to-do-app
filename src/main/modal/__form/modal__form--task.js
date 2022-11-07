@@ -94,8 +94,7 @@ function checkDate() {
   let dateProcessed = new Date(date.value);
   if (date.value) {
     dateProcessed = dateProcessed.toISOString().split("T")[0];
-    /* dateProcessed = dateProcessed.split("-").reverse().join("-"); */
-    /* dateProcessed = parseISO(dateProcessed) */
+    
   }
   return (!date.value ) ? "" : dateProcessed;
 }

@@ -49,6 +49,12 @@ side.noteButton.addEventListener("click", () =>{
   removeForm();
   formContainer.appendChild(noteForm);
 })
-
+/* hide modal when clicked outside of the modal */
+document.addEventListener("click", function (event) {
+ if (!event.target.closest(".main__modal")&& !event.target.matches(".main__display-form-btn")  && (modal.classList.contains("main__modal--hidden")== false)) {
+    modal.setAttribute("style", "animation-name : swirl-out-bck; animation-duration: 0.6s");
+    setTimeout(hideModal, 600) 
+  } 
+})
 
 export {modal} 
