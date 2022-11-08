@@ -6,6 +6,7 @@ import {
 import { NoteConstructor } from "../../main-pub-sub";
 
 const noteForm = document.createElement("form");
+noteForm.classList.add("form-note")
 
 /* inputs */
 const noteTitle = createBasicInput(
@@ -21,12 +22,13 @@ const note = document.createElement("textarea");
 note.setAttribute("id", "note");
 note.setAttribute("name", "note");
 
-const noteLabel = createLabel(note, "Details");
+const noteLabel = createLabel(note, "Details:");
 appendLabelInput(noteForm, noteLabel, note);
 
 /* "submit" button */
 const submit = document.createElement("button");
-submit.setAttribute("type", "reset"); /* maybe clear instead*/
+submit.setAttribute("type", "reset");
+submit.classList.add("form-note__btn")
 submit.textContent = "Create Note";
 noteForm.appendChild(submit);
 

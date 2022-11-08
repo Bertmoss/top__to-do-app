@@ -350,6 +350,41 @@ body {
     opacity: 0;
   }
 }
+.form-note {
+  box-sizing: border-box;
+  height: 100%;
+  padding-top: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.form-note * {
+  max-width: 70%;
+  color: #2D325A;
+}
+
+.form-note :nth-child(2n) {
+  margin-bottom: 35px;
+}
+
+.form-note__btn {
+  border: none;
+  appearance: none;
+  border-radius: 20px;
+  background-color: #2D325A;
+  color: #FFFFFF;
+  width: 75px;
+  height: 50px;
+}
+
+.form-note__btn:active {
+  width: 68px;
+  height: 48px;
+  font-size: 11px;
+}
+
 /* header */
 /* main */
 /* 

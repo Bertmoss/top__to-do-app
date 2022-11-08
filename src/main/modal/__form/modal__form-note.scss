@@ -1,0 +1,36 @@
+@use "../../../general/general__scss/colors" as *;
+.form-note {
+  box-sizing: border-box;
+  height: 100%;
+  padding-top: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  
+}
+.form-note * {
+  max-width: 70%;
+  color: $light-blue;
+}
+
+.form-note :nth-child(2n) {
+  margin-bottom: 35px;
+}
+
+.form-note__btn {
+    border: none;
+    appearance: none;
+    border-radius: 20px;
+    background-color: $light-blue;
+    color: $white;
+    width: 75px;
+    height: 50px;
+}
+
+.form-note__btn:active {
+  width: 68px;
+  height: 48px;
+  font-size: 11px;
+}
+
