@@ -15,7 +15,7 @@ import {
 import {
   subSelectProjectInput,
   subClearSelectOptions,
-} from "./modal/__form/modal__form--task";
+} from "./modal/__form/modal__form-task";
 
 //PUBSUB OBJ
 

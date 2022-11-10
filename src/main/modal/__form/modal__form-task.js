@@ -15,7 +15,7 @@ format(new Date(2014, 1, 11), "yyyy-MM-dd"); */
 
 
 let taskForm = document.createElement("form");
-taskForm.classList.add("form");
+taskForm.classList.add("form-task");
 
 let title = createBasicInput("form__input", "text", "title", "title");
 title.setAttribute("placeholder", "Title: Groceries");
@@ -67,26 +67,26 @@ appendLabelInput(taskForm, selectLabel, selectProject);
 
 /*RADIO BUTTONS*/
 let fieldset = document.createElement("fieldset");
+fieldset.classList.add("form__fieldset")
 let legend = document.createElement("legend");
 legend.textContent = "Priority";
 fieldset.appendChild(legend);
 
 
-let priorityLow = createRadioInput("low", "form__input");
-let priorityMedium = createRadioInput("medium", "form__input");
-let priorityHigh = createRadioInput("high", "form__input");
-
-
+let priorityLow = createRadioInput("low", "fieldset__input-radio");
+let priorityMedium = createRadioInput("medium", "fieldset__input-radio");
+let priorityHigh = createRadioInput("high", "fieldset__input-radio");
 
 
 appendRadioInputs(fieldset, [priorityLow, priorityMedium, priorityHigh]);
-
 taskForm.appendChild(fieldset);
+
 
 let submit = document.createElement("button");
 
 submit.textContent = "Create Task";
 submit.setAttribute("type", "button");
+submit.classList.add("form-task__btn")
 taskForm.appendChild(submit);
 
  

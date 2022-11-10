@@ -1,0 +1,22 @@
+@use "./colors" as *;
+
+
+@mixin form {
+  box-sizing: border-box;
+  height: 100%;
+  padding-top: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  
+}
+@mixin form__child {
+  max-width: 70%;
+  color: $light-blue;
+}
+
+@mixin form__child--margin {
+  margin-bottom: 35px;
+}
+

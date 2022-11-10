@@ -1,0 +1,17 @@
+@use "./colors" as *;
+
+@mixin form__button {
+  border: none;
+  appearance: none;
+  border-radius: 20px;
+  background-color: $light-blue;
+  color: $white;
+  width: 75px;
+  height: 50px;
+}
+
+@mixin form__button--active {
+width: 68px;
+height: 48px;
+font-size: 11px;
+}

@@ -1,22 +1,24 @@
+@use "../../../general/general__scss/colors" as *;
 @use "../../../general/general__scss/button" as *;
 @use "../../../general/general__scss/form" as *;
 
-.form-note {
+.form-project {
   @include form;
 }
 
-.form-note * {
+.form-project * {
   @include form__child
 }
 
-.form-note :nth-child(2n) {
+.form-project :nth-child(2n) {
   @include form__child--margin
 }
 
-.form-note__btn {
+.form-project__btn {
   @include form__button
 }
 
-.form-note__btn:active {
+.form-project__btn:active {
   @include form__button--active
 }
+

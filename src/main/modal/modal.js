@@ -1,6 +1,6 @@
 import * as side from "./__side/modal__side";
-import { taskForm } from "./__form/modal__form--task";
-import { projectForm } from "./__form/modal__form--project";
+import { taskForm } from "./__form/modal__form-task";
+import { projectForm } from "./__form/modal__form-project";
 import { noteForm } from "./__form/modal__form-note";
 
 let modal = document.createElement("div");

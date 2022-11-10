@@ -7,6 +7,7 @@ import { ProjectConstructor } from "../../main-pub-sub";
 import { createAlert } from "../../../general/general__js/_alert";
 
 const projectForm = document.createElement("form");
+projectForm.classList.add("form-project")
 
 /* inputs */
 const project = createBasicInput(
@@ -22,6 +23,7 @@ appendLabelInput(projectForm, label, project);
 const submit = document.createElement("button");
 submit.setAttribute("type", "reset");
 submit.textContent = "Create Project";
+submit.classList.add("form-project__btn")
 projectForm.appendChild(submit);
 
 function displayProjects() {

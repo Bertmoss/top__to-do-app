@@ -1,0 +1,80 @@
+@use "../../../general/general__scss/form" as *;
+@use "../../../general/general__scss/button" as *;
+.form-task {
+  @include form;
+  padding-top: 10px;
+}
+
+.form-task * {
+  @include form__child
+}
+
+.form-task__btn {
+  @include form__button
+}
+
+.form-task__btn:active {
+  @include form__button--active
+}
+
+.form__fieldset {
+  position: relative;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  
+  justify-content: space-between;
+}
+
+fieldset label {
+  font-size: 0px;
+}
+
+.fieldset__input-radio {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background-image: url("../../../../src/general/images/svg-star--blue.svg")
+}
+.fieldset__input-radio:nth-child(4) {
+  width: 40px;
+}
+.fieldset__input-radio:nth-child(6) {
+  width: 60px;
+}
+
+.fieldset__input-radio:checked {
+  background-image: url("../../../../src/general/images/svg-star--red.svg");
+}
+
+/* 
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.form__input--text {
+  width: 80%;
+  font-size: 24px;
+  min-height: 50px;
+  line-height: 50px;
+  text-indent: 15px; 
+} 
+ .form__input--text::placeholder {
+  font-size: 24px;
+}
+
+.form__input--textArea {
+  height: 200px;
+  resize: none;
+} */
+
+.form__label--hidden {
+  font-size: 0px;
+}
+ 
+ 

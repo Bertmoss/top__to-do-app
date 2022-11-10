@@ -385,6 +385,133 @@ body {
   font-size: 11px;
 }
 
+.form-project {
+  box-sizing: border-box;
+  height: 100%;
+  padding-top: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.form-project * {
+  max-width: 70%;
+  color: #2D325A;
+}
+
+.form-project :nth-child(2n) {
+  margin-bottom: 35px;
+}
+
+.form-project__btn {
+  border: none;
+  appearance: none;
+  border-radius: 20px;
+  background-color: #2D325A;
+  color: #FFFFFF;
+  width: 75px;
+  height: 50px;
+}
+
+.form-project__btn:active {
+  width: 68px;
+  height: 48px;
+  font-size: 11px;
+}
+
+.form-task {
+  box-sizing: border-box;
+  height: 100%;
+  padding-top: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 10px;
+}
+
+.form-task * {
+  max-width: 70%;
+  color: #2D325A;
+}
+
+.form-task__btn {
+  border: none;
+  appearance: none;
+  border-radius: 20px;
+  background-color: #2D325A;
+  color: #FFFFFF;
+  width: 75px;
+  height: 50px;
+}
+
+.form-task__btn:active {
+  width: 68px;
+  height: 48px;
+  font-size: 11px;
+}
+
+.form__fieldset {
+  position: relative;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+fieldset label {
+  font-size: 0px;
+}
+
+.fieldset__input-radio {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background-image: url("../../../../src/general/images/svg-star--blue.svg");
+}
+
+.fieldset__input-radio:nth-child(4) {
+  width: 40px;
+}
+
+.fieldset__input-radio:nth-child(6) {
+  width: 60px;
+}
+
+.fieldset__input-radio:checked {
+  background-image: url("../../../../src/general/images/svg-star--red.svg");
+}
+
+/* 
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.form__input--text {
+  width: 80%;
+  font-size: 24px;
+  min-height: 50px;
+  line-height: 50px;
+  text-indent: 15px; 
+} 
+ .form__input--text::placeholder {
+  font-size: 24px;
+}
+
+.form__input--textArea {
+  height: 200px;
+  resize: none;
+} */
+.form__label--hidden {
+  font-size: 0px;
+}
+
 /* header */
 /* main */
 /* 
