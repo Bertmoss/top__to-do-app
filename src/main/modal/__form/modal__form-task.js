@@ -9,36 +9,33 @@ import {
 } from "../../../general/general__js/_input";
 import { TaskConstructor } from "../../main-pub-sub";
 import {createAlert} from "../../../general/general__js/_alert";
-import {format, parseISO} from "date-fns"
-/* 
-format(new Date(2014, 1, 11), "yyyy-MM-dd"); */
+
+
 
 
 let taskForm = document.createElement("form");
 taskForm.classList.add("form-task");
 
 let title = createBasicInput("form__input", "text", "title", "title");
-title.setAttribute("placeholder", "Title: Groceries");
+title.setAttribute("placeholder", "Title");
 title.classList.add("form__input--text");
 let titleLabel = createLabel(title, "Title");
 titleLabel.classList.add("form__label--hidden");
 appendLabelInput(taskForm, titleLabel, title);
 
 
-let textArea = createTextArea("form__input--textArea", "textArea", "textArea")
-textArea.classList.add( /* are these necessary?? */
-  "form__input--text",
-  "form-input"
-);
-textArea.setAttribute("placeholder", "2 potatoes");
+let textArea = createTextArea("form__input", "textArea", "textArea")
+
+textArea.setAttribute("placeholder", "Details");
 
 let textAreaLabel = createLabel(textArea, "Details");
 textAreaLabel.classList.add("form__label--hidden");
 appendLabelInput(taskForm, textAreaLabel, textArea);
 
 let div = document.createElement("div");
+div.classList.add("form__div");
 let date = createBasicInput("form__input", "date", "date", "date");
-let dateLabel = createLabel(date, "Due date:");
+let dateLabel = createLabel(date, "Due Date:");
 appendLabelInput(div, dateLabel, date);
 taskForm.appendChild(div);
 
@@ -46,6 +43,7 @@ taskForm.appendChild(div);
 const selectProject = document.createElement("select");
 selectProject.setAttribute("id", "select-project");
 selectProject.setAttribute("name", "project");
+selectProject.classList.add("form__input")
 
 /* clears the select options at the same time as the project display is cleared */
 function subClearSelectOptions() {
@@ -62,8 +60,9 @@ function subSelectProjectInput(obj) {
   selectProject.appendChild(option);
 }
 
-const selectLabel = createLabel(selectProject, "Project");
-appendLabelInput(taskForm, selectLabel, selectProject);
+const selectLabel = createLabel(selectProject, "Project:");
+appendLabelInput(div, selectLabel, selectProject);
+
 
 /*RADIO BUTTONS*/
 let fieldset = document.createElement("fieldset");

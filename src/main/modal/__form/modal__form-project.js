@@ -34,7 +34,7 @@ function displayProjects() {
     obj.displayAll();
   }
 }
-let obj = new ProjectConstructor("general");
+let obj = new ProjectConstructor("General");
 obj.displayAll();
 
 submit.addEventListener("click", displayProjects);

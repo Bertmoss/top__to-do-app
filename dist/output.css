@@ -361,8 +361,11 @@ body {
 }
 
 .form-note * {
-  max-width: 70%;
+  max-width: 90%;
   color: #2D325A;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .form-note :nth-child(2n) {
@@ -396,8 +399,11 @@ body {
 }
 
 .form-project * {
-  max-width: 70%;
+  max-width: 90%;
   color: #2D325A;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .form-project :nth-child(2n) {
@@ -429,11 +435,16 @@ body {
   justify-content: flex-start;
   align-items: center;
   padding-top: 10px;
+  justify-content: center;
+  gap: 5px;
 }
 
 .form-task * {
-  max-width: 70%;
+  max-width: 90%;
   color: #2D325A;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .form-task__btn {
@@ -452,15 +463,43 @@ body {
   font-size: 11px;
 }
 
+/* Div Input*/
+.form__div {
+  display: grid;
+  grid-template: repeat(2, minmax(20px, 1fr))/1fr 2fr;
+  column-gap: 10px;
+  row-gap: 5px;
+}
+
+.form__div .form__input {
+  max-width: 100%;
+}
+
+.form__div .form__label {
+  align-self: center;
+}
+
+.form__input {
+  border: 1px solid #2D325A;
+}
+
+.form__input::placeholder {
+  font-size: 14px;
+  font-family: "Courier New", Courier, monospace;
+}
+
+/*Priority Input*/
 .form__fieldset {
+  padding: 5px;
+  width: 100%;
+  border: 1px solid #2D325A;
   position: relative;
   display: flex;
-  width: 100%;
   align-items: center;
   justify-content: space-between;
 }
 
-fieldset label {
+fieldset label, .form__label--hidden {
   font-size: 0px;
 }
 
@@ -482,34 +521,6 @@ fieldset label {
 
 .fieldset__input-radio:checked {
   background-image: url("../../../../src/general/images/svg-star--red.svg");
-}
-
-/* 
-.form {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-}
-
-.form__input--text {
-  width: 80%;
-  font-size: 24px;
-  min-height: 50px;
-  line-height: 50px;
-  text-indent: 15px; 
-} 
- .form__input--text::placeholder {
-  font-size: 24px;
-}
-
-.form__input--textArea {
-  height: 200px;
-  resize: none;
-} */
-.form__label--hidden {
-  font-size: 0px;
 }
 
 /* header */

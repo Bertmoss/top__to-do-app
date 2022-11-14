@@ -12,11 +12,24 @@
   
 }
 @mixin form__child {
-  max-width: 70%;
+  max-width: 90%;
   color: $light-blue;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+@mixin form__input {
+  border: 1px solid $light-blue;
+  
 }
 
 @mixin form__child--margin {
   margin-bottom: 35px;
+}
+
+@mixin form__fieldset {
+  padding: 5px;
+  width: 100%;
+  border: 1px solid $light-blue
 }
 
