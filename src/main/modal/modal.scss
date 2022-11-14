@@ -1,4 +1,5 @@
 @use "../../general/general__scss/colors" as *;
+@use "../../general/general__scss/button" as *;
 
 .modal {
   border: $dark-blue 2px solid;
@@ -20,7 +21,9 @@
 .main__modal--hidden {
   display: none;
 }
-
+.modal__close-btn {
+  @include close-btn;
+}
 
 @-webkit-keyframes swirl-out-bck {
   0% {

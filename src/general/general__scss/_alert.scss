@@ -1,0 +1,22 @@
+@use "../../general/general__scss/colors" as *;
+@use "../../general/general__scss/button" as *;
+
+.alert {
+  position: fixed; 
+  top: 250px; 
+  left: 0; 
+  right: 0; 
+  margin: 0 auto; 
+  width: 200px;  
+  border: 2px solid $dark-blue;
+  border-radius: 20px;  
+  text-align: center; 
+  color: $dark-blue;
+  font-weight: bold;
+  padding: 20px;
+  background-color: white;
+}
+
+.alert button {
+  @include close-btn
+}

@@ -13,6 +13,7 @@ import {createAlert} from "../../../general/general__js/_alert";
 
 
 
+
 let taskForm = document.createElement("form");
 taskForm.classList.add("form-task");
 
@@ -92,8 +93,7 @@ taskForm.appendChild(submit);
 function checkDate() {
   let dateProcessed = new Date(date.value);
   if (date.value) {
-    dateProcessed = dateProcessed.toISOString().split("T")[0];
-    
+    dateProcessed = dateProcessed.toISOString().split("T")[0];   
   }
   return (!date.value ) ? "" : dateProcessed;
 }

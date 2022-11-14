@@ -10,11 +10,11 @@
 }
 
 .display__container {
-  min-height: 100px;
+  min-height: 100vh;
   background-color: $dark-blue;
 }
 .display__content {
   border-radius: 0px 80px 0px 0px;
   background-color: $white;
-  min-height: 250px;
+  min-height: 100vh;
 }

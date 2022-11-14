@@ -8,11 +8,8 @@ modal.classList.add("modal", "p-main__modal");
 
 let closeBtn = document.createElement("button");
 closeBtn.setAttribute("type", "button");
-closeBtn.setAttribute(
-  "style",
-  "position:absolute"
-); /* has to be moved to scss!!! */
-closeBtn.textContent = "x";
+closeBtn.classList.add("modal__close-btn")
+closeBtn.textContent = "Close window";
 modal.appendChild(closeBtn);
 
 function hideModal() {
