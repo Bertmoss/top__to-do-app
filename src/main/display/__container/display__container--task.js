@@ -15,9 +15,10 @@ taskDisplay.classList.add(
 );
 
 /* SORT BUTTON */
-let sortCompleteDiv = document.createElement("div");
-sortCompleteDiv.classList.add("srt-cplt-div");
+let srtCpltDiv = document.createElement("div");
+srtCpltDiv.classList.add("srt-cplt-div", "p-container-task__srt-cplt-div");
 let sort = document.createElement("select");
+sort.classList.add("srt-cplt-div__srt-btn","p-srt-cplt-div__srt-btn")
 let sortPlaceholder = document.createElement("option");
 sortPlaceholder.setAttribute("disabled", "");
 sortPlaceholder.setAttribute("selected", "");
@@ -51,8 +52,8 @@ sort.appendChild(sortPriorityDescending);
 sort.appendChild(sortPriorityAscending);
 sort.appendChild(sortDateAscending);
 sort.appendChild(sortDateDescending);
-sortCompleteDiv.appendChild(sort);
-taskDisplay.appendChild(sortCompleteDiv);
+srtCpltDiv.appendChild(sort);
+taskDisplay.appendChild(srtCpltDiv);
 
 /* Complete Display button */
 //const completeDiv = document.createElement("div");
@@ -63,7 +64,7 @@ completeDisplayBtn.textContent = "COMPLETE";
 completeDisplayBtn.addEventListener("click", () => {
   displayMod.updateComplete()
 });
-sortCompleteDiv.appendChild(completeDisplayBtn);
+srtCpltDiv.appendChild(completeDisplayBtn);
 //taskDisplay.appendChild(completeDiv);
 
 /* TASK CONTAINER */

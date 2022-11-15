@@ -247,6 +247,12 @@ body {
 .srt-cplt-div {
   display: flex;
   align-content: center;
+  justify-content: end;
+  gap: 10px;
+}
+
+.p-container-task__srt-cplt-div {
+  padding: 10px 45px;
 }
 
 .p-srt-cplt-div__cplt-btn {
@@ -266,6 +272,16 @@ body {
 .p-srt-cplt-div__cplt-btn:active {
   width: 25px;
   height: 25px;
+}
+
+.srt-cplt-div__srt-btn {
+  border: 2px solid #181D3D;
+  border-radius: 5px;
+  background-color: #FFFFFF;
+}
+
+.p-srt-cplt-div__srt-btn {
+  height: 28px;
 }
 
 .complete {

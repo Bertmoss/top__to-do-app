@@ -5,6 +5,12 @@
 .srt-cplt-div {
   display: flex;
   align-content: center;
+  justify-content: end;
+  gap: 10px;
+}
+.p-container-task__srt-cplt-div {
+  padding: 10px 45px;
+
 }
 .p-srt-cplt-div__cplt-btn{
   width: 30px;
@@ -24,6 +30,15 @@
   height: 25px;
 }
 
+.srt-cplt-div__srt-btn {
+  border: 2px solid $dark-blue;
+  border-radius: 5px;
+  background-color: $white;
+}
+
+.p-srt-cplt-div__srt-btn {
+  height: 28px;
+}
 
 
 
