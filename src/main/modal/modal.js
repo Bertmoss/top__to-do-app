@@ -53,6 +53,7 @@ side.noteButton.addEventListener("click", () => {
 document.addEventListener("click", function (event) {
   if (
     !event.target.closest(".p-main__modal") &&
+    !event.target.closest(".alert") &&
     !event.target.matches(".main__display-form-btn") &&
     modal.classList.contains("main__modal--hidden") == false
   ) {
