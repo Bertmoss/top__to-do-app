@@ -99,7 +99,6 @@ function checkDate() {
 }
 
 function displayTasks() {
-  submit.setAttribute("type", "button");
   let radio = document.querySelector("input:checked");
   if (!title.value) {
     return createAlert("Please create a title for your task!");
@@ -109,7 +108,6 @@ function displayTasks() {
   }
 
   
-  submit.setAttribute("type", "reset");
   let obj = new TaskConstructor(
     title.value,
     textArea.value,
@@ -119,6 +117,7 @@ function displayTasks() {
   );
   obj.pushId();
   obj.displayAll();
+  taskForm.reset();
 }
 
 submit.addEventListener("click", displayTasks);

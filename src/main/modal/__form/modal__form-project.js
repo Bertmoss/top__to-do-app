@@ -21,18 +21,18 @@ appendLabelInput(projectForm, label, project);
 
 /* "submit" button */
 const submit = document.createElement("button");
-submit.setAttribute("type", "reset");
+submit.setAttribute("type", "button");
 submit.textContent = "Create Project";
 submit.classList.add("form-project__btn")
 projectForm.appendChild(submit);
 
 function displayProjects() {
   if (!project.value) {
-    createAlert("Please provide a name for your project!")
-  } else {
-    let obj = new ProjectConstructor(project.value);
-    obj.displayAll();
-  }
+   return createAlert("Please provide a name for your project!")
+  } 
+  let obj = new ProjectConstructor(project.value);
+  projectForm.reset();
+  obj.displayAll();
 }
 let obj = new ProjectConstructor("General");
 obj.displayAll();

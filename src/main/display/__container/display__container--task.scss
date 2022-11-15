@@ -1,6 +1,31 @@
+@use "../../../general/general__scss/colors" as *;
 .hidden {
   display: none;
 }
+.srt-cplt-div {
+  display: flex;
+  align-content: center;
+}
+.p-srt-cplt-div__cplt-btn{
+  width: 30px;
+  height: 30px;
+}
+.srt-cplt-div__cplt-btn {
+  font-size: 0px;
+  background-image: url("../../../../src/general/images/svg-check-square--dark-blue.svg");
+  background-position: center;
+  background-size: cover;
+  border: none;
+  background-color: $white;
+}
+
+.p-srt-cplt-div__cplt-btn:active {
+  width: 25px;
+  height: 25px;
+}
+
+
+
 
 .complete {
   text-decoration: line-through;

@@ -15,7 +15,8 @@ taskDisplay.classList.add(
 );
 
 /* SORT BUTTON */
-let sortDiv = document.createElement("div");
+let sortCompleteDiv = document.createElement("div");
+sortCompleteDiv.classList.add("srt-cplt-div");
 let sort = document.createElement("select");
 let sortPlaceholder = document.createElement("option");
 sortPlaceholder.setAttribute("disabled", "");
@@ -50,25 +51,24 @@ sort.appendChild(sortPriorityDescending);
 sort.appendChild(sortPriorityAscending);
 sort.appendChild(sortDateAscending);
 sort.appendChild(sortDateDescending);
-sortDiv.appendChild(sort);
-taskDisplay.appendChild(sortDiv);
+sortCompleteDiv.appendChild(sort);
+taskDisplay.appendChild(sortCompleteDiv);
 
 /* Complete Display button */
-const completeDiv = document.createElement("div");
+//const completeDiv = document.createElement("div");
 const completeDisplayBtn = document.createElement("button");
+completeDisplayBtn.classList.add("srt-cplt-div__cplt-btn", "p-srt-cplt-div__cplt-btn")
 completeDisplayBtn.setAttribute("type", "button");
-completeDisplayBtn.textContent = "COMPLETE"; // change to check svg later;
+completeDisplayBtn.textContent = "COMPLETE"; 
 completeDisplayBtn.addEventListener("click", () => {
   displayMod.updateComplete()
 });
-completeDiv.appendChild(completeDisplayBtn);
-taskDisplay.appendChild(completeDiv);
+sortCompleteDiv.appendChild(completeDisplayBtn);
+//taskDisplay.appendChild(completeDiv);
 
 /* TASK CONTAINER */
 const taskContainer = document.createElement("div");
 taskDisplay.appendChild(taskContainer);
-
-/* Might have to make a separate subscribe for complete tasks */
 
 function priorityColorSwitch(element, obj) {
   switch (obj.priority) {
