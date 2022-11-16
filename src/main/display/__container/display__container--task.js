@@ -69,6 +69,7 @@ srtCpltDiv.appendChild(completeDisplayBtn);
 
 /* TASK CONTAINER */
 const taskContainer = document.createElement("div");
+taskContainer.classList.add("task-container")
 taskDisplay.appendChild(taskContainer);
 
 function priorityColorSwitch(element, obj) {
@@ -118,6 +119,7 @@ function subscribeTask(obj) {
   taskDiv.setAttribute("data-id", obj.id);
 
   taskDiv.setAttribute("data-date", obj.date);
+  taskDiv.classList.add("task-div")
   priorityColorSwitch(taskDiv, obj);
   /* Complete checkbox */
   let completeInput = createBasicInput(
