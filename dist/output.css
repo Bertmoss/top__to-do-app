@@ -301,26 +301,42 @@ body {
   margin: auto;
 }
 
-.task-div__edit-btn {
+.task-div__edit-btn, .task-div__dlt-btn {
   font-size: 0px;
-  background-image: url("../../../../src/general/images/svg-edit--dark-blue.svg");
   background-position: center;
   background-size: cover;
   background-color: #FFFFFF;
   border: none;
 }
 
-.p-task-div__edit-btn {
-  width: 20px;
-  height: 20px;
+.task-div__edit-btn {
+  background-image: url("../../../../src/general/images/svg-edit--dark-blue.svg");
+}
+
+.task-div__dlt-btn {
+  background-image: url("../../../../src/general/images/svg-x-square--dark-blue.svg");
+}
+
+.p-task-div__edit-btn, .p-task-div__dlt-btn {
   position: absolute;
-  right: 5px;
   top: 5px;
 }
 
-.p-task-div__edit-btn:active {
+.p-task-div__edit-btn {
+  width: 20px;
+  height: 20px;
+  right: 30px;
+}
+
+.p-task-div__edit-btn:active, .p-task-div__dlt-btn:active {
   width: 18px;
   height: 18px;
+}
+
+.p-task-div__dlt-btn {
+  width: 21px;
+  height: 21px;
+  right: 5px;
 }
 
 .complete {

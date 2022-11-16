@@ -146,7 +146,8 @@ function subscribeTask(obj) {
 
   /* DELETE BUTTON */
   let dltBtn = document.createElement("button");
-  dltBtn.textContent = "x";
+  dltBtn.textContent = "Delete";
+  dltBtn.classList.add("task-div__dlt-btn", "p-task-div__dlt-btn")
   dltBtn.setAttribute("type", "button");
   dltBtn.addEventListener("click", () => {
     obj.remove();
