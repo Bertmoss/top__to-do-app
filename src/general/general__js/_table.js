@@ -5,7 +5,6 @@ function createTable(obj, parent) {
     if (key == "type" || key === "id" || key == "project" || key == "status") {
       continue;
     } else if (key == "date") {
-      console.log(value);
       let date = value.split("-").reverse().join("-");
       row = createRow(key, date);
     } else {
@@ -19,9 +18,33 @@ function createTable(obj, parent) {
 function createRow(key, value) {
   let tableRow = document.createElement("tr");
   let tableHeading = document.createElement("th");
-  tableHeading.textContent = key;
+  let keyDisplay = key.charAt(0).toUpperCase() + key.substring(1,);
+  tableHeading.textContent = keyDisplay;
   let tableData = document.createElement("td");
   tableData.textContent = value;
+  if (key == "priority") {
+    tableData.setAttribute("style", "font-size:0px")
+    let i = 0;
+    let n;
+    switch(value) {
+      case "low":
+        n = 1;
+        break;
+      case "medium":
+        n = 2   
+        break;
+      case "high": 
+        n = 3;
+        break;
+    }
+    while ( i < n ) {
+      let priorityDisplay = document.createElement("img");
+      priorityDisplay.setAttribute("src", "url(../../../src/general/images/svg-star--red.svg");
+      tableData.appendChild(priorityDisplay);
+      i++
+    }
+    
+  }
   assignClass(key, tableData);
   tableRow.appendChild(tableHeading);
   tableRow.appendChild(tableData);
