@@ -293,12 +293,34 @@ body {
 }
 
 .task-div {
+  position: relative;
   width: 250px;
   border-radius: 10px;
   box-sizing: border-box;
   padding: 10px;
-  border: 2px solid #181D3D;
   margin: auto;
+}
+
+.task-div__edit-btn {
+  font-size: 0px;
+  background-image: url("../../../../src/general/images/svg-edit--dark-blue.svg");
+  background-position: center;
+  background-size: cover;
+  background-color: #FFFFFF;
+  border: none;
+}
+
+.p-task-div__edit-btn {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}
+
+.p-task-div__edit-btn:active {
+  width: 18px;
+  height: 18px;
 }
 
 .complete {
@@ -310,11 +332,11 @@ body {
 }
 
 .priority-medium {
-  border: 1px solid orange;
+  border: 2px solid orange;
 }
 
 .priority-low {
-  border: 1px solid green;
+  border: 2px solid green;
 }
 
 @media only screen and (max-width: 560px) {

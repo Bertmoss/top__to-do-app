@@ -46,15 +46,37 @@
   margin: auto;
 }
 .task-div {
+  position: relative;
   width: 250px;
   border-radius: 10px;
   box-sizing: border-box;
   padding: 10px;
-  border: 2px solid $dark-blue;
 
   margin: auto;
-
 } 
+
+//Edit BTN
+.task-div__edit-btn {
+  font-size: 0px;
+  background-image: url("../../../../src/general/images/svg-edit--dark-blue.svg");
+  background-position: center;
+  background-size: cover;
+  background-color: $white;
+  border: none;
+  
+}
+.p-task-div__edit-btn {
+  width: 20px;
+  height: 20px;
+  
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}
+.p-task-div__edit-btn:active {
+  width: 18px;
+  height: 18px;
+}
 
 
 .complete {
@@ -64,10 +86,10 @@
   border: 2px solid red;
 }
 .priority-medium {
-  border: 1px solid orange;
+  border: 2px solid orange;
 }
 .priority-low {
-  border: 1px solid green;
+  border: 2px solid green;
 }
  
 @media only screen and (max-width: 560px) {

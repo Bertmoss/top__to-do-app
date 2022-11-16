@@ -157,6 +157,7 @@ function subscribeTask(obj) {
   /*EDIT BUTTON*/
   let editBtn = document.createElement("button");
   editBtn.textContent = "Edit";
+  editBtn.classList.add("task-div__edit-btn", "p-task-div__edit-btn")
   editBtn.setAttribute("type", "button");
 
   /*Have to create labels and hide them for accessibility ??*/
