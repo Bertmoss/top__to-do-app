@@ -2,6 +2,7 @@
 .hidden {
   display: none;
 }
+
 .srt-cplt-div {
   display: flex;
   align-content: center;
@@ -50,13 +51,13 @@
   width: 250px;
   border-radius: 10px;
   box-sizing: border-box;
-  padding: 10px;
-
+  padding: 40px 20px;
   margin: auto;
+  border: 2px solid $light-blue;
 } 
 
-//EDIT BTN && DLT BTN
-.task-div__edit-btn, .task-div__dlt-btn {
+//EDIT BTN && DLT BTN && DONE INPUT
+.task-div__edit-btn, .task-div__dlt-btn,.task-div__done-input {
   font-size: 0px;
   background-position: center;
   background-size: cover;
@@ -70,7 +71,7 @@
   background-image: url("../../../../src/general/images/svg-x-square--dark-blue.svg");
 }
 
-.p-task-div__edit-btn, .p-task-div__dlt-btn {
+.p-task-div__edit-btn, .p-task-div__dlt-btn, .task-div__done-input {
   position: absolute;
   top: 5px;
 }
@@ -92,6 +93,26 @@
   
   right: 5px;
 }
+
+ //DONE INPUT
+
+ .task-div__done-input {
+  appearance: none;
+  background-image: url("../../../../src/general/images/svg-square--dark-blue.svg");
+  
+  
+ }
+ .task-div__done-input:checked {
+  background-image: url("../../../../src/general/images/svg-check-square--dark-blue.svg");
+ }
+
+ .p-task-div__done-input {
+  margin: 0px;
+  width: 20px;
+  height: 20px;
+  left: 5px;
+
+ }
 
 .complete {
   text-decoration: line-through;

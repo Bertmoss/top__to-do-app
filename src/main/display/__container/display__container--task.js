@@ -86,6 +86,7 @@ function priorityColorSwitch(element, obj) {
 }
 function subCompleteTask(obj) {
   let taskDiv = document.createElement("div");
+  taskDiv.classList.add("task-div")
   taskDiv.setAttribute("data-id", obj.id);
   let completeInput = createBasicInput(
     "task-div__done-input",
@@ -93,6 +94,7 @@ function subCompleteTask(obj) {
     "complete-input",
     "complete-input"
   );
+  completeInput.classList.add("p-task-div__done-input")
   completeInput.setAttribute("checked", "");
   completeInput.addEventListener("click", () => {
     obj.complete();
@@ -128,6 +130,7 @@ function subscribeTask(obj) {
     "complete-input",
     "complete-input"
   );
+  completeInput.classList.add("p-task-div__done-input")
 
   completeInput.addEventListener("click", () => {
     obj.complete();
