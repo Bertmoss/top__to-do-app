@@ -1,5 +1,7 @@
 function createTable(obj, parent) {
   let table = document.createElement("table");
+  table.setAttribute("cellspacing", "0");
+  table.setAttribute("cellpadding", "0");
   for (const [key, value] of Object.entries(obj)) {
     let row;
     if (key == "type" || key === "id" || key == "project" || key == "status") {

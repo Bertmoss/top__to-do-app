@@ -14,6 +14,7 @@ taskDisplay.classList.add(
   "display__container-task"
 );
 
+
 /* SORT BUTTON */
 let srtCpltDiv = document.createElement("div");
 srtCpltDiv.classList.add("srt-cplt-div", "p-container-task__srt-cplt-div");
@@ -88,13 +89,15 @@ function subCompleteTask(obj) {
   let taskDiv = document.createElement("div");
   taskDiv.classList.add("task-div")
   taskDiv.setAttribute("data-id", obj.id);
+  let btnCpltDiv = document.createElement("div");
+  btnCpltDiv.classList.add("task-div__btn-div");
   let completeInput = createBasicInput(
-    "task-div__done-input",
+    "btn-div__done-input",
     "checkbox",
     "complete-input",
     "complete-input"
   );
-  completeInput.classList.add("p-task-div__done-input")
+  completeInput.classList.add("p-btn-div__done-input")
   completeInput.setAttribute("checked", "");
   completeInput.addEventListener("click", () => {
     obj.complete();
@@ -105,8 +108,8 @@ function subCompleteTask(obj) {
       element.classList.toggle("complete");
     });
   });
-
-  taskDiv.appendChild(completeInput);
+  btnCpltDiv.appendChild(completeInput);
+  taskDiv.appendChild(btnCpltDiv);
   createTable(obj, taskDiv);
 
   taskContainer.appendChild(taskDiv);
@@ -123,14 +126,22 @@ function subscribeTask(obj) {
   taskDiv.setAttribute("data-date", obj.date);
   taskDiv.classList.add("task-div")
   priorityColorSwitch(taskDiv, obj);
+  let btnDiv = document.createElement("div");
+  btnDiv.classList.add("task-div__btn-div")
+  let sideBtnDiv = document.createElement("div");
+  sideBtnDiv.classList.add("btn-div__side-div")
+
+
+
   /* Complete checkbox */
   let completeInput = createBasicInput(
-    "task-div__done-input",
+    "btn-div__done-input",
     "checkbox",
     "complete-input",
     "complete-input"
   );
-  completeInput.classList.add("p-task-div__done-input")
+  
+  completeInput.classList.add("p-btn-div__done-input")
 
   completeInput.addEventListener("click", () => {
     obj.complete();
@@ -145,28 +156,18 @@ function subscribeTask(obj) {
     editBtn.classList.toggle("hidden");
   });
 
-  taskDiv.appendChild(completeInput);
-
-  /* DELETE BUTTON */
-  let dltBtn = document.createElement("button");
-  dltBtn.textContent = "Delete";
-  dltBtn.classList.add("task-div__dlt-btn", "p-task-div__dlt-btn")
-  dltBtn.setAttribute("type", "button");
-  dltBtn.addEventListener("click", () => {
-    obj.remove();
-    obj.removeTaskFromProjectIdArr();
-  });
-  taskDiv.appendChild(dltBtn);
+  btnDiv.appendChild(completeInput);
 
   /*EDIT BUTTON*/
+
   let editBtn = document.createElement("button");
   editBtn.textContent = "Edit";
-  editBtn.classList.add("task-div__edit-btn", "p-task-div__edit-btn")
+  editBtn.classList.add("btn-div__edit-btn", "p-btn-div__edit-btn")
   editBtn.setAttribute("type", "button");
 
-  /*Have to create labels and hide them for accessibility ??*/
 
   editBtn.addEventListener("click", () => {
+    editBtn.classList.add("hidden");
     let tableData = document.querySelectorAll(
       `.display__container-task [data-id="${obj.id}"] .table__td`
     );
@@ -199,12 +200,13 @@ function subscribeTask(obj) {
         editInput.setAttribute("placeholder", obj.date);
       } else if (td.classList.contains("table__td--priority")) {
         editInput = document.createElement("fieldset");
+        editInput.classList.add("edit__fieldset")
         let legend = document.createElement("legend");
         legend.textContent = "Priority";
         editInput.appendChild(legend);
-        let low = createRadioInput("low", "edit-btn__input--radio");
-        let medium = createRadioInput("medium", "edit-btn__input--radio");
-        let high = createRadioInput("high", "edit-btn__input--radio");
+        let low = createRadioInput("low", "edit__input--radio");
+        let medium = createRadioInput("medium", "edit__input--radio");
+        let high = createRadioInput("high", "edit__input--radio");
         appendRadioInputs(editInput, [low, medium, high]);
       }
 
@@ -215,10 +217,11 @@ function subscribeTask(obj) {
     if (!submitChangeBtn) {
       submitChangeBtn = document.createElement("button");
       submitChangeBtn.textContent = "Submit";
-      submitChangeBtn.classList.add("submit-edit-btn");
+      submitChangeBtn.classList.add("task-div__submit-edit-btn", "p-task-div__submit-edit-btn");
     }
 
     submitChangeBtn.addEventListener("click", () => {
+      editBtn.classList.remove("hidden");
       let editedInputs = document.querySelectorAll(" .table__edit-input");
       editedInputs.forEach((input) => {
         console.log(obj)
@@ -246,8 +249,23 @@ function subscribeTask(obj) {
     });
     taskDiv.appendChild(submitChangeBtn);
   });
+  sideBtnDiv.appendChild(editBtn);
 
-  taskDiv.appendChild(editBtn);
+
+  /* DELETE BUTTON */
+  let dltBtn = document.createElement("button");
+  dltBtn.textContent = "Delete";
+  dltBtn.classList.add("btn-div__dlt-btn", "p-btn-div__dlt-btn")
+  dltBtn.setAttribute("type", "button");
+  dltBtn.addEventListener("click", () => {
+    obj.remove();
+    obj.removeTaskFromProjectIdArr();
+  });
+  
+  
+  sideBtnDiv.appendChild(dltBtn);
+  btnDiv.appendChild(sideBtnDiv);
+  taskDiv.appendChild(btnDiv);
   createTable(obj, taskDiv);
 
   //Date Ascending Display
