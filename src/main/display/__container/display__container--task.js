@@ -224,11 +224,9 @@ function subscribeTask(obj) {
       editBtn.classList.remove("hidden");
       let editedInputs = document.querySelectorAll(" .table__edit-input");
       editedInputs.forEach((input) => {
-        console.log(obj)
         if (input.getAttribute("name") == "title") {
           input.value == "" ?  obj.title : (obj.title = input.value);
         } else if (input.getAttribute("name") == "details") {
-          console.log(input.value)
           obj.details = input.value;
         } else if (input.getAttribute("name") == "date") {
           if (input.value !== "") {
@@ -239,7 +237,7 @@ function subscribeTask(obj) {
         }
       });
       let editedPriorityInput = document.querySelector(
-        ".edit-btn__input--radio:checked"
+        ".edit__input--radio:checked"
       );
       editedPriorityInput == null
         ? obj.priority
