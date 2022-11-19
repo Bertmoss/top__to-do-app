@@ -296,6 +296,11 @@ body {
   margin: auto;
 }
 
+.task-container--srt-date {
+  display: flex;
+  flex-direction: column;
+}
+
 .task-div {
   position: relative;
   width: 250px;
@@ -311,7 +316,9 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  border-radius: 6px 6px 0px 0px;
   border-bottom: 3px solid #2D325A;
+  background-color: #FFFFFF;
 }
 
 .btn-div__edit-btn, .btn-div__dlt-btn, .btn-div__done-input {
@@ -460,6 +467,49 @@ td {
 
 .edit__input--radio:checked {
   background-image: url("../../../../src/general/images/svg-star--red.svg");
+}
+
+.task-container__div--srt-date {
+  position: relative;
+  border-radius: 25px;
+  border: 3px solid #2D325A;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 80px 20px 20px 20px;
+  margin: auto;
+}
+
+.div-srt-date__h1 {
+  position: absolute;
+  color: #2D325A;
+  font-size: 30px;
+  width: fit-content;
+  top: 10px;
+  left: 0px;
+  right: 0px;
+  margin: auto;
+}
+
+.task-container__div--no-date {
+  background-color: rgb(251, 198, 99);
+}
+
+.task-container__div--overdue {
+  background-color: rgb(255, 162, 162);
+}
+
+.task-container__div--today {
+  background-color: rgb(177, 215, 177);
+}
+
+.task-container__div--week {
+  background-color: rgb(188, 140, 188);
+}
+
+.task-container__div--upcoming {
+  background-color: rgb(139, 139, 238);
 }
 
 @media only screen and (max-width: 560px) {

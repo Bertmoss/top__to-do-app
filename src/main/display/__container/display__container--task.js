@@ -46,6 +46,7 @@ sortDateDescending.textContent = "Date (Descending)";
 sortDateDescending.setAttribute("value", "date-descending");
 
 sort.addEventListener("click", () => {
+  taskContainer.classList.remove("task-container--srt-date")
   displayMod.updateSorted(sort.value)
 });
 
@@ -268,6 +269,7 @@ function subscribeTask(obj) {
 
   //Date Ascending Display
   if (sort.value == "date-ascending") {
+    taskContainer.classList.add("task-container--srt-date")
     let currentDate = new Date();
     currentDate = currentDate.toISOString().split("T")[0]; /* 
     currentDate = currentDate.split("-").reverse().join("-"); */
@@ -278,10 +280,10 @@ function subscribeTask(obj) {
       let noDateDiv = document.querySelector(".task-container__div--no-date");
       if (!noDateDiv) {
         noDateDiv = document.createElement("div");
-        noDateDiv.setAttribute("style", "background-color: pink; order:0");
-        noDateDiv.classList.add("task-container__div--no-date");
+        noDateDiv.classList.add("task-container__div--no-date", "task-container__div--srt-date");
         let noDateHeading = document.createElement("h1");
         noDateHeading.textContent = "Undated";
+        noDateHeading.classList.add("div-srt-date__h1");
         noDateDiv.appendChild(noDateHeading);
       }
       noDateDiv.appendChild(taskDiv);
@@ -295,9 +297,9 @@ function subscribeTask(obj) {
       let overdueDiv = document.querySelector(".task-container__div--overdue");
       if (!overdueDiv) {
         overdueDiv = document.createElement("div");
-        overdueDiv.setAttribute("style", "background-color: orange; order:4");
-        overdueDiv.classList.add("task-container__div--overdue");
+        overdueDiv.classList.add("task-container__div--overdue","task-container__div--srt-date" );
         let overdueHeading = document.createElement("h1");
+        overdueHeading.classList.add("div-srt-date__h1");
         overdueHeading.textContent = "Overdue";
         overdueDiv.appendChild(overdueHeading);
       }
@@ -308,9 +310,9 @@ function subscribeTask(obj) {
       let todayDiv = document.querySelector(".task-container__div--today");
       if (!todayDiv) {
         todayDiv = document.createElement("div");
-        todayDiv.setAttribute("style", "background-color: green; order:3");
-        todayDiv.classList.add("task-container__div--today");
+        todayDiv.classList.add("task-container__div--today", "task-container__div--srt-date");
         let todayHeading = document.createElement("h1");
+        todayHeading.classList.add("div-srt-date__h1");
         todayHeading.textContent = "Today";
         todayDiv.appendChild(todayHeading);
       }
@@ -322,9 +324,9 @@ function subscribeTask(obj) {
       let weekDiv = document.querySelector(".task-container__div--week");
       if (!weekDiv) {
         weekDiv = document.createElement("div");
-        weekDiv.setAttribute("style", "background-color: purple; order:2");
-        weekDiv.classList.add("task-container__div--week");
+        weekDiv.classList.add("task-container__div--week", "task-container__div--srt-date");
         let weekHeading = document.createElement("h1");
+        weekHeading.classList.add("div-srt-date__h1");
         weekHeading.textContent = "This Week";
         weekDiv.appendChild(weekHeading);
       }
@@ -338,10 +340,10 @@ function subscribeTask(obj) {
       );
       if (!upcomingDiv) {
         upcomingDiv = document.createElement("div");
-        upcomingDiv.setAttribute("style", "background-color: blue; order: 1");
-        upcomingDiv.classList.add("task-container__div--upcoming");
+        upcomingDiv.classList.add("task-container__div--upcoming", "task-container__div--srt-date");
         let upcomingHeading = document.createElement("h1");
         upcomingHeading.textContent = "Upcoming";
+        upcomingHeading.classList.add("div-srt-date__h1");
         upcomingDiv.appendChild(upcomingHeading);
       }
       upcomingDiv.appendChild(taskDiv);
