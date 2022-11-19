@@ -494,22 +494,27 @@ td {
 
 .task-container__div--no-date {
   background-color: rgb(251, 198, 99);
+  order: 5;
 }
 
 .task-container__div--overdue {
   background-color: rgb(255, 162, 162);
+  order: 1;
 }
 
 .task-container__div--today {
   background-color: rgb(177, 215, 177);
+  order: 2;
 }
 
 .task-container__div--week {
   background-color: rgb(188, 140, 188);
+  order: 3;
 }
 
 .task-container__div--upcoming {
   background-color: rgb(139, 139, 238);
+  order: 4;
 }
 
 @media only screen and (max-width: 560px) {
