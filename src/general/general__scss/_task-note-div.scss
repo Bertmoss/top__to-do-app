@@ -1,0 +1,77 @@
+@use "../../general/general__scss/colors" as *;
+
+//DIV
+
+.task-div, .note-div {
+  position: relative;
+  width: 250px;
+  height: 100%;
+  border-radius: 10px;
+  margin: auto;
+  border: 3px solid $light-blue;
+} 
+
+.task-div__btn-div, .note-div__btn-div { 
+  
+  height: 40px;
+  padding: 10px;
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  border-radius: 6px 6px 0px 0px;
+  border-bottom:  3px solid $light-blue;
+  background-color: $white;
+}
+// EDIT BTN && DLT BTN && DONE INPUT 
+
+@mixin btn-div__btn ($background-image, $width, $height) {
+  font-size: 0px;
+  background-position: center;
+  background-size: cover;
+  background-color: $white;
+  border: none;
+  background-image: $background-image;
+  width: $width;
+  height: $height;
+  margin: 0px;
+}
+
+.btn-div__edit-btn {
+  @include btn-div__btn($background-image: url("../../../../src/general/images/svg-edit--dark-blue.svg"), $width: 20px, $height: 20px)
+}
+.btn-div__dlt-btn {
+  @include btn-div__btn($background-image: url("../../../../src/general/images/svg-x-square--dark-blue.svg"), $width: 21px, $height: 21px)
+}
+.btn-div__done-input {
+  @include btn-div__btn($background-image: url("../../../../src/general/images/svg-square--dark-blue.svg"), $width:20px, $height: 20px);
+  appearance: none;
+}
+
+.btn-div__done-input:checked {
+  background-image: url("../../../../src/general/images/svg-check-square--dark-blue.svg");
+}
+
+
+//Submit btn
+
+
+.task-div__submit-edit-btn, .note-div__submit-edit-btn {
+  border-radius: 20px;
+  color: $dark-blue;
+  background: $white;
+  font-weight: bold;
+}
+.p-task-div__submit-edit-btn, .p-note-div__submit-edit-btn {
+  width: 70px;
+  margin: auto;
+  
+  position: absolute;
+  bottom: -10px;
+  left: 0px;
+  right: 0px;
+
+  border: 2px solid $dark-blue;
+
+}

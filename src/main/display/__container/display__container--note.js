@@ -7,22 +7,32 @@ let noteDisplay = document.createElement("div");
 noteDisplay.classList.add("display__container-note--hidden","display__container-note");
 
 function subscribeNote(obj) {
-  /*DELETE BTN*/
+  let noteContainer = document.createElement("div");
+  noteContainer.classList.add("note-container");
+  //Note-Div
   let noteDiv = document.createElement("div");
   noteDiv.setAttribute("data-id", obj.id);
+  noteDiv.classList.add("note-div")
+  //Note-Div__Btn-Div
+  let btnDiv = document.createElement("div");
+  btnDiv.classList.add("note-div__btn-div");
+  //Btn-Div__Dlt-Btn
   let dltBtn = document.createElement("button");
   dltBtn.textContent = "x";
   dltBtn.setAttribute("type", "button");
+  dltBtn.classList.add("btn-div__dlt-btn");
   dltBtn.addEventListener("click", () => {
     obj.remove();
   });
-  noteDiv.appendChild(dltBtn);
+  btnDiv.appendChild(dltBtn);
+  noteDiv.appendChild(btnDiv);
   
 
-  /*EDIT BUTTON*/
+  //Btn-Div__Edit-Btn
   let editBtn = document.createElement("button");
   editBtn.textContent = "Edit";
   editBtn.setAttribute("type", "button");
+  editBtn.classList.add("btn-div__edit-btn");
 
   editBtn.addEventListener("click", () => {
     let tableData = document.querySelectorAll(
@@ -49,12 +59,12 @@ function subscribeNote(obj) {
       td.parentNode.replaceChild(editInput, td);
     });
 
-    /* SUBMIT CHANGES BTN */
-    let submitChangeBtn = document.querySelector(".submit-edit-btn");
+    /* Note-div__Submit-Edit-Btn */
+    let submitChangeBtn = document.querySelector(".note-div__submit-edit-btn");
     if (!submitChangeBtn) {
       submitChangeBtn = document.createElement("button");
       submitChangeBtn.textContent = "Submit";
-      submitChangeBtn.classList.add("submit-edit-btn");
+      submitChangeBtn.classList.add("note-div__submit-edit-btn", "p-note-div__submit-edit-btn");
     }
 
     submitChangeBtn.addEventListener("click", () => {
@@ -73,10 +83,11 @@ function subscribeNote(obj) {
     });
     noteDiv.appendChild(submitChangeBtn);
   });
-
-  noteDiv.appendChild(editBtn);
+  btnDiv.appendChild(editBtn);
+  
   createTable(obj, noteDiv)
-  noteDisplay.appendChild(noteDiv);
+  noteContainer.appendChild(noteDiv)
+  noteDisplay.appendChild(noteContainer);
 }
 
 

@@ -90,6 +90,7 @@ function subCompleteTask(obj) {
   let taskDiv = document.createElement("div");
   taskDiv.classList.add("task-div")
   taskDiv.setAttribute("data-id", obj.id);
+  //Btn Div 
   let btnCpltDiv = document.createElement("div");
   btnCpltDiv.classList.add("task-div__btn-div");
   let completeInput = createBasicInput(
@@ -98,7 +99,6 @@ function subCompleteTask(obj) {
     "complete-input",
     "complete-input"
   );
-  completeInput.classList.add("p-btn-div__done-input")
   completeInput.setAttribute("checked", "");
   completeInput.addEventListener("click", () => {
     obj.complete();
@@ -142,8 +142,6 @@ function subscribeTask(obj) {
     "complete-input"
   );
   
-  completeInput.classList.add("p-btn-div__done-input")
-
   completeInput.addEventListener("click", () => {
     obj.complete();
     obj.status == "complete" ? obj.removeTaskFromProjectIdArr() : obj.pushId();
@@ -163,7 +161,7 @@ function subscribeTask(obj) {
 
   let editBtn = document.createElement("button");
   editBtn.textContent = "Edit";
-  editBtn.classList.add("btn-div__edit-btn", "p-btn-div__edit-btn")
+  editBtn.classList.add("btn-div__edit-btn")
   editBtn.setAttribute("type", "button");
 
 
@@ -254,7 +252,7 @@ function subscribeTask(obj) {
   /* DELETE BUTTON */
   let dltBtn = document.createElement("button");
   dltBtn.textContent = "Delete";
-  dltBtn.classList.add("btn-div__dlt-btn", "p-btn-div__dlt-btn")
+  dltBtn.classList.add("btn-div__dlt-btn")
   dltBtn.setAttribute("type", "button");
   dltBtn.addEventListener("click", () => {
     obj.remove();

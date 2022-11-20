@@ -1,6 +1,7 @@
 @use "../../../general/general__scss/form" as *;
 @use "../../../general/general__scss/button" as *;
 @use "../../../general/general__scss/alert";
+@use "../../../general/general__scss/input-radio" as *;
 
 .form-task {
   @include form;
@@ -48,12 +49,6 @@
 
 .form__fieldset {
   @include form__fieldset;
-
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  
 }
 
 fieldset label, .form__label--hidden {
@@ -61,11 +56,8 @@ fieldset label, .form__label--hidden {
 }
 
 .fieldset__input-radio {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 20px;
-  height: 20px;
-  background-image: url("../../../../src/general/images/svg-star--blue.svg")
+  @include input-radio($width: 20px, $height: 20px);
+  @extend %radio-background
 }
 .fieldset__input-radio:nth-child(4) {
   width: 40px;
@@ -75,7 +67,7 @@ fieldset label, .form__label--hidden {
 }
 
 .fieldset__input-radio:checked {
-  background-image: url("../../../../src/general/images/svg-star--red.svg");
+  @extend %radio-background--checked;
 }
 
  

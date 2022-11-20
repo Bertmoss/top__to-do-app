@@ -17,6 +17,10 @@
 
 @use "./main/display/display.scss" ;
 @use "./main/display/__container/display__container--task.scss";
+@use "./main/display/__container/display__container--note.scss";
+@use "./general/general__scss/task-note-div";
+@use "./general/general__scss/table"; //used in object display
+
 
 /* search modal */
 @use "./main/modal/__search/modal__search.scss";
@@ -28,3 +32,9 @@
 @use "./main/modal/__form/modal__form-project.scss";
 //modal__form-task
 @use "./main/modal/__form/modal__form-task.scss";
+
+//MODIFIERS
+//Complete
+@use "./general/general__scss/complete";
+//Hidden
+@use "./general/general__scss/hidden";

@@ -1,0 +1,17 @@
+
+
+@mixin input-radio ($width, $height) {
+  -webkit-appearance: none;
+  appearance: none;
+  width: $width;
+  height: $height;
+  
+  background-size: contain;
+}
+
+%radio-background {
+  background-image: url("../../../../src/general/images/svg-star--blue.svg");
+}
+%radio-background--checked {
+  background-image: url("../../../../src/general/images/svg-star--red.svg");
+}

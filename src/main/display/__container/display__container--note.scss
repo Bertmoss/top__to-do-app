@@ -1,0 +1,6 @@
+@use "../../../general/general__scss/container" as *;
+//note-div scss is in _task-note-div.scss
+
+.note-container {
+  @include container($padding:70px 20px);
+}

@@ -30,6 +30,10 @@
 @mixin form__fieldset {
   padding: 5px;
   width: 100%;
-  border: 1px solid $light-blue
+  border: 1px solid $light-blue;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
