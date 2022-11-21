@@ -62,7 +62,7 @@ body {
 
 .p-main__modal {
   box-sizing: border-box;
-  position: absolute;
+  position: fixed;
   top: 20%;
   margin: 0px auto;
   left: 0px;
@@ -577,7 +577,7 @@ td {
 }
 
 .p-main__search-modal {
-  position: absolute;
+  position: fixed;
   bottom: 0px;
   left: 20px;
   bottom: 20px;
