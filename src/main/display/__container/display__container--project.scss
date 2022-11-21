@@ -1,0 +1,89 @@
+
+@use "../../../general/general__scss/container" as *;
+@use "../../../general/general__scss/colors" as *;
+
+.project-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 70px 20px 20px 20px;
+}
+
+.project-div {
+  background-color: $lightest-blue; 
+  border-radius: 10px;
+  border: 3px solid $light-blue;
+}
+
+.p-project-container__project-div {
+  width: 90%;
+  height: 100%;
+  min-height: 120px;
+}
+
+.p-btn-div__heading {
+  margin: 0px;
+}
+
+.p-task-div__task-list {
+  width: 100%;
+  padding-left: 0px;
+  margin: 0px;
+}
+
+.task-list li {
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  border-bottom: 3px solid $light-blue;
+}
+
+.task-list li:last-child {
+  border-bottom: none;
+}
+.p-project-div__done-input {
+  margin: 0px;
+  width: 20px;
+  height: 20px;
+}
+
+.project-div__done-input {
+  appearance: none;
+  background-image: url("../../../../src/general/images/svg-square--dark-blue.svg");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.project-div__done-input:checked {
+  background-image: url("../../../../src/general/images/svg-check-square--dark-blue.svg");
+}
+
+@media only screen and (min-width: 560px) {
+  .task-list {
+    background-color: $light-blue;
+    display: grid;
+    gap: 4px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  .task-list:not(.task-list:empty) {
+    padding: 1px;
+  }
+
+  .task-list .ul {
+    background-color: $lightest-blue;
+  }
+
+  .task-list li {
+    border: none;
+    background-color: $lightest-blue;
+    border-radius: 5px;
+  }
+
+  .task-list table {
+    border-radius: 10px;
+  }
+}

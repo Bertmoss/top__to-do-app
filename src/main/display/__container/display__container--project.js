@@ -10,15 +10,29 @@ projectDisplay.classList.add(
   "display__container-project"
 );
 
+let projectContainer = document.createElement("div");
+projectContainer.classList.add("project-container")
+
+
+
 function subscribeProject(obj) {
   let projectDiv = document.createElement("div");
   projectDiv.setAttribute("data-id", obj.id);
+  projectDiv.classList.add("project-div", "p-project-container__project-div");
+  let btnDiv = document.createElement("div");
+  btnDiv.classList.add("project-div__btn-div")
+  projectDiv.appendChild(btnDiv)
+  let heading = document.createElement("h3");
+  heading.textContent = obj.title;
+  heading.classList.add("p-btn-div__heading")
+  btnDiv.appendChild(heading);
   /* delete button */
   if (obj.id !== 1) {
     //exemption for the general project
     let dltBtn = document.createElement("button");
-    dltBtn.textContent = "x";
+    dltBtn.textContent = "delete";
     dltBtn.setAttribute("type", "button");
+    dltBtn.classList.add("btn-div__dlt-btn")
     dltBtn.addEventListener("click", () => {
       if (obj.taskIdArr.length > 0) {
         let alert = createAlert(
@@ -44,22 +58,22 @@ function subscribeProject(obj) {
         obj.removeByProject();
       }
     });
-    projectDiv.appendChild(dltBtn);
+    btnDiv.appendChild(dltBtn);
   }
-  let heading = document.createElement("h3");
-  heading.textContent = obj.title;
-  projectDiv.appendChild(heading);
+
   let taskList = document.createElement("ul");
-  taskList.classList.add(obj.title, "task-list");
+  taskList.classList.add(obj.title, "task-list", "p-task-div__task-list");
   projectDiv.appendChild(taskList);
-  projectDisplay.appendChild(projectDiv);
+  projectContainer.appendChild(projectDiv);
+  /* projectDisplay.appendChild(projectDiv); */
+  projectDisplay.appendChild(projectContainer)
   displayMod.update();
   console.log(displayMod)
 }
 
 function subRmvProjectDisplay() {
-  while (projectDisplay.firstChild) {
-    projectDisplay.removeChild(projectDisplay.lastChild);
+  while (projectContainer.firstChild) {
+    projectContainer.removeChild(projectContainer.lastChild);
   }
 }
 
@@ -88,8 +102,9 @@ function subTaskListItem(obj) {
     "checkbox",
     "complete-input",
     "complete-input"
-  ); //finished checkbox
-  //maybe add delete button for project here too?
+  ); 
+  completeInput.classList.add("p-project-div__done-input")
+  //finished checkbox
   let listItem = document.createElement("li");
   listItem.setAttribute("data-li-id", obj.id);
   completeInput.addEventListener("click", () => {

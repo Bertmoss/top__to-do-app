@@ -211,6 +211,88 @@ body {
   background-color: #181D3D;
 }
 
+.project-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 70px 20px 20px 20px;
+}
+
+.project-div {
+  background-color: #f0f8ff;
+  border-radius: 10px;
+  border: 3px solid #2D325A;
+}
+
+.p-project-container__project-div {
+  width: 90%;
+  height: 100%;
+  min-height: 120px;
+}
+
+.p-btn-div__heading {
+  margin: 0px;
+}
+
+.p-task-div__task-list {
+  width: 100%;
+  padding-left: 0px;
+  margin: 0px;
+}
+
+.task-list li {
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  border-bottom: 3px solid #2D325A;
+}
+
+.task-list li:last-child {
+  border-bottom: none;
+}
+
+.p-project-div__done-input {
+  margin: 0px;
+  width: 20px;
+  height: 20px;
+}
+
+.project-div__done-input {
+  appearance: none;
+  background-image: url("../../../../src/general/images/svg-square--dark-blue.svg");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.project-div__done-input:checked {
+  background-image: url("../../../../src/general/images/svg-check-square--dark-blue.svg");
+}
+
+@media only screen and (min-width: 560px) {
+  .task-list {
+    background-color: #2D325A;
+    display: grid;
+    gap: 4px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+  .task-list:not(.task-list:empty) {
+    padding: 1px;
+  }
+  .task-list .ul {
+    background-color: #f0f8ff;
+  }
+  .task-list li {
+    border: none;
+    background-color: #f0f8ff;
+    border-radius: 5px;
+  }
+  .task-list table {
+    border-radius: 10px;
+  }
+}
 .display__container-note--hidden,
 .display__container-project--hidden,
 .display__container-task--hidden {
@@ -405,7 +487,7 @@ body {
   border: 3px solid #2D325A;
 }
 
-.task-div__btn-div, .note-div__btn-div {
+.task-div__btn-div, .note-div__btn-div, .project-div__btn-div {
   height: 40px;
   padding: 10px;
   display: flex;
@@ -479,7 +561,7 @@ table {
   height: calc(100% - 40px);
   padding: 20px;
   color: #181D3D;
-  background-color: #eef7ff;
+  background-color: #f0f8ff;
   border-radius: 0px 0px 9px 9px;
 }
 

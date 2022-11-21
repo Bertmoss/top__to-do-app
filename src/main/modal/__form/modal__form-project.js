@@ -19,12 +19,18 @@ const project = createBasicInput(
 const label = createLabel(project, "Title:");
 appendLabelInput(projectForm, label, project);
 
+//creates the General project
+let obj = new ProjectConstructor("General");
+obj.displayAll();
+
+
 /* "submit" button */
 const submit = document.createElement("button");
 submit.setAttribute("type", "button");
 submit.textContent = "Create Project";
 submit.classList.add("form-project__btn")
 projectForm.appendChild(submit);
+
 
 function displayProjects() {
   if (!project.value) {
@@ -34,9 +40,6 @@ function displayProjects() {
   projectForm.reset();
   obj.displayAll();
 }
-let obj = new ProjectConstructor("General");
-obj.displayAll();
-
 submit.addEventListener("click", displayProjects);
 
 export { projectForm };
