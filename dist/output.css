@@ -773,7 +773,7 @@ td {
   background-color: white;
 }
 
-.alert button {
+.alert__close-btn {
   position: absolute;
   width: 20px;
   height: 20px;
@@ -787,6 +787,28 @@ td {
   background-size: contain;
   background-position: center;
   font-size: 0px;
+}
+
+.alert__yes-btn {
+  appearance: none;
+  color: #FFFFFF;
+  font-weight: bold;
+  background-color: #2D325A;
+  border-radius: 10px 0px 0px 10px;
+  border: 2px solid #2D325A;
+  width: 50px;
+  height: 30px;
+}
+
+.alert__no-btn {
+  appearance: none;
+  color: #2D325A;
+  font-weight: bold;
+  background-color: #FFFFFF;
+  border-radius: 0px 10px 10px 0px;
+  border: 2px solid #2D325A;
+  width: 50px;
+  height: 30px;
 }
 
 .form-task {

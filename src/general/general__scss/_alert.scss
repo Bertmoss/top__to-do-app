@@ -17,6 +17,28 @@
   background-color: white;
 }
 
-.alert button {
+.alert__close-btn {
   @include close-btn
+} 
+
+@mixin yes-no-btn ($color, $background-color, $border-radius) {
+  appearance: none;
+  color: $color;
+  font-weight: bold;
+  background-color: $background-color;
+  border-radius: $border-radius;
+  border: 2px solid $light-blue;
+  width: 50px;
+  height: 30px;
+}
+
+$left: 10px 0px 0px 10px;
+$right: 0px 10px 10px 0px;
+
+.alert__yes-btn {
+  @include yes-no-btn( $white, $light-blue, $left)
+}
+
+.alert__no-btn {
+  @include yes-no-btn($light-blue, $white, $right)
 }

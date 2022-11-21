@@ -40,6 +40,7 @@ function subscribeProject(obj) {
         );
         let yesBtn = document.createElement("button");
         yesBtn.textContent = "Yes";
+        yesBtn.classList.add("alert__yes-btn")
         yesBtn.addEventListener("click", () => {
           obj.removeByProject();
           obj.remove();
@@ -48,6 +49,7 @@ function subscribeProject(obj) {
         alert.appendChild(yesBtn);
         let noBtn = document.createElement("button");
         noBtn.textContent = "No";
+        noBtn.classList.add("alert__no-btn")
         noBtn.addEventListener("click", () => {
           alert.remove();
         });
