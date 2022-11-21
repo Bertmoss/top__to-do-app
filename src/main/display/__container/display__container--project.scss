@@ -64,19 +64,15 @@
 
 
 @media only screen and (min-width: 560px) {
+  .project-div {
+    background-color: $light-blue;
+  }
+
   .task-list {
     background-color: $light-blue;
     display: grid;
-    gap: 4px;
+    gap: 3px;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  }
-
-  .task-list:not(.task-list:empty) {
-    padding: 1px;
-  }
-
-  .task-list .ul {
-    background-color: $lightest-blue;
   }
 
   .task-list li {

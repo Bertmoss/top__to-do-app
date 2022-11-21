@@ -272,17 +272,14 @@ body {
 }
 
 @media only screen and (min-width: 560px) {
+  .project-div {
+    background-color: #2D325A;
+  }
   .task-list {
     background-color: #2D325A;
     display: grid;
-    gap: 4px;
+    gap: 3px;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  }
-  .task-list:not(.task-list:empty) {
-    padding: 1px;
-  }
-  .task-list .ul {
-    background-color: #f0f8ff;
   }
   .task-list li {
     border: none;
