@@ -19,3 +19,9 @@
   margin: 0px;
   color: $white;
 }
+
+@media only screen and (min-width:560px) {
+  .header {
+    border-radius: 0px 0px 0px 110px;
+  }
+}

@@ -1,42 +1,91 @@
 @use "../../../general/general__scss/colors" as *;
 
-.display__nav {
-  background-color: $dark-blue;  
+.p-display__nav {
   padding-bottom: 20px;
   border-radius: 0px 0px 0px 110px;
 }
 
-/* list */
-.nav__list {
+.display__nav {
+  background-color: $dark-blue;  
+}
+//List
+.p-nav__list {
   margin: 0px auto;
-  height: 50px;
   padding: 0px;
   max-width: 250px;
-  background-color: $light-blue;
+  height: 50px;
   border-radius: 110px;
 }
 
-.c-nav__list {
-  font-size: 22px;
+.nav__list {
+  background-color: $light-blue;
   color: $white;
+  font-size: 22px;
   list-style: none;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* list items */
-.nav__list-item {
+//List Items
+.p-nav__list-item {
   width: 100%;
   height:100%;
 }
 
-.c-nav__list-item {
+.nav__list-item {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.c-nav__list-item:hover {
+.nav__list-item:hover {
   background-color: $dark-blue;
+  border: 1px solid $white;
+}
+
+.nav__list-item--home:hover {
+  border-radius: 110px 0px 0px 110px;
+}
+
+.nav__list-item--note:hover {
+  border-radius: 0px 110px 110px 0px;
+}
+
+@media only screen and (min-width:560px) {
+  .p-display__nav {
+    position: fixed;
+    left: 25px;
+    top: 225px;
+    border-radius: 110px;
+    height: 200px;
+    width: 75px;
+  }
+
+  .p-nav__list {
+    height: 200px;
+  }
+  
+  .nav__list {
+
+    background-color: $dark-blue;
+
+    font-size: 18px;
+   
+
+    flex-direction: column;
+
+  }
+  .nav__list-item:hover {
+    background-color: $light-blue;
+    border: none;
+  
+  }
+  .nav__list-item--home:hover {
+    border-radius: 110px 110px 0px 0px;
+
+  }
+  .nav__list-item--note:hover {
+    border-radius: 0px 0px 110px 110px;
+  }
 }

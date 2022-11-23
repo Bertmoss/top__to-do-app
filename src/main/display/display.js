@@ -23,8 +23,10 @@ displayContent.appendChild(projectDisplay);
 /* SHOULD REFORMAT THIS */
 
 const home = side.createListItem("Home");
+home.classList.add("nav__list-item--home");
 const project = side.createListItem("Projects");
 const note = side.createListItem("Notes");
+note.classList.add("nav__list-item--note");
 
 home.addEventListener("click", () => {
   displayMod.update();
