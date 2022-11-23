@@ -6,8 +6,9 @@ import {displayMod} from "../../main-pub-sub"
 let noteDisplay = document.createElement("div");
 noteDisplay.classList.add("display__container-note--hidden","display__container-note");
 
+let noteContainer = document.createElement("div");
+
 function subscribeNote(obj) {
-  let noteContainer = document.createElement("div");
   noteContainer.classList.add("note-container");
   //Note-Div
   let noteDiv = document.createElement("div");
@@ -93,8 +94,8 @@ function subscribeNote(obj) {
 
 
 function subRmvNoteDisplay() {
-  while (noteDisplay.firstChild) {
-    noteDisplay.removeChild(noteDisplay.lastChild);
+  while (noteContainer.firstChild) {
+    noteContainer.removeChild(noteContainer.lastChild);
   }
 }
 

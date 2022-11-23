@@ -522,8 +522,12 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 20px;
-  padding: 70px 20px;
+  padding: 20px 20px;
   margin: auto;
+}
+
+.note-container:first-child {
+  padding: 70px 20px 20px 20px;
 }
 
 .task-div, .note-div {

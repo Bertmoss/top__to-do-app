@@ -36,6 +36,7 @@ home.addEventListener("click", () => {
 });
 
 note.addEventListener("click", () => {
+ /*  displayMod.updateNotes(); */
   noteDisplay.classList.remove("display__container-note--hidden");
   projectDisplay.classList.add("display__container-project--hidden");
   taskDisplay.classList.add("display__container-task--hidden");

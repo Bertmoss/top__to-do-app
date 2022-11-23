@@ -2,5 +2,8 @@
 //note-div scss is in _task-note-div.scss
 
 .note-container {
-  @include container($padding:70px 20px);
+  @include container($padding:20px 20px);
+}
+.note-container:first-child {
+  padding: 70px 20px 20px 20px;
 }
