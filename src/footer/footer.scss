@@ -1,0 +1,31 @@
+@use "./../general/general__scss/colors" as *;
+
+
+.footer__div-decoration--interior {
+  background-color: $white;
+  width: 100%;
+  height: 100px;
+
+  border-radius: 0px 0px 110px 0px;
+ 
+}
+.footer__div-decoration--exterior {
+  background-color: $light-blue;
+}
+
+.footer__div--text {
+  background-color: $light-blue;
+  border-radius: 110px 0px 0px 0px;
+  width: 100%;
+  height: 100px;
+  color: $white;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer__text {
+  margin: 0px;
+
+}
